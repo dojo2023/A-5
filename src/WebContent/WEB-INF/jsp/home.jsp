@@ -99,6 +99,8 @@
 						//表示したい項目がある場合は、ここでリンクを設定する
 	                    calendar += "<td>" + count + "<br>"
 	                    //+"<a href=''>"+year+"</a>"
+	                     //アイコン表示
+						+ "<a href='/A-five/src/HomeServlet'><img src='/A-five/img/HW_icon.png' width='1' height='1' alt='家事'></a>"
 	                    +"</td>";
 
 	                }
