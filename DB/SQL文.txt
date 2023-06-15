@@ -1,0 +1,104 @@
+【ドライバ】
+org.h2.Driver
+
+【JDBC URL】
+jdbc:h2:file:C:/pleiades/workspace/data/Yakou
+
+※データベース作成のエラーが表示された場合は、
+https://sukkiri.jp/technologies/ides/eclipse/h2-createdb.html
+を参照してください。
+
+※H2 Consoleは、Webブラウザを閉じても終了しないので、Windowsの
+タスクバーの右側にある「＾」をクリックして、表示されたアイコン
+から黄色いドラム缶のアイコンの「H2 Database Engine」を右クリッ
+クし、表示されたメニューから「Exit」を選択してください。
+
+【ユーザー名】	【パスワード】
+sa		（なし）
+
+【usersテーブルを作成するSQL文】--------------------------------------------------------
+CREATE TABLE users (
+  user_id int AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(12) UNIQUE NOT NULL,
+  user_pass VARCHAR(12) NOT NULL
+);
+
+【usersテーブルにサンプルデータを登録するSQL文】
+INSERT INTO users (user_name, user_pass) VALUES ('inoueKousei', 'kousei');
+
+【usersテーブル内に入っているデータを確認するSQL文】
+SELECT * FROM users
+---------------------------------------------------------------------------------
+【itemsテーブルを作成するSQL文】
+CREATE TABLE items (
+item_id INT AUTO_INCREMENT PRIMARY KEY,
+user_id INT REFERENCES users (user_id),
+daily_name VARCHAR (12) NOT NULL,
+daily_unit VARCHAR (5) NOT NULL,
+item_name VARCHAR (20) NOT NULL,
+item_price INT NOT NULL,
+item_volume INT NOT NULL,
+item_memo varchar (50)
+);
+【itemsテーブルにサンプルデータを登録するSQL文】
+INSERT INTO items (user_id, daily_name, daily_unit, item_name, item_price, item_volume, item_memo) VALUES (1, 'シャンプー', 'ml', 'メリット', 400, 300, '特になし');
+
+【itemsテーブル内に入っているデータを確認するSQL文】
+SELECT * FROM items
+---------------------------------------------------------------------------------
+【items_historyテーブルを作成するSQL文】
+CREATE TABLE item_history (
+item_his_id int AUTO_INCREMENT PRIMARY KEY,
+item_id int REFERENCES items (item_id),
+item_start date NOT NULL,
+item_due date NOT NULL,
+item_fin date ,
+item_peiod int ,
+item_flag boolean NOT NULL DEFAULT false
+);
+
+【items_historyテーブルにサンプルデータを登録するSQL文】
+INSERT INTO item_history (item_id, item_start, item_due) VALUES (1, CURRENT_DATE(), CURRENT_DATE()+7);
+
+【items_historyテーブル内に入っているデータを確認するSQL文】
+SELECT * FROM item_history
+---------------------------------------------------------------------------------
+【houseworksテーブルを作成するSQL文】
+CREATE TABLE houseworks (
+hw_id int AUTO_INCREMENT PRIMARY KEY,
+user_id INT REFERENCES users (user_id),
+hw_name varchar (20) NOT NULL,
+hw_freq int NOT NULL,
+hw_memo varchar (50)
+);
+
+
+【houseworksテーブルにサンプルデータを登録するSQL文】
+INSERT INTO houseworks (user_id, hw_name, hw_freq, hw_memo) VALUES (1, 'トイレ掃除', 5, '汚い');
+
+【houseworksテーブル内に入っているデータを確認するSQL文】
+SELECT * FROM houseworks
+---------------------------------------------------------------------------------
+【hw_historyテーブルを作成するSQL文】
+CREATE TABLE hw_history (
+hw_his_id int AUTO_INCREMENT PRIMARY KEY,
+hw_id int REFERENCES houseworks (hw_id),
+hw_date date ,
+hw_due date NOT NULL,
+hw_flag boolean DEFAULT false
+);
+
+【hw_historyテーブルにサンプルデータを登録するSQL文】
+INSERT INTO hw_history (hw_id, hw_due) VALUES (1, CURRENT_DATE()+7);
+
+【hw_historyテーブル内に入っているデータを確認するSQL文】
+SELECT * FROM hw_history
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
