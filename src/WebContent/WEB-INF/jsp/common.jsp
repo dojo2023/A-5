@@ -2,38 +2,61 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>共通画面｜A5アプリ</title>
-</head>
-<body>
-<h3>ここに日時を挿入する</h3>
-<div class="wrapper">
-  <!-- ヘッダー（ここから） -->
-  <nav id="g-nav">
-  <ul id="g-nav-list">
-    <li><a href="HomeServlet">カレンダー</a></li>
-    <li><a href="ListServlet">一覧</a></li>
-    <li><a>育成</a></li>
-    <li><a href="AnalysisServlet">分析</a></li>
-    <li><a href="LogoutServlet">ログアウト</a></li>
-  </ul>
-  </nav>
+	<head>
+		<meta charset="UTF-8">
+		<title>共通画面｜A5アプリ</title>
+		<link rel="stylesheet" href="css/common.css">
+	</head>
+	<body>
+		<div class="wrapper">
+		  <!-- ロゴ -->
+		  <div id="logo">
+		  <h1 img src='/A-five/img/logo.jpg' width='100' height='100' alt='ロゴ'></h1>
+		  </div>
+		  <!-- メニュー -->
+		  <nav id="g-nav">
+		  <ul id="g-nav-list">
+			<li><a href="HomeServlet">カレンダー</a></li>
+			<li><a href="ListServlet">一覧</a></li>
+			<li><a href="AnalysisServlet">分析</a></li>
+		  </ul>
+		  </nav>
+		  <!-- メニューここまで -->
 
-  <h1>未達成タスク</h1>
-  <p><><></p>
-  <h1>今日のタスク</h1>
-  <p><><></p>
-  <h1>明日のタスク</h1>
-  <p><><></p>
-  <h1>今週の購入品</h1>
-  <p><><></p>
+		  <!-- ログアウト -->
+		  <div id="logout"><a href="LogoutServlet">ログアウト</a></div>
+		  <!-- 日付表示 -->
+		  <div id="current_date"></div>
 
+		  <!-- タスク表示 -->
+		  <div id="miss_task">
+		  	<h3>未達成タスク</h3>
+		  	<p>データが入るよ</p>
+		  </div>
+		  <div id="today_task">
+		  	<h3>今日のタスク</h3>
+		  	<p>データが入るよ</p>
+		  </div>
+		  <div id="tr_task">
+		  	<h3>明日のタスク</h3>
+		  	<p>データが入るよ</p>
+		  </div>
+		  <div id="item_task">
+			<h3>今週の購入品</h3>
+			<p>データが入るよ</p>
+		  </div>
+		  <!-- タスク表示ここまで -->
 
-</div>
+		</div>
 
-
-  <!-- ヘッダー（ここまで） -->
-
-</body>
+		  <!-- JavaScript -->
+		  <script>
+		  date = new Date();
+		  year = date.getFullYear();
+		  month = date.getMonth() + 1;
+		  day = date.getDate();
+		  document.getElementById("current_date").innerHTML = year + "/" + month + "/" + day;
+		  </script>
+		  <!-- JavaScriptここまで -->
+	</body>
 </html>
