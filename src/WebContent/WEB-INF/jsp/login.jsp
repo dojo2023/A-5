@@ -4,39 +4,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン</title>
 </head>
 <body>
 <div class="login-page">
   <div class="form">
-  <form class="register-form" id="loginForm" method="POST" action="/dojo6/src/servlet/LoginServlet">
-    	<input type="text" placeholder="ユーザー名" name="user_name">
-    	<div id='errorUserName'></div>
-    	 <p class="errormessage"></p>
+  <form  id="loginForm" method="POST" action="/dojo6/src/servlet/LoginServlet">
+    	<div class="userName">
+    		<input type="text" pattern="^[a-zA-Z0-9]+$" minlength="6" maxlength="12" placeholder="ユーザー名(半角英数字6～12字)" name="user_name">
+        </div>
         <div class= "togglePassword">
     		<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
       		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-     		<!-- <form id="fieldPassword"> -->
-     	<input type="password" id="textPassword" placeholder="パスワード">
-     	<div id="errorUserPass"></div>
-     	<p></p>
-    <input type="submit" name="LOGIN" value="ログイン"><br>
+     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$" minlength="8" maxlength="12" placeholder="パスワード(半角英数字8～12字)">
+     	</div>
+    <input type="submit" name="LOGIN" value="ログイン">
 
     <p class="message"><a href= "/A-five/AccountServlet">新規登録はこちら</a></p>
   </form>
+  </div>
 </div>
 </body>
 	<style>
 	.login-page {
   width: 360px;
+  height: 500px;/*幅*/
   padding: 8% 0 0;
   margin: auto;
 	}
-	.form {//formの四角の中身に対する変更
-  position: relative;
+	.form {/*formの四角の中身に対する変更*/
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;/*幅*/
+  max-height: 480px;/*高さ*/
   margin: 0 auto 100px;
   padding: 45px;/*padding..テキストと四角の間*/
   text-align: center;/*テキスト中央ぞろえ*/
@@ -47,15 +47,17 @@
   outline: 0;
   background: #f2f2f2;
   width: 100%;
-  border: 0;
+  border: 10px;
   margin: 0 0 0px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
 }
+	/*目のやつ*/
 	span{position: relative;
 	 top: 40px;
-	 left: 100px;}
+	 left: 110px;}
+
       #textPassword {
        //border: none; /* デフォルトの枠線を消す */
       }
@@ -64,9 +66,10 @@
         border-style: solid;
         width: 200px;
       }
-      input[name="LOGIN"]{/*inputタグの、name属性が"LOGIN"のものに適応*/
+
+      /*inputタグの、name属性が"LOGIN"のものに適応*/
+      input[name="LOGIN"]{
       	 font-family: "Roboto", sans-serif;
-  		text-transform: uppercase;
   		outline: 0;
   		background: #4CAF50;
   		width: 100%;
@@ -86,8 +89,14 @@
   color: #b3b3b3;
   font-size: 12px;
 }
+	.form .userName{
+	height:50px}
+
 	.form .togglePassword{
-	height:40}
+	height:100px}
+
+
+
 	.form .error-message{
 		color: #FF0000;
 		font-size: 10px;
@@ -110,39 +119,36 @@
           btnEye.className = "fa fa-eye-slash";
         }
       }
-   // inputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
- /*     let loginForm = document.getElementById('loginForm'); /* ID=loginFromの中身を取得
+      /*
+      var sample = [6,8];
+      let i = 0;
+      i = i + 1;
+      */
+
+      // inputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
+      let loginForm = document.getElementById('loginForm'); // ID=accountFromの中身を取得
       loginForm.addEventListener('submit', function(submit) { //type=submitが押された瞬間、以下の処理を開始
           let inputs = loginForm.querySelectorAll('input:not([type="submit"])');
       		//inputタグのうちsubmitじゃないもの（=ユーザー名・パスワード）をinputsとして取得
-          inputs.forEach(function(input) {//ユーザー名・パスワードそれぞれに判定をしたいのでfor文使う
-              let error = input.nextElementSibling;
-              if (input.value.trim() === '') {//空白を文字として認識しない trim
+          inputs.forEach(function(input) {//ユーザー名・パスワードそれぞれに判定をしたい for文
+              let error = input.nextElementSibling;//テキストを取得してる？
+
+              if (input.value.trim() === '') {
                   submit.preventDefault();//習った
                   if (!error || !error.classList.contains('error-message')) {
-                      error = document.getElementById('errorUserName');
+                      error = document.createElement('div');
                       error.classList.add('error-message');//クラスerror-messageを作る
-                      document.getElementById('errorUserName').textContent = '入力されていません';
+                      error.textContent = '入力されていません';
                       input.parentNode.insertBefore(error, input.nextElementSibling);//inputの次に入れる
                   }
-              } else {
+              }
+              else {
                   if (error && error.classList.contains('error-message')) {
                       error.remove();
                   }
               }
           });
-      })*/
-      let loginForm = document.getElementById('loginForm').onsubmit = function(event){  //ID=loginFromの中身を取得
-    	  event.preventDefault();
-    	  const search = document.getElementById('form').value;
-    	  document.getElementById('errormessage').textContent =`入力されていません`;
-    	};
-    	/*
-    	<!--処理内容
-    	クリックされたら、formがついた要素を引っ張ってくる。
-    	その中の、word属性を持っているもの（テキスト打ち込む場所？）のvalue（value属性=入力した言葉？）を'search'に入れる。
-    	output（特に何も入ってない段落） を`${search}の検索中`に書き換える
+      })
 
-    	-->*/
       </script>
 </html>
