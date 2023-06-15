@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ItemHisDao;
+
 /**
  * Servlet implementation class RegistServlet
  */
@@ -29,6 +31,12 @@ public class RegistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		ItemHisDao IHDAO = new ItemHisDao();
+		String due = IHDAO.select();
+		//一覧検索
+		request.setAttribute("due", due);
+
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
