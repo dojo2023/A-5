@@ -1,1 +1,103 @@
 @charset "UTF-8";
+
+/* bodyタグ */
+body{
+    margin: 0 0 0 0;		/* マージンなし（後で個別に設定） */
+    padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
+    font-size: 16px;
+    text-align: center;
+}
+
+/*wrapperクラス*/
+.wrapper {
+    margin: 0 auto 0 auto;	/* 中央揃え */
+    width: 800px;			/* 幅を固定 */
+    height: 560px;          /* 高さを固定 */
+  }
+
+
+/* h1タグ */
+
+/* id="nav" */
+#nav li {
+    display: inline;		/* インラインで横に表示する */
+    list-style-type: none;	/* 先頭の記号をなくす */
+    padding-right: 30px;		/* 区切りを空ける */
+  }
+
+/* div{ */
+    /* border: 0.2px solid #000000; /*枠線 */
+/* } */
+
+*{/* 初期化 */
+    margin:0px;padding:0px;
+}
+#logo { /* ロゴ */
+    width: 140px;
+    height: 130px;
+    position:static;
+    z-index: auto;
+}
+
+ #g-nav{ /* メニュー */
+    width: 500px;
+    height: 130px;
+	position:relative;
+	top: -130px;
+    left: 140px;
+}
+
+#logout{ /* ログアウト */
+    width: 130px;
+	height: 35px;
+	position:relative;
+	top: -240px;
+    left: 640px;
+}
+
+#current_date{ /* 日付 */
+    width: 130px;
+	height: 35px;
+	position:relative;
+	top: -240px;
+    left: 640px;
+}
+
+
+
+#miss_task{ /* 未達成タスク */
+    background: #AEFFBD;
+    border: 0.2px solid #006400;
+    width: 200px;
+	height: 100px;
+	position:relative;
+	top: -220px;
+}
+
+#today_task{ /* 今日のタスク */
+    background: #AEFFBD;
+    border: 0.2px solid #006400;
+    width: 200px;
+	height: 100px;
+	position:relative;
+	top: -215px;
+}
+
+#tr_task{ /* 明日のタスク */
+    background: #AEFFBD;
+    border: 0.2px solid #006400;
+    width: 200px;
+	height: 100px;
+	position:relative;
+	top: -210px;
+}
+
+#item_task{ /* 日用品タスク */
+    background: #AEFFBD;
+    border: 0.2px solid #006400;
+    width: 200px;
+	height: 100px;
+	position:relative;
+	top: -205px;
+}
+
