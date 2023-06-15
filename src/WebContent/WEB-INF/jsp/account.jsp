@@ -4,28 +4,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規登録</title>
 </head>
 <body>
-  <h1>新規登録</h1>
-  <form id='accountForm'  method="POST" action="/A-five/LoginServlet">
-  <!-- 「新規登録」ボタンを押すとログイン画面に遷移
-  		新規登録で入れたユーザー名を保持したまま遷移したい -->
-    ユーザー名<input type="text" name="user_name">
-    <div class= "togglePassword">
-    <span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
-    パスワード<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <!-- <form id="fieldPassword"> -->
-      <input type="password" id="textPassword" value="">
-    </div>
-    <input type="submit" name="account" value="新規登録">
+<div class="account-page">
+  <div class="form">
+  <form  id="accountForm" method="POST" action="/dojo6/src/servlet/LoginServlet">
+    	<div class="userName">
+    		<input type="text" pattern="^[a-zA-Z0-9]+$" minlength="6" maxlength="12" placeholder="ユーザー名(半角英数字6～12字)" name="user_name">
+        </div>
+        <div class= "togglePassword">
+    		<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
+      		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$" minlength="8" maxlength="12" placeholder="パスワード(半角英数字8～12字)">
+     	</div>
+    <input type="submit" name="ACCOUNT" value="登録">
+    <p class="message">&ensp;</p>
+
   </form>
- <!--ロゴを入れる-->
+</div>
+</div>
+
 </body>
 <style>
+	.account-page {
+  width: 360px;
+  height: 400px;/*幅*/
+  padding: 8% 0 0;
+  margin: auto;
+	}
+	.form {/*formの四角の中身に対する変更*/
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;/*幅*/
+
+  margin: 0 auto 100px;
+  padding: 45px;/*padding..テキストと四角の間*/
+  text-align: center;/*テキスト中央ぞろえ*/
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);/*影*/
+	}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 10px;
+  margin: 0 0 0px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+	/*目のやつ*/
 	span{position: relative;
-	 top: 0px;
-	 left: 280px;}
+	 top: 40px;
+	 left: 110px;}
 
       #textPassword {
        //border: none; /* デフォルトの枠線を消す */
@@ -35,7 +67,47 @@
         border-style: solid;
         width: 200px;
       }
-</style>
+	/*inputタグの、name属性が"ACCOUNT"のものに適応*/
+      input[name="ACCOUNT"]{
+      	 font-family: "Roboto", sans-serif;
+  		outline: 0;
+  		background: #4CAFFF;
+  		width: 100%;
+  		border: 0;
+  		padding: 15px;
+  		color: #FFFFFF;
+  		font-size: 14px;
+  		-webkit-transition: all 0.3 ease;
+  		transition: all 0.3 ease;
+  		cursor: pointer;
+      }
+      input[name="ACCOUNT"]:hover,.form button:active,.form button:focus {
+  			background: #43A0FF;
+		}
+
+
+
+	.form .userName{
+	height:50px}
+
+	.form .togglePassword{
+	height:100px}
+
+	.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;}
+
+	.form .error-message{
+		color: #FF0000;
+		font-size: 10px;
+		padding: 0px;
+		text-align: left;/*テキスト中央ぞろえ*/
+		/*position: absolute;*/
+	 		top: 160px;
+	 		left: 500px;
+	}
+  </style>
 <script>
       function pushHideButton() {
         var txtPass = document.getElementById("textPassword");
