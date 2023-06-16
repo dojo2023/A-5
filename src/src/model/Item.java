@@ -3,105 +3,117 @@ import java.util.Date;
 
 public class Item {
 
-	private int item_id;
-	private int user_id;
-	private String daily_name;
-	private String daily_unit;
-	private String item_name;
-	private int item_price;
-	private int item_volume;
-	private String item_memo;
-	private int item_his_id;
-	private Date item_start;
-	private Date item_due;
-	private Date item_fin;
-	private int item_period;
-	private boolean item_flag;
+	private int itemId;
+	private int userId;
+	private String dailyName;
+	private String dailyUnit;
+	private String itemName;
+	private int itemPrice;
+	private int itemVolume;
+	private String itemMemo;
+	private int itemHisId;
+	private Date itemStart;
+	private Date itemDue;
+	private Date itemFin;
+	private int itemPeriod;
+	private boolean itemFlag;
 
+	public Item(String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo) {
+		super();
+		this.dailyName = dailyName;
+		this.dailyUnit = dailyUnit;
+		this.itemName = itemName;
+		this.itemPrice = itemPrice;
+		this.itemVolume = itemVolume;
+		this.itemMemo = itemMemo;
+	}
+	public Item() {
+		super();
+	};
 
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getDaily_name() {
-		return daily_name;
+	public String getDailyName() {
+		return dailyName;
 	}
-	public void setDaily_name(String daily_name) {
-		this.daily_name = daily_name;
+	public void setDailyName(String dailyName) {
+		this.dailyName = dailyName;
 	}
-	public String getDaily_unit() {
-		return daily_unit;
+	public String getDailyUnit() {
+		return dailyUnit;
 	}
-	public void setDaily_unit(String daily_unit) {
-		this.daily_unit = daily_unit;
+	public void setDailyUnit(String dailyUnit) {
+		this.dailyUnit = dailyUnit;
 	}
-	public String getItem_name() {
-		return item_name;
+	public String getItemName() {
+		return itemName;
 	}
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
-	public int getItem_price() {
-		return item_price;
+	public int getItemPrice() {
+		return itemPrice;
 	}
-	public void setItem_price(int item_price) {
-		this.item_price = item_price;
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
 	}
-	public int getItem_volume() {
-		return item_volume;
+	public int getItemVolume() {
+		return itemVolume;
 	}
-	public void setItem_volume(int item_volume) {
-		this.item_volume = item_volume;
+	public void setItemVolume(int itemVolume) {
+		this.itemVolume = itemVolume;
 	}
-	public String getItem_memo() {
-		return item_memo;
+	public String getItemMemo() {
+		return itemMemo;
 	}
-	public void setItem_memo(String item_memo) {
-		this.item_memo = item_memo;
+	public void setItemMemo(String itemMemo) {
+		this.itemMemo = itemMemo;
 	}
-	public int getItem_his_id() {
-		return item_his_id;
+	public int getItemHisId() {
+		return itemHisId;
 	}
-	public void setItem_his_id(int item_his_id) {
-		this.item_his_id = item_his_id;
+	public void setItemHisId(int itemHisId) {
+		this.itemHisId = itemHisId;
 	}
-	public Date getItem_start() {
-		return item_start;
+	public Date getItemStart() {
+		return itemStart;
 	}
-	public void setItem_start(Date item_start) {
-		this.item_start = item_start;
+	public void setItemStart(Date itemStart) {
+		this.itemStart = itemStart;
 	}
-	public Date getItem_due() {
-		return item_due;
+	public Date getItemDue() {
+		return itemDue;
 	}
-	public void setItem_due(Date item_due) {
-		this.item_due = item_due;
+	public void setItemDue(Date itemDue) {
+		this.itemDue = itemDue;
 	}
-	public Date getItem_fin() {
-		return item_fin;
+	public Date getItemFin() {
+		return itemFin;
 	}
-	public void setItem_fin(Date item_fin) {
-		this.item_fin = item_fin;
+	public void setItemFin(Date itemFin) {
+		this.itemFin = itemFin;
 	}
-	public int getItem_period() {
-		return item_period;
+	public int getItemPeriod() {
+		return itemPeriod;
 	}
-	public void setItem_period(int item_period) {
-		this.item_period = item_period;
+	public void setItemPeriod(int itemPeriod) {
+		this.itemPeriod = itemPeriod;
 	}
-	public boolean isItem_flag() {
-		return item_flag;
+	public boolean isItemFlag() {
+		return itemFlag;
 	}
-	public void setItem_flag(boolean item_flag) {
-		this.item_flag = item_flag;
+	public void setItemFlag(boolean itemFlag) {
+		this.itemFlag = itemFlag;
 	}
 
 }
