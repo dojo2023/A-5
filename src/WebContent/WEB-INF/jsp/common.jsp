@@ -11,7 +11,7 @@
 		<div class="wrapper">
 		  <!-- ロゴ -->
 		  <div id="logo">
-		  <h1 img src='/A-five/img/logo.jpg' width='100' height='100' alt='ロゴ'></h1>
+		 <h1><img src='/img/logo.jpg' alt='ロゴ'></h1>
 		  </div>
 		  <!-- メニュー -->
 		  <nav id="g-nav">
