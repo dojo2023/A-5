@@ -47,6 +47,11 @@ body{
     left: 140px;
 }
 
+#g-nav-list{ /* メニュー */
+    display: flex;
+    list-style: none;
+}
+
 #logout{ /* ログアウト */
     width: 130px;
 	height: 35px;
