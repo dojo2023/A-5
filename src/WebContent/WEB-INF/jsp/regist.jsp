@@ -18,7 +18,7 @@
         <div>
             <ul>
                 <li><a href="#tabs-1"> 日用品登録</a></li>
-                <li><a href="#tabs-2"> 家事登録</a></li>
+                <li><a href="#tabs-2"> 家事登録<%= request.getAttribute("due") %></a></li>
             </ul>
         </div>
         <!-- CSSで罰ボタンを -->
