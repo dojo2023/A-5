@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,9 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
+	<c:if test="${not empty itemlist}">
+		<p>${itemlist.itemPrice}</p>
+	</c:if>
     <!--全体を囲う-->
 	<div id="tabs">
 		<!-- タブ-->
@@ -28,15 +32,15 @@
                 <input id="dailyName" name="dailyName" type="text" placeholder="日用品項目" style="display: none;">
                 <select id="dailySelect" name="dailySelect">
                     <!-- foreachでユーザー毎の日用品項目を取得。日用品情報テーブル -->
-                    <option value="shanpoo">シャンプー</option>
+                    <option value="shampoo">シャンプー</option>
                     <option value="wash">洗剤</option>
                     <option value="tissue">ティッシュ</option>
                     <option value="create">新規作成</option>
                 </select>
-                <input name="itemName" type="text" placeholder="商品名">
+                <input name="itemName" type="text" placeholder="商品名" >
                 <input name="itemPrice" type="text" placeholder="値段">
                 <input name="itemVolume" type="text" placeholder="容量">
-                <select id="unit" name="unit">
+                <select id="unit" name="dailyUnit">
                     <!-- 日用品項目と単位はマップ -->
                     <option value="ml">ml</option>
                     <option value="box">箱</option>
@@ -179,7 +183,7 @@
 
         // 日用品項目の選択を変えたら、それに応じて単位もかわからない
         const mappingData = {
-            shanpoo: 'ml',
+            shampoo: 'ml',
             wash: 'ml',
             tissue: 'box',
         }
