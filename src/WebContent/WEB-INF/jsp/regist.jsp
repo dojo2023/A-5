@@ -14,7 +14,13 @@
 </head>
 <body>
 	<c:if test="${not empty itemlist}">
-		<p>${itemlist.itemPrice}</p>
+		<c:forEach var="e" items="${itemlist}">
+			<p>${e.itemPrice}</p>
+		</c:forEach>
+	</c:if>
+
+	<c:if test="${empty result}">
+		<p>から</p>
 	</c:if>
     <!--全体を囲う-->
 	<div id="tabs">
@@ -28,7 +34,7 @@
         <!-- CSSで罰ボタンを -->
         <!-- 日用品登録フォーム-->
         <div id="tabs1">
-            <form id="dailyRegistForm" action="" method="post">
+            <form id="dailyRegistForm" action="/A-five/RegistServlet" method="post">
                 <input id="dailyName" name="dailyName" type="text" placeholder="日用品項目" style="display: none;">
                 <select id="dailySelect" name="dailySelect">
                     <!-- foreachでユーザー毎の日用品項目を取得。日用品情報テーブル -->
@@ -65,6 +71,12 @@
         </div>
 	</div>
     <script>
+    	//登録完了アラート
+    	<c:if test="${not empty result}">
+	    	window.onload = function() {
+				alert("${result}");
+			};
+		</c:if>
         // タブを作るJquery
         $(function() {
             $( "#tabs" ).tabs();
