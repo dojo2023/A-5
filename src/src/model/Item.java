@@ -18,8 +18,9 @@ public class Item {
 	private int itemPeriod;
 	private boolean itemFlag;
 
-	public Item(String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo) {
+	public Item(int userId, String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo) {
 		super();
+		this.userId = userId;
 		this.dailyName = dailyName;
 		this.dailyUnit = dailyUnit;
 		this.itemName = itemName;
