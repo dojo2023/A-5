@@ -72,6 +72,63 @@ public class ItemHisDao {
 		// 結果を返す
 		return itemlist;
 	}
+	public List<Item> getDaily() {
+		Connection conn = null;
+		List<Item> itemlist = new ArrayList<Item>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+			String sql = "SELECT * FROM items WHERE user_id = ?";
+			PreparedStatement  pStmt = conn.prepareStatement(sql);
+			//user_idの？に1を入れる
+			pStmt.setString(1, "1");
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");
+				Item item = new Item();
+				item.setItemId(rs.getInt("ITEM_ID"));
+				item.setUserId(rs.getInt("USER_ID"));
+				item.setDailyName(rs.getString("DAILY_NAME"));
+				item.setDailyUnit(rs.getString("DAILY_UNIT"));
+				item.setItemName(rs.getString("ITEM_NAME"));
+				item.setItemPrice(rs.getInt("ITEM_PRICE"));
+				item.setItemVolume(rs.getInt("ITEM_VOLUME"));
+				item.setItemMemo(rs.getString("ITEM_MEMO"));
+				itemlist.add(item);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			itemlist = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			itemlist = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					itemlist = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return itemlist;
+	}
 
 
 }

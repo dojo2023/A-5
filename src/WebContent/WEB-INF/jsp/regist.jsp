@@ -13,15 +13,6 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-	<c:if test="${not empty itemlist}">
-		<c:forEach var="e" items="${itemlist}">
-			<p>${e.itemPrice}</p>
-		</c:forEach>
-	</c:if>
-
-	<c:if test="${empty result}">
-		<p>から</p>
-	</c:if>
     <!--全体を囲う-->
 	<div id="tabs">
 		<!-- タブ-->
@@ -35,14 +26,10 @@
         <!-- 日用品登録フォーム-->
         <div id="tabs1">
             <form id="dailyRegistForm" action="/A-five/RegistServlet" method="post">
-                <input id="dailyName" name="dailyName" type="text" placeholder="日用品項目" style="display: none;">
-                <select id="dailySelect" name="dailySelect">
-                    <!-- foreachでユーザー毎の日用品項目を取得。日用品情報テーブル -->
-                    <option value="shampoo">シャンプー</option>
-                    <option value="wash">洗剤</option>
-                    <option value="tissue">ティッシュ</option>
-                    <option value="create">新規作成</option>
-                </select>
+                <input id="dailyName" name="dailyName" type="text" placeholder="日用品項目" list="dailySelect">
+                <datalist id="dailySelect" name="dailySelect">
+
+                </datalist>
                 <input name="itemName" type="text" placeholder="商品名" >
                 <input name="itemPrice" type="text" placeholder="値段">
                 <input name="itemVolume" type="text" placeholder="容量">
@@ -70,13 +57,12 @@
             </form>
         </div>
 	</div>
+	<c:if test="{not empty result}">
+		<script type="text/javascript">alert(result);</script>
+	</c:if>
     <script>
-    	//登録完了アラート
-    	<c:if test="${not empty result}">
-	    	window.onload = function() {
-				alert("${result}");
-			};
-		</c:if>
+
+
         // タブを作るJquery
         $(function() {
             $( "#tabs" ).tabs();
@@ -124,17 +110,9 @@
 
         return halfWidth;
         }
-
         // 日用品項目のプルダウンメニューで新規登録を選択したら、入力フィールドが出現
-        let daily_select = document.getElementById('dailySelect');
-        let daily_name = document.getElementById('dailyName');
-        daily_select.addEventListener('change', function() {
-            if (daily_select.value == 'create') {
-                daily_name.style.display = 'block';
-            } else {
-                daily_name.style.display = 'none';
-            }
-        })
+
+
 
 
         // 日用品登録フォームのinputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
@@ -193,23 +171,80 @@
             return hasEmptyInput;
         }
 
-        // 日用品項目の選択を変えたら、それに応じて単位もかわからない
-        const mappingData = {
-            shampoo: 'ml',
-            wash: 'ml',
-            tissue: 'box',
-        }
         const dailySelect = document.getElementById('dailySelect');
-        const unitSelect = document.getElementById('unit');
-        dailySelect.addEventListener('change', function() {
-            let selectedDaily = dailySelect.value;
-            let unit = mappingData[selectedDaily];
-            if (unit) {
-                unitSelect.value = unit;
-            } else {
-                unitSelect.value = 'ml';
-            }
-        });
+        // 日用品項目の選択を変えたら、それに応じて単位もかわからない
+        /* const mappingData = {
+            シャンプー: 'ml',
+            食器用洗剤: 'ml',
+            ティッシュ: 'box'
+        }  */
+
+        //mappingDataはデータベースから持ってくる
+        function unitSet(mappingData) {
+        	mappingData.forEach(function(value, key) {
+        	    console.log(key + ': ' + value);
+        	    let option = document.createElement('option');
+	            option.classList.add(key);
+	            option.value = key;
+	            option.textContent = key;
+	            dailySelect.appendChild(option);
+        	});
+	        /* Object.entries(mappingData).forEach(([key]) => {
+	        	console.log(key);
+	            let option = document.createElement('option');
+	            option.classList.add(key);
+	            option.value = key;
+	            option.textContent = key;
+	            dailySelect.appendChild(option);
+	        }); */
+	        const unitSelect = document.getElementById('unit');
+	        dailySelect.addEventListener('change', function() {
+	            let selectedDaily = dailySelect.value;
+	            let unit = mappingData[selectedDaily];
+	            if (unit) {
+	                unitSelect.value = unit;
+	            } else {
+	                unitSelect.value = 'ml';
+	            }
+	        });
+        }
+		window.onload = goAjax;
+       	function goAjax(){
+			alert("functionはいったよ！");
+			//非同期通信始めるよ
+			$.ajaxSetup({scriptCharset:'utf-8'});
+			$.ajax({
+				//どのサーブレットに送るか
+				//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+				url: '/A-five/AjaxServlet',
+				//どのメソッドを使用するか
+				type:"GET",
+				//受け取るデータのタイプ
+				dataType:"json",
+				//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+				processDate:false,
+				timeStamp: new Date().getTime()
+			}).done(function(data) {
+				alert("成功1");
+				let mappingData = new Map();
+				Object.entries(data).forEach(function([key, value]) {
+					mappingData.set(key, value);
+				  });
+				console.log(mappingData);
+				unitSet(mappingData);
+				/* const mappingData = JSON.stringify(data);
+				console.log(mappingData); */
+				/* const dataArray = JSON.parse(data);
+				const mappingData = {};
+				dataArray.forEach(function(item) {
+					console.log(item.dailyName);
+				})
+				console.log(data + 'hdfalkda'); */
+			  })
+			  .fail(function() {
+				alert("失敗！");
+			  });
+		}
 
     </script>
 </body>

@@ -9,6 +9,7 @@ import model.Item;
 
 public class ItemDao {
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
+
 		public boolean insert(Item item) {
 			Connection conn = null;
 			boolean result = false;
