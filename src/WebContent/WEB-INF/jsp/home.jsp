@@ -4,10 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style>
+
+
+
+</style>
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/A-five/css/home.css">
 </head>
 <body>
+	<div id="test">
+		<%@ include file="common.jsp" %>
+	</div>
     <div class="wrapper">
 
     	<!-- カレンダー関連 -->
@@ -15,7 +26,7 @@
 	    <h1 id="header"></h1>
 
 	    <!-- ボタンクリックで月移動 -->
-	    <div id="next-prev-button">
+	    <div id="nextPrevButton">
 	        <button id="prev" onclick="prev()">＜</button>
 	        <button id="next" onclick="next()">＞</button>
 	    </div>
@@ -100,7 +111,7 @@
 	                    calendar += "<td>" + count + "<br>"
 	                    //+"<a href=''>"+year+"</a>"
 	                     //アイコン表示
-						+ "<a href='/A-five/src/HomeServlet'><img src='/A-five/img/HW_icon.png' width='1' height='1' alt='家事'></a>"
+						+ "<a href='/A-five/src/HomeServlet'><img src='../img/HW_icon.png' width='1' height='1' alt='家事'></a>"
 	                    +"</td>";
 
 	                }
@@ -113,6 +124,8 @@
 	<!-- カレンダー関連ここまで -->
 
 	</script>
+	<script src="js/Common.js"></script>
+    <script>header();</script>
 
 </body>
 </html>
