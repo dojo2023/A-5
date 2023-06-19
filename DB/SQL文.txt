@@ -14,7 +14,7 @@ https://sukkiri.jp/technologies/ides/eclipse/h2-createdb.html
 クし、表示されたメニューから「Exit」を選択してください。
 
 【ユーザー名】	【パスワード】
-yakou		ressha
+"sa"		""
 
 【usersテーブルを作成するSQL文】--------------------------------------------------------
 CREATE TABLE users (
