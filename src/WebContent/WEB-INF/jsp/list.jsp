@@ -55,13 +55,20 @@
 					<th>期限</th>
 					<th>完了</th>
 				</tr>
+
+		<c:forEach var="e" items="${hwList}" varStatus="status">
+
+			<form method="GET" action="/A-five/ListServlet">
 				<tr>
-					<td>シンク掃除</td>
+					<td>${e.hwName}</td>
 					<td><button type="button" data-izimodal-open="#HWModal">詳細</button></td>
-					<td>週一回</td>
-					<td>あと四日</td>
+					<td>${e.hwFreq}</td>
+					<td>${e.hwDue}</td>
 					<td><input type="checkbox"></td>
 				</tr>
+			</form>
+		</c:forEach>
+
 			</table>
 		</div>
 	</div>
