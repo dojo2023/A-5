@@ -33,11 +33,10 @@
                 <input name="itemName" type="text" placeholder="商品名" >
                 <input name="itemPrice" type="text" placeholder="値段">
                 <input name="itemVolume" type="text" placeholder="容量">
-                <select id="unit" name="dailyUnit">
+                <input id="dailyUnit" name="dailyUnit" type="text" placeholder="単位" list="unitSelect">
+                <datalist id="unitSelect" name="unitSelect">
                     <!-- 日用品項目と単位はマップ -->
-                    <option value="ml">ml</option>
-                    <option value="box">箱</option>
-                </select>
+                </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
                 <input name="itemSubmit" type="submit" value="登録">
             </form>
@@ -45,7 +44,12 @@
         <!-- 家事登録フォーム-->
         <div id="tabs2">
             <form id="hwRegistForm" action="" method="post">
-                <input type="text" placeholder="家事項目">
+                <input type="text" placeholder="家事項目" list="hwSelect">
+                <datalist id="hwSelect">
+                	<c:forEach var="item" items="${itemlist}">
+                		<option>${item.dailyName}</option>
+                	</c:forEach>
+                </datalist>
                 <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
                 <select name="unit">
                     <option value="1">日</option>
@@ -74,34 +78,36 @@
         numberInputs.forEach(function(input){
             // blur：次の入力欄が選択されたら
             input.addEventListener('blur', function(){
-                //.trim()：入力された文字の前後のスペースをなくす→スペースだけで送信させない
-                let inputValue = input.value.trim();
-                //全角を半角に変換
-                let halfWidthValue = convertFullWidthToHalfWidth(inputValue);
-                //10は10進数であることを示す
-                let parsedValue = parseInt(halfWidthValue, 10);
-                //nextElementSibilingは兄弟要素を取得。値段の入力欄の場合、次の要素である容量の入力欄を取得（35行目）
-                let errorNum = input.nextElementSibling;
-                if (isNaN(parsedValue) || parsedValue < 1) {
-                    if (errorNum.classList.contains('errorMessage')) {
-                        errorNum.textContent = '1以上の数値を入力してください';
-                    } else {
-                        //divタグのerrorクラスを作成
-                        errorNum = document.createElement('div');
-                        errorNum.classList.add('errorMessage');
-                        errorNum.textContent = '1以上の数値を入力してください';
-                        //inputの親要素（form）を取得。insertBefore(入れたいもの, どこの前に入れるか)
-                        input.parentNode.insertBefore(errorNum, input.nextElementSibling);
-                    }
-                    input.value = '';
-                } else {
-                    if (errorNum.classList.contains('errorMessage')) {
-                        errorNum.remove();
-                    }
-                    input.value = parsedValue;
-                }
+            	numCheck(input);
             })
         })
+
+        //数字のエラーチェックをする関数
+        function numCheck(input) {
+            let inputValue = input.value.trim();
+            let halfWidthValue = convertFullWidthToHalfWidth(inputValue);
+            let parsedValue = parseInt(halfWidthValue, 10);
+            let errorNum = input.nextElementSibling;
+            if (isNaN(parsedValue) || parsedValue < 1) {
+                if (errorNum.classList.contains('errorMessage')) {
+                    errorNum.textContent = '1以上の数値を入力してください';
+                } else {
+                    //divタグのerrorクラスを作成
+                    errorNum = document.createElement('div');
+                    errorNum.classList.add('errorMessage');
+                    errorNum.textContent = '1以上の数値を入力してください';
+                    //inputの親要素（form）を取得。insertBefore(入れたいもの, どこの前に入れるか)
+                    input.parentNode.insertBefore(errorNum, input.nextElementSibling);
+                }
+                input.value = '';
+            } else {
+                if (errorNum.classList.contains('errorMessage')) {
+                    errorNum.remove();
+                }
+                input.value = parsedValue;
+            }
+        }
+
         function convertFullWidthToHalfWidth(input) {
         // 全角数字を半角数字に変換
         let halfWidth = input.replace(/[０-９]/g, function(match) {
@@ -171,40 +177,41 @@
             return hasEmptyInput;
         }
 
-        const dailySelect = document.getElementById('dailySelect');
-        // 日用品項目の選択を変えたら、それに応じて単位もかわからない
-        /* const mappingData = {
+
+        // mappingDataにはこんなマップデータが入ってる
+        /* [{
             シャンプー: 'ml',
             食器用洗剤: 'ml',
             ティッシュ: 'box'
-        }  */
+        } ,{
+            シャンプー: 'ml',
+            食器用洗剤: 'ml',
+            ティッシュ: 'box'
+        } ] */
 
         //mappingDataはデータベースから持ってくる
+        //日用品項目と日用品の単位をマッピング
         function unitSet(mappingData) {
+        	const dailySelect = document.getElementById('dailySelect');
+            const dailyName = document.getElementById('dailyName');
+        	//日用品項目の予測補完をoptionタグで作成
         	mappingData.forEach(function(value, key) {
-        	    console.log(key + ': ' + value);
         	    let option = document.createElement('option');
 	            option.classList.add(key);
 	            option.value = key;
 	            option.textContent = key;
+	            //dailySelectの子要素として挿入
 	            dailySelect.appendChild(option);
         	});
-	        /* Object.entries(mappingData).forEach(([key]) => {
-	        	console.log(key);
-	            let option = document.createElement('option');
-	            option.classList.add(key);
-	            option.value = key;
-	            option.textContent = key;
-	            dailySelect.appendChild(option);
-	        }); */
-	        const unitSelect = document.getElementById('unit');
-	        dailySelect.addEventListener('change', function() {
-	            let selectedDaily = dailySelect.value;
-	            let unit = mappingData[selectedDaily];
+			const dailyUnit = document.getElementById('dailyUnit');
+	        const unitSelect = document.getElementById('unitSelect');
+	        //日用品の項目に応じて単位を変える
+	        dailyName.addEventListener('blur', function() {
+	            let unit = mappingData.get(dailyName.value);
 	            if (unit) {
-	                unitSelect.value = unit;
+	            	dailyUnit.value = unit;
 	            } else {
-	                unitSelect.value = 'ml';
+	            	dailyUnit.value = '';
 	            }
 	        });
         }
@@ -246,7 +253,9 @@
 			  });
 		}
 
+
     </script>
+    ${ dailyJson}
 </body>
 </html>
 
