@@ -38,26 +38,28 @@
                     <!-- 日用品項目と単位はマップ -->
                 </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
-                <input name="itemSubmit" type="submit" value="登録">
+                <input name="regist" type="hidden" value="itemSubmit">
+                <button type="submit">登録</button>
             </form>
         </div>
         <!-- 家事登録フォーム-->
         <div id="tabs2">
-            <form id="hwRegistForm" action="" method="post">
-                <input type="text" placeholder="家事項目" list="hwSelect">
+            <form id="hwRegistForm" action="/A-five/RegistServlet" method="post">
+                <input name="hwName" type="text" placeholder="家事項目" list="hwSelect">
                 <datalist id="hwSelect">
                 	<c:forEach var="item" items="${itemlist}">
                 		<option>${item.dailyName}</option>
                 	</c:forEach>
                 </datalist>
                 <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
-                <select name="unit">
+                <select name="freqUnit">
                     <option value="1">日</option>
                     <option value="7">週</option>
                     <option value="30">月</option>
                 </select>
-                <input type="text" placeholder="メモ">
-                <input type="submit" value="登録">
+                <input name="hwMemo" type="text" placeholder="メモ">
+                <input name="regist" type="hidden" value="hwSubmit">
+                <button type="submit">登録</button>
             </form>
         </div>
 	</div>
@@ -139,7 +141,7 @@
         })
 
         // 家事登録フォームのinputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
-        const HwRegistForm = document.getElementById('hwRegistForm');
+        const HwRegistForm = document.getElementById("hwRegistForm");
         HwRegistForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const inputs = HwRegistForm.querySelectorAll('input:not([type="submit"]), select');
@@ -149,7 +151,7 @@
             });
             if (!hasEmptyInput) {
                 if (confirm('本当に送信しますか？')) {
-                    HwRegistForm.submit(); // フォームを送信
+                	HwRegistForm.submit();
                 }
             }
         })
