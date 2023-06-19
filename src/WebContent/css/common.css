@@ -39,7 +39,7 @@ body{
     z-index: auto;
 }
 
- #g-nav{ /* メニュー */
+ #gNav{ /* メニュー */
     width: 500px;
     height: 130px;
 	position:relative;
@@ -47,7 +47,7 @@ body{
     left: 140px;
 }
 
-#g-nav-list{ /* メニュー */
+#gNavList{ /* メニュー */
     display: flex;
     list-style: none;
 }
@@ -60,7 +60,7 @@ body{
     left: 640px;
 }
 
-#current_date{ /* 日付 */
+#currentDate{ /* 日付 */
     width: 130px;
 	height: 35px;
 	position:relative;
@@ -70,7 +70,7 @@ body{
 
 
 
-#miss_task{ /* 未達成タスク */
+#missTask{ /* 未達成タスク */
     background: #AEFFBD;
     border: 0.2px solid #006400;
     width: 200px;
@@ -79,7 +79,7 @@ body{
 	top: -220px;
 }
 
-#today_task{ /* 今日のタスク */
+#todayTask{ /* 今日のタスク */
     background: #AEFFBD;
     border: 0.2px solid #006400;
     width: 200px;
@@ -88,7 +88,7 @@ body{
 	top: -215px;
 }
 
-#tr_task{ /* 明日のタスク */
+#trTask{ /* 明日のタスク */
     background: #AEFFBD;
     border: 0.2px solid #006400;
     width: 200px;
@@ -97,7 +97,7 @@ body{
 	top: -210px;
 }
 
-#item_task{ /* 日用品タスク */
+#itemTask{ /* 日用品タスク */
     background: #AEFFBD;
     border: 0.2px solid #006400;
     width: 200px;
