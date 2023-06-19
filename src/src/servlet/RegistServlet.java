@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ItemDao;
 import dao.ItemHisDao;
 import model.Item;
-import model.Useful;
 
 /**
  * Servlet implementation class RegistServlet
@@ -38,27 +36,10 @@ public class RegistServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		ItemHisDao IHDao = new ItemHisDao();
-		Useful useful = new Useful();
  		//items、item_historyの中のデータを全部持ってくる
 		List<Item> itemlist = IHDao.getDaily();
-		Map<String, String> mappingData = useful.getMappingData(itemlist);
-		System.out.println(mappingData);
-//		ObjectMapper mapper = new ObjectMapper();
-//		try {
-//            //JavaオブジェクトからJSONに変換
-//            String testJson = mapper.writeValueAsString(mappingData);
-//            //JSONの出力
-//            response.getWriter().write(testJson);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//
-////		//文字コードの設定（めんどいのでコピペでOK）
-//		response.setContentType("application/json");
-//		response.setHeader("Cache-Control", "nocache");
-//		response.setCharacterEncoding("utf-8");
-//
-//		request.setAttribute("itemlist", itemlist);
+		itemlist.forEach(event -> System.out.println(event.getDailyName()));
+		request.setAttribute("itemlist", itemlist);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
