@@ -40,10 +40,10 @@ public class AjaxServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
             //JavaオブジェクトからJSONに変換
-            String testJson = mapper.writeValueAsString(mappingData);
+            String dailyJson = mapper.writeValueAsString(mappingData);
             //JSONの出力
-            response.getWriter().write(testJson);
-            System.out.println(testJson);
+            response.getWriter().write(dailyJson);
+            request.setAttribute("dailyJson", dailyJson);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
