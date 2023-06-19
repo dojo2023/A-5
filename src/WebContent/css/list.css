@@ -1,1 +1,84 @@
 @charset "UTF-8";
+	.tabWrap{width:500px; margin:80px auto;}
+    input[type="radio"]{display:none;}
+    .tabArea{font-size:0; margin:0 10px;}
+    .tabArea label{width:150px; margin:0 5px; display:inline-block; padding:12px 0; color:#999; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
+    .tabArea label:hover{opacity:0.5;}
+    .panelArea{background:#fff;}
+    .tabPanel{width:100%; padding:80px 0; display:none;}
+    .tabPanel p{font-size:14px; letter-spacing:1px; text-align:center;}
+    #itemTab:checked ~ .tabArea .itemTabLabel{background:#fff; color:#000;}
+    #itemTab:checked ~ .panelArea #itemPanel{display:block;}
+    #HWTab:checked ~ .tabArea .HWTabLabel{background:#fff; color:#000;}
+    #HWTab:checked ~ .panelArea #HWPanel{display:block;}
+
+
+
+
+#mask {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.batsu {
+	border-radius: 50%;
+    position: fixed;
+    top: 10px;
+    left: 545px;
+    border: none;
+    background: none;
+    font-size: 25px;
+     width: 28px;
+    height: 28px;
+}
+
+.batsu:hover{
+	background:lightgray;
+}
+
+.editButton{
+	position:fixed;
+	top:365px;
+	left:240px;
+}
+
+.deleteButton{
+	position:fixed;
+	top:365px;
+	left:310px;
+
+}
+
+.table {
+  border-spacing:5px;
+}
+.table th {
+  border: 1px solid #ccc;
+  font-size: 16px;
+  padding: 20px;
+  width: 25%;
+}
+.table td {
+  border: 1px solid #ccc;
+  font-size: 16px;
+  padding: 20px;
+}
+
+.tableWrap {
+  margin-inline: auto;
+  overflow-x: auto; /* tableタグのはみ出た要素を隠す */
+  white-space: nowrap; /* テキストの折り返しなし */
+}
+.table {
+  width: auto;;
+  white-space: nowrap;
+}
+
+
+

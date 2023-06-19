@@ -14,7 +14,7 @@ https://sukkiri.jp/technologies/ides/eclipse/h2-createdb.html
 クし、表示されたメニューから「Exit」を選択してください。
 
 【ユーザー名】	【パスワード】
-sa		（なし）
+yakou		ressha
 
 【usersテーブルを作成するSQL文】--------------------------------------------------------
 CREATE TABLE users (
@@ -53,7 +53,7 @@ item_id int REFERENCES items (item_id),
 item_start date NOT NULL,
 item_due date NOT NULL,
 item_fin date ,
-item_peiod int ,
+item_period int ,
 item_flag boolean NOT NULL DEFAULT false
 );
 
@@ -94,9 +94,12 @@ INSERT INTO hw_history (hw_id, hw_due) VALUES (1, CURRENT_DATE()+7);
 【hw_historyテーブル内に入っているデータを確認するSQL文】
 SELECT * FROM hw_history
 ---------------------------------------------------------------------------------
-
-
-
+【item系を全取得するSQL文】
+SELECT it.item_id, it.item_name, it.user_id, it.daily_name,it.daily_unit, it.item_price, it.item_volume, it.item_memo, his.item_his_id, his.item_start, his.item_due, his.item_fin, his.item_period, his.item_flag FROM item_history AS his JOIN items AS it ON his.item_id = it.item_id
+---------------------------------------------------------------------------------
+【列名を変更するSQL文】
+ALTER TABLE item_history RENAME COLUMN item_peiod TO item_period
+---------------------------------------------------------------------------------
 
 
 
