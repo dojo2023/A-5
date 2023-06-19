@@ -51,10 +51,10 @@ td.today {
 }
 
 /*ボタン*/
-#next-prev-button {
+#nextPrevButton {
     position: relative;
 }
-#next-prev-button button{
+#nextPrevButton button{
     cursor: pointer;
     background: #B78D4A;
     color: #fff;
@@ -64,7 +64,7 @@ td.today {
     padding: 0.5rem 2rem;
     margin: 1rem 0;
 }
-#next-prev-button button:hover{
+#nextPrevButton button:hover{
     background-color: #D4BB92;
     border-color: #D4BB92;
 }
