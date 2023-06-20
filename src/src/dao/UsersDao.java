@@ -11,11 +11,11 @@ import model.User;
 
 public class UsersDao {
 //ログイン
-	public User isLoginOK(String user_name, String user_pass) {
+	public boolean isLoginOK(String userName, String userPass) {
 		Connection conn = null;//Connectionクラスのconn いったんnull
 		boolean loginResult = false;
-
-		User Login  = new User();
+		User Login = new User();
+		Login.setUser_id(null);
 		//インスタンス化 Userというクラスをmodelで作っておく
 		//それをLoginという名前にして呼び出す
 		try {
@@ -32,19 +32,22 @@ public class UsersDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			//?に値を挿入する ここで入力された値がisLoginOKの引数になる
-			pStmt.setString(1, user_name);
-			pStmt.setString(2, user_pass);
+			pStmt.setString(1, userName);
+			pStmt.setString(2, userPass);
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			//rsは直接取ってこれないからLoginに入れる
+			//青いところはなんとなくSQLの列名が入ることが多い
 			while(rs.next()) {
 			Login.setUser_id(rs.getString("user_id"));
 			Login.setUser_name(rs.getString("user_name"));
 			Login.setUser_pass(rs.getString("user_pass"));
 			}
-
+			//LoginのUser_idに値が入ってたらtrue返す
+			if(Login.getUser_id() != null)
+			loginResult = true;
 		}
 
 		catch (SQLException e) {
@@ -68,13 +71,13 @@ public class UsersDao {
 			}
 		}
 		// 結果を返す　Beans
-		return Login;
+		return loginResult;
 	}
 //新規登録
 	//1 ユーザー名被りが無いか検索
 	//2 無ければレコードを登録
 
-	public boolean newAccount(String user_name, String user_pass) {
+	public boolean newAccount(String userName, String userPass) {
 			Connection conn = null;
 			boolean accountResult = false;
 
@@ -91,7 +94,7 @@ public class UsersDao {
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 
 		//?に値を挿入
-		pStmt.setString(1, user_name);
+		pStmt.setString(1, userName);
 
 		// SQL文を実行し、結果表を取得
 		ResultSet rs = pStmt.executeQuery();
@@ -107,8 +110,8 @@ public class UsersDao {
 			 pStmt = conn.prepareStatement(sql);
 
 			//?に値を挿入する ここで入力された値がデータベースに入る
-			pStmt.setString(1, user_name);
-			pStmt.setString(2, user_pass);
+			pStmt.setString(1, userName);
+			pStmt.setString(2, userPass);
 
 			// SQL文を実行
 			if (pStmt.executeUpdate() == 1) {
