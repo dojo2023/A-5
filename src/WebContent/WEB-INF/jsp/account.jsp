@@ -13,15 +13,14 @@
     	<div class="userName">
     		<input type="text" pattern="^[a-zA-Z0-9]+$"
     		 minlength="6" maxlength="12"
-    		 placeholder="ユーザー名(半角英数字6～12字)"
-    		 name="user_name" value="${param.user_name}" required>
+    		 placeholder="ユーザー名(半角英数字6～12字)" name="user_name" value="${param.user_name}" required>
 			<div class="error"> ${error}</div>
         </div>
 
         <div class= "togglePassword">
     		<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
       		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$" minlength="8" maxlength="12" placeholder="パスワード(半角英数字8～12字)" name="user_pass"required>
+     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$" minlength="8" maxlength="12" placeholder="パスワード(半角英数字8～12字)" name="user_pass" required>
      	</div>
     <input type="submit" name="ACCOUNT" value="登録">
 
