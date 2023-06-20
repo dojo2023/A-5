@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import model.User;
 
 public class UsersDao {
-//ログイン
-	public boolean isLoginOK(String userName, String userPass) {
+//ログイン isLoginOKくんはUser型の変数＝(int,str,str)を返す
+	public User isLoginOK(String userName, String userPass) {
 		Connection conn = null;//Connectionクラスのconn いったんnull
-		boolean loginResult = false;
-		User Login = new User();
-		Login.setUser_id(null);
+//		boolean loginResult = false;　booleanはYesNOしか返さない、もうｓ使わない
+		User login = null;
+
 		//インスタンス化 Userというクラスをmodelで作っておく
 		//それをLoginという名前にして呼び出す
 		try {
@@ -38,25 +38,24 @@ public class UsersDao {
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
-			//rsは直接取ってこれないからLoginに入れる
+			//rsは直接取ってこれないからloginに入れる
 			//青いところはなんとなくSQLの列名が入ることが多い
+
 			while(rs.next()) {
-			Login.setUser_id(rs.getString("user_id"));
-			Login.setUser_name(rs.getString("user_name"));
-			Login.setUser_pass(rs.getString("user_pass"));
+				login = new User();//枝豆のカラ
+				login.setUser_id(rs.getInt("user_id"));//int豆
+				login.setUser_name(rs.getString("user_name"));//str豆
+				login.setUser_pass(rs.getString("user_pass"));//str豆
 			}
-			//LoginのUser_idに値が入ってたらtrue返す
-			if(Login.getUser_id() != null)
-			loginResult = true;
 		}
 
 		catch (SQLException e) {
 			e.printStackTrace();
-			loginResult = false;
+//			loginResult = false; もうbooleanは使わないので不要
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			loginResult = false;
+//			loginResult = false;
 		}
 		finally {
 			// データベースを切断
@@ -66,12 +65,12 @@ public class UsersDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					loginResult = false;
+//					loginResult = false;
 				}
 			}
 		}
 		// 結果を返す　Beans
-		return loginResult;
+		return login;
 	}
 //新規登録
 	//1 ユーザー名被りが無いか検索
@@ -82,44 +81,44 @@ public class UsersDao {
 			boolean accountResult = false;
 
 	  try {
-		// JDBCドライバを読み込む
-		Class.forName("org.h2.Driver");
+		   // JDBCドライバを読み込む
+		   Class.forName("org.h2.Driver");
 
-		// データベースに接続する
-		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+		   // データベースに接続する
+		   conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
 
 
-		//新規登録　被りがないか探すSQL文を準備
-		String sql = "select * from users where user_name = ?";
-		PreparedStatement pStmt = conn.prepareStatement(sql);
+		   //新規登録　被りがないか探すSQL文を準備
+		   String sql = "select * from users where user_name = ?";
+		   PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		//?に値を挿入
-		pStmt.setString(1, userName);
+		   //?に値を挿入
+		   pStmt.setString(1, userName);
 
-		// SQL文を実行し、結果表を取得
-		ResultSet rs = pStmt.executeQuery();
+		   // SQL文を実行し、結果表を取得
+		   ResultSet rs = pStmt.executeQuery();
 
-		//重複あり　失敗　ユーザー名
-		if(rs.next()) {
-			accountResult = false;
-		}
-		// 重複なし　SQL文２を準備する 自動採番はsql文に書かなくて良い
-		else{
+		   //重複あり　失敗　ユーザー名
+		   if(rs.next()) {
+			 accountResult = false;
+		   }
+		   // 重複なし　SQL文２を準備する 自動採番はsql文に書かなくて良い
+		   else{
 			 sql = "insert into users(user_name,user_pass) values(?,?)";
 
 			 pStmt = conn.prepareStatement(sql);
 
-			//?に値を挿入する ここで入力された値がデータベースに入る
-			pStmt.setString(1, userName);
-			pStmt.setString(2, userPass);
+			 //?に値を挿入する ここで入力された値がデータベースに入る
+			 pStmt.setString(1, userName);
+			 pStmt.setString(2, userPass);
 
-			// SQL文を実行
-			if (pStmt.executeUpdate() == 1) {
+		   // SQL文を実行
+			 if (pStmt.executeUpdate() == 1) {
 				accountResult = true;
 			}
-		}
-	  }
-			catch (SQLException e) {
+		   }
+	 }
+		catch (SQLException e) {
 				e.printStackTrace();
 			}
 			catch (ClassNotFoundException e) {
@@ -140,9 +139,4 @@ public class UsersDao {
 			// 結果を返す
 			return accountResult;
 			}
-
-
-
-
-
 	}
