@@ -4,9 +4,9 @@ import java.io.Serializable;
 //クラス（メソッドとフィールドが必要）
 public class User implements Serializable {
 	//フィールドの宣言をする
-	private String user_id;	// ID
-	private String user_name;	// ユーザー名
-	private String user_pass;	// パスワード
+	private String userId;	// ID
+	private String userName;	// ユーザー名
+	private String userPass;	// パスワード
 
 
 //コンストラクタ （= 特別なメソッド）
@@ -14,41 +14,41 @@ public class User implements Serializable {
 //ここの引数は自由記述
 //引数の値をフィールドにセットするコンストラクタ
 	public User(String id, String name, String pass) {
-		this.user_id = id; //this.(フィールドの変数) = (引数)
-		this.user_name = name;
-		this.user_pass = pass;
+		this.userId = id; //this.(フィールドの変数) = (引数)
+		this.userName = name;
+		this.userPass = pass;
 	}
 
 //JavaBeansを作るのに必要
 //引数なしコンストラクタ　何もしない
 	public User() {
-		this.user_id ="";
-		this.user_name = "";
-		this.user_pass = "";
+		this.userId ="";
+		this.userName = "";
+		this.userPass = "";
 	}
 
 //メソッド
 //ゲッター フィールド(上の)の値を取得するメソッド
 //セッター フィールド(上の)に値を設定するメソッド
 	public String getUser_id() {
-		return user_id;
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUser_id(String userId) {
+		this.userId = userId;
 	}
 
 	public String getUser_name() {
-		return user_name;
+		return userName;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_name(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUser_pass() {
-		return user_pass;
+		return userPass;
 	}
-	public void setUser_pass(String user_pass) {
-		this.user_pass = user_pass;
+	public void setUser_pass(String userPass) {
+		this.userPass = userPass;
 	}
 }
