@@ -4,7 +4,7 @@ import java.io.Serializable;
 //クラス（メソッドとフィールドが必要）
 public class User implements Serializable {
 	//フィールドの宣言をする
-	private String userId;	// ID
+	private int userId;	// ID
 	private String userName;	// ユーザー名
 	private String userPass;	// パスワード
 
@@ -13,7 +13,7 @@ public class User implements Serializable {
 //クラス名と同じ
 //ここの引数は自由記述
 //引数の値をフィールドにセットするコンストラクタ
-	public User(String id, String name, String pass) {
+	public User(int id, String name, String pass) {
 		this.userId = id; //this.(フィールドの変数) = (引数)
 		this.userName = name;
 		this.userPass = pass;
@@ -22,7 +22,7 @@ public class User implements Serializable {
 //JavaBeansを作るのに必要
 //引数なしコンストラクタ　何もしない
 	public User() {
-		this.userId ="";
+		this.userId = 0;
 		this.userName = "";
 		this.userPass = "";
 	}
@@ -30,11 +30,11 @@ public class User implements Serializable {
 //メソッド
 //ゲッター フィールド(上の)の値を取得するメソッド
 //セッター フィールド(上の)に値を設定するメソッド
-	public String getUser_id() {
+	public int getUser_id() {
 		return userId;
 	}
 
-	public void setUser_id(String userId) {
+	public void setUser_id(int userId) {
 		this.userId = userId;
 	}
 
