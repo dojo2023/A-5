@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -128,6 +129,66 @@ public class ItemHisDao {
 
 		// 結果を返す
 		return itemlist;
+	}
+
+	public boolean editUpdate(Item editItem) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+			conn.setAutoCommit(false);//トランザクションの手動制御のため、自動コミットを無効
+
+			// SQL文を準備する
+			//使用開始日を変更するSQL
+			String sql1 = "UPDATE item_history SET item_start = ? WHERE item_his_id = ?";
+			//日用品項目の名前を変えるためのSQL
+			String sql2 = "UPDATE items SET daily_name = ? WHERE itemId = 1";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			// SQL文を完成させる
+			Item item = new Item();
+			pStmt1.setDate(1, (Date) item.getItemStart());
+			pStmt1.setInt(2, item.getItemHisId());
+
+			pStmt2.setString(1, item.getDailyName());
+
+			pStmt1.executeUpdate();
+			pStmt2.executeUpdate();
+
+			conn.commit();
+			result = true;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e3) {
+					e3.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
 	}
 
 
