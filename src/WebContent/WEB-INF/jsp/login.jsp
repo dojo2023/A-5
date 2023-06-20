@@ -8,15 +8,17 @@
 </head>
 <body>
 <div class="login-page">
+
   <div class="form">
   <form id="loginForm" method="POST" action="LoginServlet">
     	<div class="userName">
     		<input type="text" minlength="6" pattern="^[a-zA-Z0-9]+$" maxlength="12" placeholder="ユーザー名(半角英数字6～12字)" value="${param.user_name}" name="user_name" required>
+            <div class="error"> ${error}</div>
         </div>
         <div class= "togglePassword">
     		<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
       		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$"  maxlength="12" placeholder="パスワード(半角英数字8～12字)" required>
+     	<input type="password" id="textPassword" pattern="^[a-zA-Z0-9]+$"  maxlength="12" placeholder="パスワード(半角英数字8～12字)" name="user_pass" required>
      	</div>
     <input type="submit" name="LOGIN" value="ログイン">
 
@@ -89,6 +91,11 @@ span{position: relative;
   color: #b3b3b3;
   font-size: 12px;
 }
+	.form .error{
+		color: #FF0000;
+		font-size: 10px;
+		padding: 0px;
+		text-align: left;/*テキスト ぞろえ*/}
 	.form .userName{
 	height:50px}
 
