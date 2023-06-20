@@ -54,6 +54,8 @@ public class AccountServlet extends HttpServlet {
 		ログイン画面に飛ぶ
 		*/
 		if(Account == true) {
+			request.setAttribute("good", "新規登録が完了しました！");
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}
