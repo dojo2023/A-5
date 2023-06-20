@@ -36,8 +36,9 @@ public class ListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HWHisDao hwHis = new HWHisDao();
+		
 		List<HW> hwList = hwHis.select();
-
+		
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hwList", hwList);
