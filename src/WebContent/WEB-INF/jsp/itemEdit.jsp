@@ -10,11 +10,11 @@
 <body>
 <h1>日用品編集画面</h1>
 <form>
-<p>商品名:<input type="text" id="itemname"  name="itemname">
+<p>商品名:<input type="text" id="itemName"  name="itemName">
 <input type="button" value="クリア" onclick="clearTextitemname()" />
 </p>
 
-<p>容量：<input type="text"  id="itemcapacity"  name="itemcapacity" placeholder="数字を入力">
+<p>容量：<input type="text"  id="itemCapacity" value="itemCapacity"  name="itemCapacity" placeholder="数字を入力">
 <select name=”item”>
     <option value=”select”>単位を選択</option>
     <option value=”ml”>ml</option>
@@ -30,9 +30,9 @@
     <input type="button" value="クリア" onclick="clearTextitemprice()" />
 </p>
 
-<p>使用開始日：<input type="date" name="startdate">
+<p>使用開始日：<input type="date" name="startDate">
 </p>
-<p>使用終了日：<input type="date" name="enddate">
+<p>使用終了日：<input type="date" name="endDate">
 </p>
 
 <p>備考：<input type="text" id="itemremarks" name="itemremarks">
