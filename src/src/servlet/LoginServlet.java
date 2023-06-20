@@ -35,33 +35,33 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータを取得する
-				request.setCharacterEncoding("UTF-8");
-				String user_name = request.getParameter("user_name");
-				String user_pass = request.getParameter("user_pass");
+			request.setCharacterEncoding("UTF-8");
+			String user_name = request.getParameter("user_name");
+			String user_pass = request.getParameter("user_pass");
 
 
-		UsersDao UDao = new UsersDao(); //呼び出し
-		User Login = new User();
-		boolean loginResult = UDao.isLoginOK(user_name, user_pass);
-		//UsersDao  通称UDaoさんとこのisLoginOKさんに引数としてデータを渡し、
-		//loginResultの結果を聞く
+			UsersDao UDao = new UsersDao(); //呼び出し
+			User loginResult = UDao.isLoginOK(user_name, user_pass);
+			//UsersDao  通称UDaoさんとこのisLoginOKさんに引数としてデータを渡す
+			//nullか枝豆（int,str,strの3つが入っている）どっちかを返す
 
-		Login.setUser_id(null);
-		//ユーザーIDが取得できていたらログイン成功
-		if(loginResult == true){
-			HttpSession session = request.getSession();
-			session.setAttribute("Login", Login);//枝豆の房をセッションスコープに保存
+			//ログイン成功（nullじゃない＝枝豆取得）
+			if(loginResult != null){
+				HttpSession session = request.getSession();
+				session.setAttribute("loginResult", loginResult);//枝豆の房をセッションスコープに保存
 
-			//今はホームのjspに飛ぶ
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-			dispatcher.forward(request, response);
-  		}
-		// ログイン失敗
-		else {
-			request.setAttribute("error", "ユーザー名かパスワードに誤りがあります。");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-			dispatcher.forward(request, response);
-		}
+				//今はホームのjspに飛ぶ
+				//スコープに保存して呼び出せるようになった！
+				//${loginResult.user_id}${loginResult.user_name}${loginResult.user_pass}
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/NewFile.jsp");
+				dispatcher.forward(request, response);
+			}
+			// ログイン失敗
+			else {
+				request.setAttribute("error", "ユーザー名かパスワードに誤りがあります。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+				dispatcher.forward(request, response);
+			}
 
 	}
 }
