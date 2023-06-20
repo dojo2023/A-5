@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,18 +57,25 @@
 					<th>完了</th>
 				</tr>
 
-		<c:forEach var="e" items="${hwList}" varStatus="status">
+
 
 			<form method="GET" action="/A-five/ListServlet">
+
+			<c:forEach var="e" items="${hwList}">
+
 				<tr>
 					<td>${e.hwName}</td>
 					<td><button type="button" data-izimodal-open="#HWModal">詳細</button></td>
-					<td>${e.hwFreq}</td>
-					<td>${e.hwDue}</td>
+					<td>5</td>
+					<td>e</td>
 					<td><input type="checkbox"></td>
 				</tr>
+
+			</c:forEach>
+
 			</form>
-		</c:forEach>
+
+
 
 			</table>
 		</div>
