@@ -10,33 +10,32 @@
 <body>
 <h1>日用品編集画面</h1>
 <form>
-<p>商品名:<input type="text" id="itemName"  name="itemName">
-<input type="button" value="クリア" onclick="clearTextitemname()" />
+<p>商品名:<input type="text" id="itemName" value="itemName"  name="itemName">
+<input type="button" value="クリア" onclick="clearTextitemName()" />
 </p>
 
 <p>容量：<input type="text"  id="itemCapacity" value="itemCapacity"  name="itemCapacity" placeholder="数字を入力">
-<select name=”item”>
+<select name=”itemUnit” id="itemUnit" value="itemUnit">
     <option value=”select”>単位を選択</option>
     <option value=”ml”>ml</option>
     <option value=”g”>g</option>
     <option value=”ko”>個</option>
     <option value=”m”>メートル</option>
     <option value=”hon”>本</option>
-    <option value=”others”>その他</option>
-<input type="button" value="クリア" onclick="clearTextitemcapacity()" />
+<input type="button" value="クリア" onclick="clearTextitemCapacity()" />
 </p>
 
-<p>値段：<input type="text" id="itemprice" name="itemprice" placeholder="数字を入力">円
-    <input type="button" value="クリア" onclick="clearTextitemprice()" />
+<p>値段：<input type="text" id="itemPrice" value="itemPrice" name="itemPrice" placeholder="数字を入力">円
+    <input type="button" value="クリア" onclick="clearTextitemPrice()" />
 </p>
 
-<p>使用開始日：<input type="date" name="startDate">
+<p>使用開始日：<input type="date" value="startDate" name="startDate">
 </p>
-<p>使用終了日：<input type="date" name="endDate">
+<p>使用終了日：<input type="date" value="endDate"  name="endDate">
 </p>
 
-<p>備考：<input type="text" id="itemremarks" name="itemremarks">
-<input type="button" value="クリア" onclick="clearTextitemremarks()" />
+<p>備考：<input type="text" id="itemRemarks" name="itemRemarks" value="itemRemarks">
+<input type="button" value="クリア" onclick="clearTextitemRemarks()" />
 </p>
 <p>
 <input type="submit" value="更新する" onclick="return checkFormValue();">
@@ -47,18 +46,18 @@
 
 function checkFormValue(){
     //商品名のチェック
-    if(itemname.value == ""){
+    if(itemName.value == ""){
         alert("商品名を入力して下さい")
         //submitさせずに戻る
         return false;
     }
     //容量のチェック
-    if(itemcapacity.value ==""){
+    if(itemCapacity.value ==""){
         alert("容量を入力して下さい")
         return false;
     }
     //値段のチェック
-    if(itemprice.value ==""){
+    if(itemPrice.value ==""){
         alert("値段を入力して下さい")
         return false;
     }
@@ -66,23 +65,23 @@ function checkFormValue(){
     return true
 }
 
-function clearTextitemname() {
-	var textForm = document.getElementById("itemname");
+function clearTextitemName() {
+	var textForm = document.getElementById("itemName");
   textForm.value = '';
 }
 
-function clearTextitemcapacity() {
-	var textForm = document.getElementById("itemcapacity");
+function clearTextitemCapacity() {
+	var textForm = document.getElementById("itemCapacity");
   textForm.value = '';
 }
 
-function clearTextitemprice() {
-	var textForm = document.getElementById("itemprice");
+function clearTextitemPrice() {
+	var textForm = document.getElementById("itemPrice");
   textForm.value = '';
 }
 
-function clearTextitemremarks() {
-	var textForm = document.getElementById("itemremarks");
+function clearTextitemRemarks() {
+	var textForm = document.getElementById("itemRemarks");
   textForm.value = '';
 }
 </script>
