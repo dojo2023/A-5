@@ -8,12 +8,13 @@
 </head>
 <body>
 <div class="login-page">
-
+  <div class="good">${good}</div>
   <div class="form">
   <form id="loginForm" method="POST" action="LoginServlet">
-    	<div class="userName">
+    	  <div class="userName">
     		<input type="text" minlength="6" pattern="^[a-zA-Z0-9]+$" maxlength="12" placeholder="ユーザー名(半角英数字6～12字)" value="${param.user_name}" name="user_name" required>
-            <div class="error"> ${error}</div>
+            <div class="error">${error}</div>
+
         </div>
         <div class= "togglePassword">
     		<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
@@ -34,6 +35,12 @@
   padding: 8% 0 0;
   margin: auto;
 	}
+	.login-page .good{
+	color: #000000;
+	font-size: 17px;
+	padding: 5px;
+	text-align: center;/*テキスト ぞろえ*/}
+
 	.form {/*formの四角の中身に対する変更*/
   z-index: 1;
   background: #FFFFFF;
@@ -96,6 +103,9 @@ span{position: relative;
 		font-size: 10px;
 		padding: 0px;
 		text-align: left;/*テキスト ぞろえ*/}
+
+
+
 	.form .userName{
 	height:50px}
 
@@ -127,11 +137,6 @@ span{position: relative;
           btnEye.className = "fa fa-eye-slash";
         }
       }
-      /*
-      var sample = [6,8];
-      let i = 0;
-      i = i + 1;
-      */
 
       // inputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
       let loginForm = document.getElementById('loginForm'); // ID=accountFromの中身を取得
