@@ -48,13 +48,18 @@ public class LoginServlet extends HttpServlet {
 			//ログイン成功（nullじゃない＝枝豆取得）
 			if(loginResult != null){
 				HttpSession session = request.getSession();
-				session.setAttribute("loginResult", loginResult);//枝豆の房をセッションスコープに保存
-
-				//今はホームのjspに飛ぶ
-				//スコープに保存して呼び出せるようになった！
-				//${loginResult.user_id}${loginResult.user_name}${loginResult.user_pass}
+				session.setAttribute("user_id", loginResult.getUser_id());//IDだけをセッションスコープに保存
+				//ホームのjspに飛ぶ
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/NewFile.jsp");
 				dispatcher.forward(request, response);
+
+				//beanの中身を全部セッションスコープに保存する場合↓
+				//session.setAttribute("loginResult", loginResult);//枝豆の房をセッションスコープに保存
+				//${loginResult.user_id}${loginResult.user_name}${loginResult.user_pass}
+
+
+
+
 			}
 			// ログイン失敗
 			else {
