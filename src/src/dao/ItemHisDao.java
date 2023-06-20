@@ -191,5 +191,63 @@ public class ItemHisDao {
 		return result;
 	}
 
+	public List<Item> itemDetail() {
+		Connection conn = null;
+		List<Item> itemlist = new ArrayList<Item>();
 
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+			String sql = "SELECT his.item_his_id, his.item_id, his.item_start, his.item_due, his.item_fin,his.item_period, his.item_flag,it.user_id, it.daily_name, it.daily_unit,it.item_name, it.item_price,it.item_volume, it.item_memo FROM item_history AS his JOIN items AS it  ON his.item_id = it.item_id WHERE his.item_flag = 0 and it.user_id =1 GROUP BY his.item_id ORDER BY item_due asc";
+			PreparedStatement  pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");
+				Item item = new Item();
+				item.setItemId(rs.getInt("ITEM_ID"));
+				item.setUserId(rs.getInt("USER_ID"));
+				item.setDailyName(rs.getString("DAILY_NAME"));
+				item.setDailyUnit(rs.getString("DAILY_UNIT"));
+				item.setItemName(rs.getString("ITEM_NAME"));
+				item.setItemPrice(rs.getInt("ITEM_PRICE"));
+				item.setItemVolume(rs.getInt("ITEM_VOLUME"));
+				item.setItemMemo(rs.getString("ITEM_MEMO"));
+				item.setItemHisId(rs.getInt("ITEM_HIS_ID"));
+				item.setItemStart(rs.getDate("ITEM_START"));
+				item.setItemDue(rs.getDate("ITEM_DUE"));
+				item.setItemFin(rs.getDate("ITEM_FIN"));
+				item.setItemPeriod(rs.getInt("ITEM_PERIOD"));
+				item.setItemFlag(rs.getBoolean("ITEM_FLAG"));
+				itemlist.add(item);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			itemlist = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			itemlist = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					itemlist = null;
+				}
+			}
+
+		}
+	return itemlist;
+	}
 }
