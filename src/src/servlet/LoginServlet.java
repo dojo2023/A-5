@@ -20,6 +20,7 @@ import model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,19 +41,26 @@ public class LoginServlet extends HttpServlet {
 
 
 		UsersDao UDao = new UsersDao(); //呼び出し
-		User Login = UDao.isLoginOK(user_name, user_pass);
+		User Login = new User();
+		boolean loginResult = UDao.isLoginOK(user_name, user_pass);
+		//UsersDao  通称UDaoさんとこのisLoginOKさんに引数としてデータを渡し、
+		//loginResultの結果を聞く
 
+		Login.setUser_id(null);
 		//ユーザーIDが取得できていたらログイン成功
-		if(Login.getUser_id() != null){
+		if(loginResult == true){
 			HttpSession session = request.getSession();
 			session.setAttribute("Login", Login);//枝豆の房をセッションスコープに保存
-			// ホームサーブレットにリダイレクトする
-			//今だけ　新規登録画面に飛ぶ
-			response.sendRedirect("AccountServlet");
+
+			//今はホームのjspに飛ぶ
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+			dispatcher.forward(request, response);
   		}
 		// ログイン失敗
 		else {
-			response.sendRedirect("LoginServlet");
+			request.setAttribute("error", "ユーザー名かパスワードに誤りがあります。");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	}
