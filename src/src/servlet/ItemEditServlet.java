@@ -57,8 +57,10 @@ public class ItemEditServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String itemName = request.getParameter("itemName");
 		String itemCapacity = request.getParameter("itemCapacity");
+		int number = Integer.parseInt(itemCapacity);
 		String itemUnit = request.getParameter("itemUnit");
 		String itemPrice = request.getParameter("itemPrice");
+		int number = Integer.parseInt(itemPrice);
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		String itemMemo = request.getParameter("itemMemo");
