@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>${loginResult.user_id}<br>
-   ${loginResult.user_name}<br>
-   ${loginResult.user_pass}</p>
+<p>${user_id}<br>
+ <br>
+</p>
 </body>
 </html>
