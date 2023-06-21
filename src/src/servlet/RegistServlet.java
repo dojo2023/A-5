@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.HWDao;
+import dao.HWHisDao;
 import dao.ItemDao;
 import dao.ItemHisDao;
 import model.HW;
@@ -108,12 +109,11 @@ public class RegistServlet extends HttpServlet {
 			ItemHisDao IHDao = new ItemHisDao();
 			//情報テーブルにデータを保存できたら
 			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo))) {	// 登録成功
-				result = true;
-				System.out.println("成功");
-				//直前に情報テーブルに保存したデータのitemIdを取得する（履歴テーブル入れるため）
+				result = true;				//直前に情報テーブルに保存したデータのitemIdを取得する（履歴テーブル入れるため）
 				int itemId = IDao.getMaxItemId();
 				if(IHDao.insertItemHis(itemId, itemStart ,itemDue)) {
 					result = true;
+					System.out.println("成功");
 				};
 			}
 
@@ -131,9 +131,11 @@ public class RegistServlet extends HttpServlet {
 
 
 			HWDao HwDao = new HWDao();
+			HWHisDao hwHisDao = new HWHisDao();
 			if (HwDao.insert(hw)) {
 				result = true;
 				System.out.println("成功");
+
 			}
 
 		} else {
