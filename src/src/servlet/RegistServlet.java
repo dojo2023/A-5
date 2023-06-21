@@ -115,12 +115,13 @@ public class RegistServlet extends HttpServlet {
 			System.out.println("失敗");
 		}
 
-
 		request.setAttribute("result",result);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
+
+
 	}
 
 }
