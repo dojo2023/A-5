@@ -27,6 +27,7 @@ public class Item {
 		this.itemPrice = itemPrice;
 		this.itemVolume = itemVolume;
 		this.itemMemo = itemMemo;
+		
 	}
 	public Item() {
 		super();
@@ -115,6 +116,30 @@ public class Item {
 	}
 	public void setItemFlag(boolean itemFlag) {
 		this.itemFlag = itemFlag;
+	}
+}
+
+public class ItemEdit{
+    private String itemName;
+	private int itemCapacity;
+	private String itemUnit;
+	private int itemPrice;
+	private Date startDate;
+	private Date endDate;
+	private String itemRemarks;
+
+	public ItemEdit(String itemName, int itemCapacity, String itemUnit, int itemPrice, Date startDate, Date endDate, string itemRemarks ){
+		super();
+		this.itemName = itemName;
+		this.itemCapacity = itemCapacity;
+		this.itemUnit = itemUnit;
+		this.itemPrice = itemPrice;
+		this.startDateb= startDate;
+		this.endDate = endDate;
+		this.itemRemarks = itemRemarks;
+
+		
+
 	}
 
 }
