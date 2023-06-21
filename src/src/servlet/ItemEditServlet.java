@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,8 +61,21 @@ public class ItemEditServlet extends HttpServlet {
 		String itemPrice = request.getParameter("itemPrice");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		String Itemremarks = request.getParameter("Itemremarks");
+		String itemRemarks = request.getParameter("itemRemarks");
+		
 
+		//編集処理を行う
+		ItemDao iDao = new ItemDao();
+		Item i = new Item();
+		boolean result = false;
+	if (request.getParameter("SUBMIT").equals("更新")) {
+		if (iDao.update(new i(itemName,itemCapacity,itemUnit,itemPrice,startDate,endDate,itemRemarks))){
+			result = true;
+			request.setAttribute("result",
+			
+			
+		}
+	}
 		
         //フォワード処理
 
