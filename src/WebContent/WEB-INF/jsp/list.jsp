@@ -36,16 +36,65 @@
 					<th>使用終了</th>
 				</tr>
 
+
+			<c:forEach var="g" items="${itemList}" varStatus ="status">
+
+			<form method="GET" action="/A-five/ListServlet">
+			<c:if test="${!g.itemFlag}">
+			
 				<tr>
-					<td>シャンプー<br>メリット</td>
-					<td><button type="button" data-izimodal-open="#itemModal">詳細</button></td>
-					<td>06/14</td>
-					<td>あと５日</td>
+					<td>${g.dailyName}<br>${g.itemName}</td>
+					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
+					<td>${g.itemDue}</td>
+					<td>あと日</td>
 					<td><input type="checkbox"></td>
-					<td><input type="checkbox"></td>
+					<td><input type="checkbox">
+
+					<!-- 日用品のモーダル -->
+				<div id="itemModal${c.itemHisId}" class="iziModal" >
+					<button type="button" class="batsu" data-izimodal-close="#itemModal">×</button>
+					<h4>項目名:シャンプー</h4>
+					<hr>
+					<p>商品名：メリット</p>
+					<p>	容量:300ml</p>
+					<p>使用開始日:2023/04/16</p>
+					<p>使用終了日:2023/06/26</p>
+					<p>備考:特売セール</p>
+
+					<h2>履歴</h2>
+					<p>商品名：メリット</p>
+					<p>	容量:300ml</p>
+					<p>使用開始日:2023/04/16</p>
+					<p>使用終了日:2023/06/26</p>
+					<p>備考:特売セール</p>
+					<br>
+					<p>商品名：メリット</p>
+					<p>	容量:300ml</p>
+					<p>使用開始日:2023/04/16</p>
+					<p>使用終了日:2023/06/26</p>
+					<p>備考:特売セール</p>
+					<br>
+					<br>
+
+
+
+						<button type="button" class="editButton">編集</button>
+						<button type="button" class="deleteButton">削除</button>
+				</div>
+
+					</td>
+					
 				</tr>
+
+			</c:if>
+			
+			</form>
+		    </c:forEach>
+
 			</table>
+
 		</div>
+
 
 		<div id="HWPanel" class="tabPanel">
 			<table class="table">
@@ -59,21 +108,63 @@
 
 
 
+
+
+			<c:forEach var="e" items="${hwList}" varStatus ="status">
+
+
+
 			<form method="GET" action="/A-five/ListServlet">
-
-			<c:forEach var="e" items="${hwList}">
-
+			<c:if test="${!e.hwFlag}">
 				<tr>
 					<td>${e.hwName}</td>
-					<td><button type="button" data-izimodal-open="#HWModal">詳細</button></td>
-					<td>5</td>
-					<td>e</td>
-					<td><input type="checkbox"></td>
+					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" >詳細</button></td>
+					<td>${e.hwFreq}日</td>
+					<td>${e.hwDue}</td>
+					<td><input type="checkbox">
+
+			<div id="HWModal${e.hwHisId}" class="iziModal" >
+
+
+			<button type="button" class="batsu" data-izimodal-close="#HWModal${e.hwHisId}">×</button>
+			<h4>${e.hwName}</h4>
+			<hr>
+
+			<p>目標頻度:${e.hwFreq}日に一回</p>
+			<p>次回実施日：${e.hwDue}</p>
+			<p>備考:${e.hwMemo}</p>
+
+			<h2>履歴</h2>
+
+			<c:forEach var="f" items="${hwList}">
+
+			<c:if test="${f.hwId == e.hwId}">
+
+			<p>${f.hwDate}</p>
+
+
+			</c:if>
+			</c:forEach>
+
+			<br>
+			<br>
+
+				<button type="button" class="editButton">編集</button>
+				<button type="button" class="deleteButton">削除</button>
+
+			</div>
+
+					</td>
+
 				</tr>
+
+			</c:if>
+
+
+			</form>
 
 			</c:forEach>
 
-			</form>
 
 
 
@@ -82,7 +173,7 @@
 	</div>
 </div>
 
-<!-- 日用品のモーダル -->
+<!--  日用品のモーダル
 <div id="itemModal" class="iziModal" >
 	<button type="button" class="batsu" data-izimodal-close="#itemModal">×</button>
 	<h4>項目名:シャンプー</h4>
@@ -113,9 +204,12 @@
 		<button type="button" class="editButton">編集</button>
 		<button type="button" class="deleteButton">削除</button>
 </div>
-
+ -->
 <!-- 家事のモーダル -->
-<div id="HWModal" class="iziModal" >
+<!-- <div id="HWModal" class="iziModal" >
+
+	<form method="GET" action="/A-five/ListServlet">
+
 	<button type="button" class="batsu" data-izimodal-close="#HWModal">×</button>
 	<h4>シンク掃除</h4>
 	<hr>
@@ -123,10 +217,10 @@
 	<h2>履歴</h2>
 	<br>
 	<br>
-
+	</form>
 		<button type="button" class="editButton">編集</button>
 		<button type="button" class="deleteButton">削除</button>
-</div>
+</div> -->
 
 <script type="text/javascript">
 	$(function(){
