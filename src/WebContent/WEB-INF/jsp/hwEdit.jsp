@@ -12,28 +12,27 @@
     <body>
     <h1>家事編集画面</h1>
     <form>
-    <p>家事項目名：<input type="text" id="HWname" ="HWname">
-    <input type="button" value="クリア" onclick="clearTextHWname()" />
+    <p>家事項目名：<input type="text" id="HWName" name="HWname" value="HWName">
+    <input type="button" value="クリア" onclick="clearTextHWName()" />
     </p>
     
-    <p>実施日：<input type="date">
+    <p>実施日：<input type="date" id="HWDate" name="HWDate" value="HWDate" >
     </p>
     
-    <p>頻度：<input type="text" id="HWfrequency" name="HWfrequency">
-    <select name=”HWfrequencyselect”>
+    <p>頻度：<input type="text" id="HWFreq" name="HWFreq" value="HWFreq">
+    <select name=”HWFreqselect”>
         <option value=”select”>頻度を選択</option>
         <option value=”day”>日</option>
         <option value=”week”>週</option>
         <option value=”month”>月</option>
         <option value=”year”>年</option>
         <option value=”others”>その他</option>
-        <input type="button" value="クリア" onclick="clearTextHWfrequency()" />
+        <input type="button" value="クリア" onclick="clearTextHWFreq()" />
     </p>
     
-    <p>備考：<input type="text" id="HWremarks"  name="HWremarks">
-    <input type="button" value="クリア" onclick="clearTextHWremarks()" />
+    <p>備考：<input type="text" id="HWMemo"  name="HWMemo" value="HWMemo">
+    <input type="button" value="クリア" onclick="clearTextHWMemo()" />
     </p>
-    
     <p>
     <input type="submit" value="更新する">
     <button type="button">キャンセル</button>
@@ -43,13 +42,13 @@
     
     function checkFormValue(){
         //商品名のチェック
-        if(HWname.value == ""){
+        if(HWName.value == ""){
             alert("家事項目を入力して下さい")
             //submitさせずに戻る
             return false;
         }
         //家事頻度のチェック
-        if(HWfrequency.value ==""){
+        if(HWFreq.value ==""){
             alert("頻度を入力して下さい")
             return false;
         }
@@ -57,18 +56,18 @@
         return true
     }
     //家事項目のクリア
-    function clearTextHWname() {
-        var textForm = document.getElementById("HWname");
+    function clearTextHWName() {
+        var textForm = document.getElementById("HWName");
       textForm.value = '';
     }
     //家事頻度のクリア
-    function clearTextHWfrequency() {
-        var textForm = document.getElementById("HWfrequency");
+    function clearTextHWFreq() {
+        var textForm = document.getElementById("HWFreq");
       textForm.value = '';
     }
     //備考（家事）のクリア
-    function clearTextHWremarks() {
-        var textForm = document.getElementById("HWremarks");
+    function clearTextHWMemo() {
+        var textForm = document.getElementById("HWMemo");
       textForm.value = '';
     }
     
