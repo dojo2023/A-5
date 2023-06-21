@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.HWDao;
 import dao.ItemDao;
+import dao.ItemHisDao;
+import model.HW;
+import model.Item;
+
 /**
  * Servlet implementation class HWEditServlet
  */
@@ -26,10 +30,11 @@ public class HWEditServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpResponse response) throws ServletException, IOException{
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null){
-			response.sendRedirect("/dojo6/LoginServlet");
-			return;
-		}
+		HWhisdao HHDao = new HWHisdao();
+		list<HW> HWlist = HHDao.select();
+		
+		HWlist.forEach(event -> System.out.println(event.getHWName()));
+		request.setAttribute("HWlist", HWlist);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/HWEdit.jsp");
 		dispatcher.forward(request, response);
@@ -43,10 +48,26 @@ public class HWEditServlet extends HttpServlet {
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/dojo6/LoginServlet");
 			return;
+	    }
+
+		request.setCharacterEncoding("UTF-8");
+		String HWName = request.getParameter("HWName");
+		String HWDate = request.getParameter("HWDate");
+		String HWFreq = request.getParameter("HWFreq");
+		String HWMemo = request.getParameter("HWMemo");
+
+		HWDao  HDao = new HWdao();
+		HW H = new HW();
+		boolean result = false;
+	if (request.getParameter("SUBMIT").equals("更新")){
+
+		if (HDao.update(new H(HWName, HWDate, HWFreq, HWMemo))){
+			request = True;
+			request.setAttribute("H");
+	    }
 	}
 
-	request.setCharacterEncoding("UTF-8");
-
-
-
+	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/HWEdit.jsp");
+	dispatcher.forward(request,response);
+    }
 }
