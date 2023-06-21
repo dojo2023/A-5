@@ -68,7 +68,7 @@ public class HWDao {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
-			String sql = "SELECT MAX(hwd_id) AS maxId FROM houseworks WHERE user_id = ? ";
+			String sql = "SELECT MAX(hw_id) AS maxId FROM houseworks WHERE user_id = ? ";
 			PreparedStatement  pStmt = conn.prepareStatement(sql);
 			//user_idの？に1を入れる
 			pStmt.setString(1, "1");

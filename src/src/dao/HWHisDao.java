@@ -114,4 +114,8 @@ public class HWHisDao {
 		// 結果を返す
 		return result;
     }
+
+    public boolean updateDateAndFlag() {
+
+    }
 }

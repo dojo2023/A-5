@@ -130,6 +130,7 @@ public class RegistServlet extends HttpServlet {
 			hw.setHwMemo(hwMemo);
 
 			Date currentDate = calendar.getTime();
+			System.out.println(currentDate);
 			calendar.add(calendar.DATE, hwFreq);
 			Date hwDue = calendar.getTime();
 
