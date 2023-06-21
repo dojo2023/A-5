@@ -54,6 +54,7 @@ public class HWEditServlet extends HttpServlet {
 		String HWName = request.getParameter("HWName");
 		String HWDate = request.getParameter("HWDate");
 		String HWFreq = request.getParameter("HWFreq");
+		int number = Integer.parseInt(HWFreq);
 		String HWMemo = request.getParameter("HWMemo");
 
 		HWDao  HDao = new HWdao();
@@ -63,6 +64,7 @@ public class HWEditServlet extends HttpServlet {
 
 		if (HDao.update(new H(HWName, HWDate, HWFreq, HWMemo))){
 			request = True;
+			
 			request.setAttribute("H");
 	    }
 	}
