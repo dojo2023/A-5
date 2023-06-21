@@ -40,7 +40,7 @@ public class ItemEditServlet extends HttpServlet {
 		itemlist.forEach(event -> System.out.println(event.getDailyName()));
 		request.setAttribute("itemlist", itemlist);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemEdit.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -61,21 +61,21 @@ public class ItemEditServlet extends HttpServlet {
 		String itemPrice = request.getParameter("itemPrice");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		String itemRemarks = request.getParameter("itemRemarks");
-
+		String itemMemo = request.getParameter("itemMemo");
+		
 
 		//編集処理を行う
 		ItemDao iDao = new ItemDao();
 		Item i = new Item();
 		boolean result = false;
 	if (request.getParameter("SUBMIT").equals("更新")) {
-		if (iDao.update(new i(itemName,itemCapacity,itemUnit,itemPrice,startDate,endDate,itemRemarks))){
+		if (iDao.update(new i(itemName,itemCapacity,itemUnit,itemPrice,startDate,endDate,itemMemo))){
 			result = true;
 			request.setAttribute("i");
 
 		}
 	}
-		
+
         //フォワード処理
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");
 	dispatcher.forward(request,response);
