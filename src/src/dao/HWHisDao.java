@@ -21,7 +21,7 @@ public class HWHisDao {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
-			String sql = "SELECT hw.hw_id, hw.user_id,hw.hw_freq, hw.hw_name, hw.hw_memo, his.hw_his_id, his.hw_date, his.hw_due, his.hw_flag FROM hw_history AS his JOIN houseworks AS hw ON his.hw_id = hw.hw_id";
+			String sql = "SELECT hw.hw_id, hw.user_id,hw.hw_freq, hw.hw_name, hw.hw_memo, his.hw_his_id, his.hw_date, his.hw_due, his.hw_flag FROM hw_history AS his JOIN houseworks AS hw ON his.hw_id = hw.hw_id ";
 
 
         	PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class HWHisDao {
 			    hw.setHwDate(rs.getDate("HW_DATE"));
 			    hw.setHwFlag(rs.getBoolean("HW_FLAG"));
 			    hwList.add(hw);
+
 			}
         } catch (SQLException e) {
             e.printStackTrace();
