@@ -17,6 +17,11 @@ public class Item {
 	private Date itemFin;
 	private int itemPeriod;
 	private boolean itemFlag;
+	private int itemCapacity;
+	private String itemUnit;
+	private Date startDate;
+	private Date endDate;
+	private String itemRemarks;
 
 	public Item(int userId, String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo) {
 		super();
@@ -27,7 +32,18 @@ public class Item {
 		this.itemPrice = itemPrice;
 		this.itemVolume = itemVolume;
 		this.itemMemo = itemMemo;
-		
+
+	}
+
+	public Item(String itemName, int itemCapacity, String itemUnit, int itemPrice, Date startDate, Date endDate, String itemRemarks ){
+		super();
+		this.itemName = itemName;
+		this.itemCapacity = itemCapacity;
+		this.itemUnit = itemUnit;
+		this.itemPrice = itemPrice;
+		this.startDate= startDate;
+		this.endDate = endDate;
+		this.itemRemarks = itemRemarks;
 	}
 	public Item() {
 		super();
@@ -117,28 +133,45 @@ public class Item {
 	public void setItemFlag(boolean itemFlag) {
 		this.itemFlag = itemFlag;
 	}
-}
 
-public class ItemEdit{
-    private String itemName;
-	private int itemCapacity;
-	private String itemUnit;
-	private int itemPrice;
-	private Date startDate;
-	private Date endDate;
-	private String itemRemarks;
+	public int getItemCapacity() {
+		return itemCapacity;
+	}
 
-	public ItemEdit(String itemName, int itemCapacity, String itemUnit, int itemPrice, Date startDate, Date endDate, string itemRemarks ){
-		super();
-		this.itemName = itemName;
+	public void setItemCapacity(int itemCapacity) {
 		this.itemCapacity = itemCapacity;
+	}
+
+	public String getItemUnit() {
+		return itemUnit;
+	}
+
+	public void setItemUnit(String itemUnit) {
 		this.itemUnit = itemUnit;
-		this.itemPrice = itemPrice;
-		this.startDateb= startDate;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getItemRemarks() {
+		return itemRemarks;
+	}
+
+	public void setItemRemarks(String itemRemarks) {
 		this.itemRemarks = itemRemarks;
-
-
 
 	}
 
