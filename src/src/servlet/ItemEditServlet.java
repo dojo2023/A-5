@@ -62,7 +62,7 @@ public class ItemEditServlet extends HttpServlet {
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		String itemRemarks = request.getParameter("itemRemarks");
-		
+
 
 		//編集処理を行う
 		ItemDao iDao = new ItemDao();
@@ -71,14 +71,14 @@ public class ItemEditServlet extends HttpServlet {
 	if (request.getParameter("SUBMIT").equals("更新")) {
 		if (iDao.update(new i(itemName,itemCapacity,itemUnit,itemPrice,startDate,endDate,itemRemarks))){
 			result = true;
-			request.setAttribute("result",
-			
-			
+			request.setAttribute("i");
+
 		}
 	}
 		
         //フォワード処理
-
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");
+	dispatcher.forward(request,response);
 	}
 
 }
