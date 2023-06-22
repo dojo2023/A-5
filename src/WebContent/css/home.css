@@ -1,17 +1,41 @@
 @charset "UTF-8";
 
-/*全体*/
-.wrapper{
-    max-width: 600px;
-    margin: 0 auto;
-    color: #666;
+
+body{
+    margin: 0 0 0 0;		/* マージンなし（後で個別に設定） */
+    padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
 }
-#header {
-    text-align: center;
-    font-size: 24px;
+
+.container-fluid {
+	width: 100%;
+}
+
+.col-9{
+	position: relative;
     width: 100%;
-    margin: 1rem 0 0;
+    flex: 0 0 75%;
+    max-width: 75%;
 }
+
+.d-flex {
+	display: flex !important;
+}
+
+.tuki{
+	width: 20%;
+	height: 20%;
+}
+
+.calender{
+	position: relative;
+	width: 70%;
+	height: 20%;
+	top: -650px;
+    left: 300px;
+}
+
+
+
 
 /*カレンダー*/
 #calendar {
