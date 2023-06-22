@@ -60,19 +60,38 @@ public class AjaxServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
 		boolean result = false;
-		String strHwFlag = request.getParameter("flag");
-		boolean hwFlag = strHwFlag.equals("1");
-		int hwHisId = Integer.parseInt(request.getParameter("id"));
+		if (request.getParameter("hwFlag") != null) {
+			String strHwFlag = request.getParameter("hwFlag");
+			boolean hwFlag = strHwFlag.equals("1");
+			int hwHisId = Integer.parseInt(request.getParameter("hwId"));
 
-		HWHisDao hwHisDao = new HWHisDao();
-		if (hwFlag) {
-			if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
-				result = true;
-			};
+			HWHisDao hwHisDao = new HWHisDao();
+			if (hwFlag) {
+				if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
+					result = true;
+				};
+			} else {
+				if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
+					result = true;
+				};
+			}
+
 		} else {
-			if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
-				result = true;
-			};
+			String strItemFlag = request.getParameter("itemFlag");
+			boolean itemFlag = strItemFlag.equals("1");
+			int itemHisId = Integer.parseInt(request.getParameter("itemId"));
+
+			ItemHisDao  IHDao = new ItemHisDao();
+			if (itemFlag) {
+				if(IHDao.falseToTrue(itemHisId, itemFlag)) {
+					result = true;
+				};
+			} else {
+				if(IHDao.trueToFalse(itemHisId, itemFlag)) {
+					result = true;
+				};
+			}
+
 		}
 
 	}
