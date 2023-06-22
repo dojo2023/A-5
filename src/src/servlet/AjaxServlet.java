@@ -54,28 +54,8 @@ public class AjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.getParameter('userId');
-		ItemHisDao IHDao = new ItemHisDao();
-		Useful useful = new Useful();
- 		//items、item_historyの中のデータを全部持ってくる
-		List<Item> itemlist = IHDao.getDaily();
+		request.setCharacterEncoding("UTF-8");
+		String hwFlag = request.getParameter("flag");
 
-		Map<String, String> mappingData = useful.getMappingData(itemlist);
-		System.out.println(mappingData);
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-            //JavaオブジェクトからJSONに変換
-            String testJson = mapper.writeValueAsString(mappingData);
-            //JSONの出力
-            response.getWriter().write(testJson);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-//		//文字コードの設定（めんどいのでコピペでOK）
-		response.setContentType("application/json");
-		response.setHeader("Cache-Control", "nocache");
-		response.setCharacterEncoding("utf-8");
 	}
-
 }

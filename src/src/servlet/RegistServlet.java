@@ -116,21 +116,19 @@ public class RegistServlet extends HttpServlet {
 					System.out.println("成功");
 				};
 			}
-
+		//家事項目フォームから送信されたら
 		} else if (submitBtn != null && submitBtn.equals("hwSubmit")) {
 			String hwName = request.getParameter("hwName");
 			int numFreq = Integer.parseInt(request.getParameter("hwFreq"));
 			int freqUnit = Integer.parseInt(request.getParameter("freqUnit"));
 			String hwMemo = request.getParameter("hwMemo");
-
+			//頻度の数値と頻度の単位から頻度を日換算（1 + 週 = 7）
 			int hwFreq = numFreq * freqUnit;
 			HW hw = new HW();
 			hw.setHwName(hwName);
 			hw.setHwFreq(hwFreq);
 			hw.setHwMemo(hwMemo);
-
-			Date currentDate = calendar.getTime();
-			System.out.println(currentDate);
+			//現在日時と目標頻度を足して、期日を算出
 			calendar.add(calendar.DATE, hwFreq);
 			Date hwDue = calendar.getTime();
 
