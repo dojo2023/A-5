@@ -42,11 +42,10 @@ public class RegistServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		ItemHisDao IHDao = new ItemHisDao();
+		HWDao HDao = new HWDao();
  		//items、item_historyの中のデータを全部持ってくる
-		List<Item> itemlist = IHDao.getDaily();
-		itemlist.forEach(event -> System.out.println(event.getDailyName()));
-		request.setAttribute("itemlist", itemlist);
+		List<String> hwNameList = HDao.getHwName();
+		request.setAttribute("hwNameList", hwNameList);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
