@@ -51,8 +51,8 @@
             <form id="hwRegistForm" action="/A-five/RegistServlet" method="post">
                 <input name="hwName" type="text" placeholder="家事項目" list="hwSelect">
                 <datalist id="hwSelect">
-                	<c:forEach var="item" items="${itemlist}">
-                		<option>${item.dailyName}</option>
+                	<c:forEach var="hwName" items="${hwNameList}">
+                		<option>${hwName}</option>
                 	</c:forEach>
                 </datalist>
                 <select name="freqUnit">
