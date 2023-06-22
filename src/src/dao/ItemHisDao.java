@@ -272,7 +272,7 @@ public class ItemHisDao {
 			// SQL文を完成させる
 			pStmt.setInt(1,  itemId);
 			pStmt.setDate(2, sqlItemStart);
-			pStmt.setDate(3, (Date) sqlItemDue);
+			pStmt.setDate(3, sqlItemDue);
 
 
 

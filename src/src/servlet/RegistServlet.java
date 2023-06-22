@@ -80,6 +80,7 @@ public class RegistServlet extends HttpServlet {
 		String submitBtn = request.getParameter("regist");
 		System.out.println(submitBtn);
 		boolean result = false;
+		Calendar calendar = Calendar.getInstance();
 		//日用品の登録処理
 		if (submitBtn != null && submitBtn.equals("itemSubmit")) {
 			int userId = 1;//とりあえず「１」にしている
@@ -100,7 +101,6 @@ public class RegistServlet extends HttpServlet {
 	        }
 	        int itemPeriod = Integer.parseInt(request.getParameter("itemPeriod"));
 	        //使用開始日（ユーザーが入力）と終了予測日数（ユーザーが入力）から終了予測日を計算
-	        Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(itemStart);
 	        calendar.add(Calendar.DATE, itemPeriod);
 	        Date itemDue = calendar.getTime();
@@ -129,12 +129,20 @@ public class RegistServlet extends HttpServlet {
 			hw.setHwFreq(hwFreq);
 			hw.setHwMemo(hwMemo);
 
+			Date currentDate = calendar.getTime();
+			System.out.println(currentDate);
+			calendar.add(calendar.DATE, hwFreq);
+			Date hwDue = calendar.getTime();
+
 
 			HWDao HwDao = new HWDao();
 			HWHisDao hwHisDao = new HWHisDao();
 			if (HwDao.insert(hw)) {
-				result = true;
-				System.out.println("成功");
+				int hwId = HwDao.getMaxHwId();
+				if(hwHisDao.insert(hwId, hwDue)) {
+					result = true;
+					System.out.println("成功");
+				}
 
 			}
 
@@ -147,7 +155,7 @@ public class RegistServlet extends HttpServlet {
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
-		
+
 
 
 

@@ -53,6 +53,7 @@ public class HWEditServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String HWName = request.getParameter("HWName");
 		String HWDate = request.getParameter("HWDate");
+		Date HWdate = 
 		String HWFreq = request.getParameter("HWFreq");
 		int number = Integer.parseInt(HWFreq);
 		String HWMemo = request.getParameter("HWMemo");
