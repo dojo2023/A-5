@@ -118,8 +118,8 @@
 					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" >詳細</button></td>
 					<td>${e.hwFreq}日</td>
 					<td>${e.hwDue}</td>
-					<td><input type="checkbox">
-
+					<td><input type="checkbox" id="checkbox${status.index}" onchange="toggleFlag(${status.index})">
+					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
 			<div id="HWModal${e.hwHisId}" class="iziModal" >
 
 
@@ -224,6 +224,60 @@
 		$(".iziModal").iziModal();
 	});
 
+	function toggleFlag(index) {
+	    const hwHisId = document.getElementById('hwHisId'+index).value;
+	    alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);
+	    const hwFlag = document.getElementById('checkbox'+index);
+	    alert(hwFlag.checked);
+	    let hwFlagValue = hwFlag.checked ? 1 : 0;
+	    alert(hwFlagValue);
+	    const data = {
+	        flag: hwFlagValue,
+	        id: hwHisId
+	    }
+
+	    /* fetch('/A-five/AjaxServlet',{
+	        method: 'POST',
+	        headers: {
+	        'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify(data)
+	    })
+	    .then(response => {
+	        if (response.ok) {
+	            console.log('フラグを更新');
+	        } else {
+	            throw new Error('フラグを更新失敗');
+	        }
+	    })
+	    .catch(error => {
+	        console.error(error);
+	    }) */
+	  //非同期通信始めるよ
+	    $.ajaxSetup({scriptCharset:'utf-8'});
+	    $.ajax({
+	        //どのサーブレットに送るか
+	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+	        url: '/A-five/AjaxServlet',
+	        //どのメソッドを使用するか
+	        type:"POST",
+	        //受け取るデータのタイプ
+	        dataType:"json",
+	        //何をサーブレットに飛ばすか（変数を記述）
+	        data: data,
+	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+	        processDate:false,
+	        timeStamp: new Date().getTime()
+	       //非同期通信が成功したときの処理
+	    }).done(function(data) {
+	        alert("成功1");
+	    })
+	       //非同期通信が失敗したときの処理
+	      .fail(function() {
+	        //失敗とアラートを出す
+	        alert("失敗！");
+	      });
+	}
 </script>
 </body>
 </html>

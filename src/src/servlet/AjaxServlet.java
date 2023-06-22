@@ -60,8 +60,8 @@ public class AjaxServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
 		boolean result = false;
-		System.out.println(request.getParameter("flag"));
 		String strHwFlag = request.getParameter("flag");
+		System.out.println(strHwFlag);
 		boolean hwFlag = strHwFlag.equals("1");
 		System.out.println(hwFlag);
 		int hwHisId = Integer.parseInt(request.getParameter("id"));
