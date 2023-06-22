@@ -5,10 +5,56 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.HW;
 
 public class HWDao {
+	public List<String> getHwName() {
+		Connection conn = null;
+		List<String> hwNameList = new ArrayList<String>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+			String sql = "SELECT hw_name FROM HOUSEWORKS GROUP BY hw_name";
+			PreparedStatement  pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				hwNameList.add(rs.getString("hw_name"));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			hwNameList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			hwNameList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					hwNameList = null;
+				}
+			}
+
+		}
+		return hwNameList;
+	}
+
 	public boolean insert(HW hw) {
 		Connection conn = null;
 		boolean result = false;
