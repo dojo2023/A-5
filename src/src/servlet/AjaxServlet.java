@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dao.HWHisDao;
 import dao.ItemHisDao;
 import model.Item;
 import model.Useful;
@@ -55,7 +56,19 @@ public class AjaxServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String hwFlag = request.getParameter("flag");
+        response.setContentType("application/json");
+		response.setHeader("Cache-Control", "nocache");
+		response.setCharacterEncoding("utf-8");
+		boolean result = false;
+		System.out.println(request.getParameter("flag"));
+		String strHwFlag = request.getParameter("flag");
+		boolean hwFlag = strHwFlag.equals("1");
+		System.out.println(hwFlag);
+		int hwHisId = Integer.parseInt(request.getParameter("id"));
 
+		HWHisDao hwHisDao = new HWHisDao();
+		if(hwHisDao.updateDateAndFlag(hwHisId, hwFlag)) {
+			result = true;
+		};
 	}
 }
