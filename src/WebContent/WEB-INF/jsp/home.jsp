@@ -7,23 +7,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<style>
 
 
 
-</style>
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/A-five/css/home.css">
 </head>
 <body>
-	<div id="test">
-		<%@ include file="common.jsp" %>
-	</div>
-    <div class="wrapper">
 
+		<%@ include file="common_header.jsp" %>
+
+		<%@ include file="common_list.jsp" %>
+
+
+<!--     <div class="col-9 d-flex justify-content-center align-items-center">
+	<div class="d-flex justify-content-center align-items-center"> -->
+
+	<div class="calender">
     	<!-- カレンダー関連 -->
 	    <!-- xxxx年xx月を表示 -->
+	    <div class="tuki">
 	    <h1 id="header"></h1>
+	    </div>
 
 	    <!-- ボタンクリックで月移動 -->
 	    <div id="nextPrevButton">
@@ -33,8 +38,9 @@
 
 	    <!-- カレンダー -->
 	    <div id="calendar"></div>
+	 <!-- </div>
+	 </div> -->
 	    <!-- カレンダー関連ここまで -->
-
 	</div>
 
 
@@ -121,11 +127,8 @@
 	    }
 	    return calendar;
 	}
-	<!-- カレンダー関連ここまで -->
-
 	</script>
-	<script src="js/Common.js"></script>
-    <script>header();</script>
+	<!-- カレンダー関連ここまで -->
 
 </body>
 </html>
