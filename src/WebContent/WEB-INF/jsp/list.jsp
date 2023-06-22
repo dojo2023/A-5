@@ -47,9 +47,9 @@
 					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input id= "id${status.index}" type="checkbox" onchange="toggleFlag(${status.index})"></td>
+					<td><input id= "checkbox${status.index}" type="checkbox" onchange="toggleFlag(${status.index})"></td>
 					<td><input type="checkbox">
-						<input type="hidden" id="test${status.index}" value="${id}">
+						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 
 					<!-- 日用品のモーダル -->
 				<div id="itemModal${g.itemHisId}" class="iziModal" >
@@ -64,15 +64,15 @@
 					<h2>履歴</h2>
 
 				<c:forEach var="h" items="${itemlist}" varStatus ="status">
-
-					<p>商品名：メリット</p>
-					<p>	容量:300ml</p>
-					<p>使用開始日:2023/04/16</p>
-					<p>使用終了日:2023/06/26</p>
-					<p>備考:特売セール</p>
+				<c:if test="${h.itemId == g.itemId}">
+					<p>商品名：${h.itemName}</p>
+					<p>	容量:${h.itemVolume}${h.dailyUnit}</p>
+					<p>使用開始日:${h.itemStart}</p>
+					<p>使用終了日:${h.itemFin}</p>
+					<p>備考:${h.itemMemo}</p>
 					<br>
-
-					</c:forEach>
+				</c:if>
+				</c:forEach>
 
 
 						<button type="button" class="editButton">編集</button>
