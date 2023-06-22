@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.Date;
 import dao.HWDao;
 import dao.ItemDao;
 import dao.ItemHisDao;
@@ -53,7 +53,7 @@ public class HWEditServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String HWName = request.getParameter("HWName");
 		String HWDate = request.getParameter("HWDate");
-		Date HWdate = 
+		Date HWdate =
 		String HWFreq = request.getParameter("HWFreq");
 		int number = Integer.parseInt(HWFreq);
 		String HWMemo = request.getParameter("HWMemo");
