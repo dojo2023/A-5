@@ -69,7 +69,7 @@ public class UsersDao {
 				}
 			}
 		}
-		// 結果を返す　Beans
+		// 結果を返す　User型のBeansかnullを返す
 		return login;
 	}
 //新規登録
