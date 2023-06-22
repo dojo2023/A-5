@@ -1,1 +1,88 @@
 @charset "UTF-8";
+
+        #tabs{
+        width: 1100px;
+        height: auto;/*幅*/
+        padding: 0;
+        margin: auto;
+        }
+        .dailyRegistForm {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        height: 100%;
+        border: 10px;
+        margin: 0 0 0px;
+        padding: 10px,15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        }
+        #tabs form {/*formの四角の中身に対する変更*/
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 100%;/*幅*/
+        max-height: auto;/*高さ*/
+        margin: 0 auto 100px;
+        padding: 35px;/*padding..テキストと四角の間*/
+        text-align: left;/*テキスト中央ぞろえ*/
+        /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);影 */
+	    }
+        #tabs form input{
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 10px;
+        margin: 5px;
+        padding: 6px ;
+        box-sizing: border-box;
+        font-size: 14px;
+        }
+         /*inputタグの、name属性が" "のものに適応*/
+         #tabs form input[name="hwFreq"]{
+        position: relative;
+            left: -55px;
+            /* right: 65px; */
+            width: 92%;
+        }
+
+        #tabs form select{
+        font-family: "Roboto", sans-serif;
+        outline: 1;
+        position: relative;
+            left: 936px;
+        background: #f2f2f2;
+        width: 5%;
+        border: 8px;
+        margin: 0px;
+        padding: 5px;
+        box-sizing: flex;
+        font-size: 14px;
+        }
+        #tabs form button{
+        font-family: "Roboto", sans-serif;
+  		outline: 0;
+        margin-left: 900px;
+  		background: #4CAF50;
+  		width: 70px;
+        height: 30px;
+  		border: 0;
+  		padding: 5px;
+  		color: #FFFFFF;
+  		font-size: 14px;
+        text-align: center;/*テキスト ぞろえ*/
+  		-webkit-transition: all 0.3 ease;
+  		transition: all 0.3 ease;
+  		cursor: pointer;
+        }
+
+        #tabs form .errorMessage{
+		color: #FF0000;
+		font-size: 10px;
+		padding: 0px;
+		text-align: left;/*テキスト ぞろえ*/
+		/*position: absolute;*/
+	 		top: 160px;
+	 		left: 500px;
+	    }
