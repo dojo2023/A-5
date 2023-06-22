@@ -37,45 +37,42 @@
 				</tr>
 
 
-			<c:forEach var="g" items="${itemList}" varStatus ="status">
+			<c:forEach var="g" items="${itemlist}" varStatus ="status">
 
 			<form method="GET" action="/A-five/ListServlet">
 			<c:if test="${!g.itemFlag}">
-			
+
 				<tr>
 					<td>${g.dailyName}<br>${g.itemName}</td>
 					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input type="checkbox"></td>
+					<td><input id= "id${status.index}" type="checkbox" onchange="toggleFlag(${status.index})"></td>
 					<td><input type="checkbox">
+						<input type="hidden" id="test${status.index}" value="${id}">
 
 					<!-- 日用品のモーダル -->
-				<div id="itemModal${c.itemHisId}" class="iziModal" >
-					<button type="button" class="batsu" data-izimodal-close="#itemModal">×</button>
-					<h4>項目名:シャンプー</h4>
+				<div id="itemModal${g.itemHisId}" class="iziModal" >
+					<button type="button" class="batsu" data-izimodal-close="#itemModal${g.itemHisId }">×</button>
+					<h4>項目名:${g.dailyName}</h4>
 					<hr>
-					<p>商品名：メリット</p>
-					<p>	容量:300ml</p>
-					<p>使用開始日:2023/04/16</p>
-					<p>使用終了日:2023/06/26</p>
-					<p>備考:特売セール</p>
-
+					<p>商品名：${g.itemName}</p>
+					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
+					<p>使用開始日:${g.itemStart}</p>
+					<p>使用終了日:${g.itemDue}</p>
+					<p>備考:${g.itemMemo}</p>
 					<h2>履歴</h2>
+
+				<c:forEach var="h" items="${itemlist}" varStatus ="status">
+
 					<p>商品名：メリット</p>
 					<p>	容量:300ml</p>
 					<p>使用開始日:2023/04/16</p>
 					<p>使用終了日:2023/06/26</p>
 					<p>備考:特売セール</p>
-					<br>
-					<p>商品名：メリット</p>
-					<p>	容量:300ml</p>
-					<p>使用開始日:2023/04/16</p>
-					<p>使用終了日:2023/06/26</p>
-					<p>備考:特売セール</p>
-					<br>
 					<br>
 
+					</c:forEach>
 
 
 						<button type="button" class="editButton">編集</button>
@@ -83,11 +80,11 @@
 				</div>
 
 					</td>
-					
+
 				</tr>
 
 			</c:if>
-			
+
 			</form>
 		    </c:forEach>
 
