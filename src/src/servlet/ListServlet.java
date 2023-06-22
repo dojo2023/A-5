@@ -45,9 +45,6 @@ public class ListServlet extends HttpServlet {
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hwList", hwList);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
-		dispatcher.forward(request, response);
-
 
 		/*
 				try {
@@ -59,7 +56,12 @@ public class ListServlet extends HttpServlet {
 				}*/
 
 		ItemHisDao itemHis =new ItemHisDao();
-		List<Item> itemList =itemHis.select();
+		List<Item> itemlist =itemHis.select();
+
+		request.setAttribute("itemlist", itemlist);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
+		dispatcher.forward(request, response);
 
 	}
 }
