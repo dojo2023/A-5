@@ -57,9 +57,9 @@ public class LoginServlet extends HttpServlet {
 
 				//beanの中身を全部セッションスコープに保存する場合↓
 				//session.setAttribute("loginResult", loginResult);//枝豆の房をセッションスコープに保存
-				//JSPで表示させるEL式
-				//${loginResult.user_id}${loginResult.user_name}${loginResult.user_pass}
 
+				//JSPで表示させるEL式↓
+				//${loginResult.user_id}${loginResult.user_name}${loginResult.user_pass}
 
 			}
 			// ログイン失敗
