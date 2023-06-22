@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/A-five/css/regist.css">
 <meta charset="UTF-8">
 <title>登録</title>
+
 <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -53,12 +55,12 @@
                 		<option>${item.dailyName}</option>
                 	</c:forEach>
                 </datalist>
-                <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
                 <select name="freqUnit">
                     <option value="1">日</option>
                     <option value="7">週</option>
                     <option value="30">月</option>
                 </select>
+                <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
                 <input name="hwMemo" type="text" placeholder="メモ">
                 <input name="regist" type="hidden" value="hwSubmit">
                 <button type="submit">登録</button>
@@ -68,6 +70,7 @@
 	<c:if test="{not empty result}">
 		<script type="text/javascript">alert(result);</script>
 	</c:if>
+
     <script>
 
 
