@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.HW;
@@ -21,7 +22,7 @@ public class HWHisDao {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
-			String sql = "SELECT hw.hw_id, hw.user_id,hw.hw_freq, hw.hw_name, hw.hw_memo, his.hw_his_id, his.hw_date, his.hw_due, his.hw_flag FROM hw_history AS his JOIN houseworks AS hw ON his.hw_id = hw.hw_id";
+			String sql = "SELECT hw.hw_id, hw.user_id,hw.hw_freq, hw.hw_name, hw.hw_memo, his.hw_his_id, his.hw_date, his.hw_due, his.hw_flag FROM hw_history AS his JOIN houseworks AS hw ON his.hw_id = hw.hw_id ";
 
 
         	PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -42,6 +43,7 @@ public class HWHisDao {
 			    hw.setHwDate(rs.getDate("HW_DATE"));
 			    hw.setHwFlag(rs.getBoolean("HW_FLAG"));
 			    hwList.add(hw);
+
 			}
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,5 +64,100 @@ public class HWHisDao {
         }
 
         return hwList;
+    }
+    public boolean insert(int hwId, Date hwDue) {
+    	Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+
+			// SQL文を準備する
+			String sql = "insert into hw_history (hw_id, hw_due) values (?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			java.sql.Date sqlHwDue = new java.sql.Date(hwDue.getTime());
+
+			pStmt.setInt(1, hwId);
+			pStmt.setDate(2, sqlHwDue);
+
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+    }
+
+    public boolean updateDateAndFlag(int hwHisId, boolean hwFlag) {
+    	Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+
+			// SQL文を準備する
+			String sql = "update hw_history set hw_date=CURRENT_DATE, hw_flag=? where hw_his_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setBoolean(1, hwFlag);
+			pStmt.setInt(2, hwHisId);
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
     }
 }

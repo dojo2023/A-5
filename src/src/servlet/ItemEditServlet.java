@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +40,7 @@ public class ItemEditServlet extends HttpServlet {
 		itemlist.forEach(event -> System.out.println(event.getDailyName()));
 		request.setAttribute("itemlist", itemlist);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemEdit.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -55,15 +57,30 @@ public class ItemEditServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String itemName = request.getParameter("itemName");
 		String itemCapacity = request.getParameter("itemCapacity");
+		int number = Integer.parseInt(itemCapacity);
 		String itemUnit = request.getParameter("itemUnit");
 		String itemPrice = request.getParameter("itemPrice");
+		int number = Integer.parseInt(itemPrice);
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		String Itemremarks = request.getParameter("Itemremarks");
-
+		String itemMemo = request.getParameter("itemMemo");
 		
-        //フォワード処理
 
+		//編集処理を行う
+		ItemDao iDao = new ItemDao();
+		Item i = new Item();
+		boolean result = false;
+	if (request.getParameter("SUBMIT").equals("更新")) {
+		if (iDao.update(new i(itemName,itemCapacity,itemUnit,itemPrice,startDate,endDate,itemMemo))){
+			result = true;
+			request.setAttribute("i");
+
+		}
+	}
+
+        //フォワード処理
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");
+	dispatcher.forward(request,response);
 	}
 
 }

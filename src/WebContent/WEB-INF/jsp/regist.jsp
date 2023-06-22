@@ -38,6 +38,8 @@
                     <!-- 日用品項目と単位はマップ -->
                 </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
+                <input name="itemStart" type="date" placeholder="使用開始日">
+                <input name="itemPeriod" type="text" placeholder="予測使用日数">
                 <input name="regist" type="hidden" value="itemSubmit">
                 <button type="submit">登録</button>
             </form>
@@ -75,7 +77,7 @@
         });
 
         // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
-        let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq]');
+        let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq], input[name=itemDue]');
         // 値段・容量・目標頻度の入力欄をforeach
         numberInputs.forEach(function(input){
             // blur：次の入力欄が選択されたら

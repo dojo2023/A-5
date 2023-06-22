@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dao.HWHisDao;
 import dao.ItemHisDao;
 import model.Item;
 import model.Useful;
@@ -54,28 +55,20 @@ public class AjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.getParameter('userId');
-		ItemHisDao IHDao = new ItemHisDao();
-		Useful useful = new Useful();
- 		//items、item_historyの中のデータを全部持ってくる
-		List<Item> itemlist = IHDao.getDaily();
-
-		Map<String, String> mappingData = useful.getMappingData(itemlist);
-		System.out.println(mappingData);
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-            //JavaオブジェクトからJSONに変換
-            String testJson = mapper.writeValueAsString(mappingData);
-            //JSONの出力
-            response.getWriter().write(testJson);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-//		//文字コードの設定（めんどいのでコピペでOK）
-		response.setContentType("application/json");
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
-	}
+		boolean result = false;
+		String strHwFlag = request.getParameter("flag");
+		System.out.println(strHwFlag);
+		boolean hwFlag = strHwFlag.equals("1");
+		System.out.println(hwFlag);
+		int hwHisId = Integer.parseInt(request.getParameter("id"));
 
+		HWHisDao hwHisDao = new HWHisDao();
+		if(hwHisDao.updateDateAndFlag(hwHisId, hwFlag)) {
+			result = true;
+		};
+	}
 }

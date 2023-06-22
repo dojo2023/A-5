@@ -248,6 +248,56 @@ public class ItemHisDao {
 			}
 
 		}
-	return itemlist;
+		return itemlist;
+	}
+
+	//登録時に履歴テーブル新規レコードを挿入
+	public boolean insertItemHis(int itemId, java.util.Date itemStart, java.util.Date itemDue) {
+		boolean result = false;
+		Connection conn = null;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+
+			// SQL文を準備する
+			String sql = "insert into item_history (item_id, item_start, item_due) values(?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			java.sql.Date sqlItemStart = new java.sql.Date(itemStart.getTime());
+			java.sql.Date sqlItemDue = new java.sql.Date(itemDue.getTime());
+
+			// SQL文を完成させる
+			pStmt.setInt(1,  itemId);
+			pStmt.setDate(2, sqlItemStart);
+			pStmt.setDate(3, sqlItemDue);
+
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
 	}
 }

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.HWHisDao;
+import dao.ItemHisDao;
 import model.HW;
+import model.Item;
 
 /**
  * Servlet implementation class ListServlet
@@ -36,15 +38,12 @@ public class ListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HWHisDao hwHis = new HWHisDao();
-		
+
 		List<HW> hwList = hwHis.select();
-		
+
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hwList", hwList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
-		dispatcher.forward(request, response);
 
 
 		/*
@@ -55,6 +54,14 @@ public class ListServlet extends HttpServlet {
 				} catch (java.text.ParseException e) {
 					e.printStackTrace();
 				}*/
+
+		ItemHisDao itemHis =new ItemHisDao();
+		List<Item> itemlist =itemHis.select();
+
+		request.setAttribute("itemlist", itemlist);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
+		dispatcher.forward(request, response);
 
 	}
 }
