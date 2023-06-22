@@ -61,14 +61,19 @@ public class AjaxServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		boolean result = false;
 		String strHwFlag = request.getParameter("flag");
-		System.out.println(strHwFlag);
 		boolean hwFlag = strHwFlag.equals("1");
-		System.out.println(hwFlag);
 		int hwHisId = Integer.parseInt(request.getParameter("id"));
 
 		HWHisDao hwHisDao = new HWHisDao();
-		if(hwHisDao.updateDateAndFlag(hwHisId, hwFlag)) {
-			result = true;
-		};
+		if (hwFlag) {
+			if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
+				result = true;
+			};
+		} else {
+			if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
+				result = true;
+			};
+		}
+
 	}
 }

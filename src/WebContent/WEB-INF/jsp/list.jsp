@@ -47,7 +47,7 @@
 					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input id= "checkbox${status.index}" type="checkbox" onchange="toggleFlag(${status.index})"></td>
+					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})"></td>
 					<td><input type="checkbox">
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 
@@ -118,7 +118,7 @@
 					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" >詳細</button></td>
 					<td>${e.hwFreq}日</td>
 					<td>${e.hwDue}</td>
-					<td><input type="checkbox" id="checkbox${status.index}" onchange="toggleFlag(${status.index})">
+					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
 					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
 			<div id="HWModal${e.hwHisId}" class="iziModal" >
 
@@ -224,10 +224,10 @@
 		$(".iziModal").iziModal();
 	});
 
-	function toggleFlag(index) {
+	function toggleHwFlag(index) {
 	    const hwHisId = document.getElementById('hwHisId'+index).value;
 	    alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);
-	    const hwFlag = document.getElementById('checkbox'+index);
+	    const hwFlag = document.getElementById('hwCheck'+index);
 	    alert(hwFlag.checked);
 	    let hwFlagValue = hwFlag.checked ? 1 : 0;
 	    alert(hwFlagValue);
@@ -253,6 +253,40 @@
 	    .catch(error => {
 	        console.error(error);
 	    }) */
+	  //非同期通信始めるよ
+	    $.ajaxSetup({scriptCharset:'utf-8'});
+	    $.ajax({
+	        //どのサーブレットに送るか
+	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+	        url: '/A-five/AjaxServlet',
+	        //どのメソッドを使用するか
+	        type:"POST",
+	        //受け取るデータのタイプ
+	        dataType:"json",
+	        //何をサーブレットに飛ばすか（変数を記述）
+	        data: data,
+	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+	        processDate:false,
+	        timeStamp: new Date().getTime()
+	       //非同期通信が成功したときの処理
+	    }).done(function(data) {
+	        alert("成功1");
+	    })
+	       //非同期通信が失敗したときの処理
+	      .fail(function() {
+	        //失敗とアラートを出す
+	        alert("失敗！");
+	      });
+	}
+	function toggleItemFlag(index) {
+	    const itemHisId = document.getElementById('itemHisId'+index).value;
+	    const itemFlag = document.getElementById('itemCheck'+index);
+	    alert(itemFlag.checked);
+	    let itemFlagValue = itemFlag.checked ? 1 : 0;
+	    const data = {
+	        flag: itemFlagValue,
+	        id: itemHisId
+	    }
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
 	    $.ajax({
