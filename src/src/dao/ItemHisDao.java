@@ -73,6 +73,7 @@ public class ItemHisDao {
 		// 結果を返す
 		return itemlist;
 	}
+	//AjaxServletに使う。日用品項目と単位を取得してJavaScriptでマッピング。
 	public List<Item> getDaily() {
 		Connection conn = null;
 		List<Item> itemlist = new ArrayList<Item>();
@@ -83,7 +84,7 @@ public class ItemHisDao {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
-			String sql = "SELECT * FROM items WHERE user_id = ?";
+			String sql = "SELECT daily_name, daily_unit FROM ITEMS WHERE user_id = ? GROUP BY daily_name, daily_unit";
 			PreparedStatement  pStmt = conn.prepareStatement(sql);
 			//user_idの？に1を入れる
 			pStmt.setString(1, "1");
@@ -93,16 +94,9 @@ public class ItemHisDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");
 				Item item = new Item();
-				item.setItemId(rs.getInt("ITEM_ID"));
-				item.setUserId(rs.getInt("USER_ID"));
 				item.setDailyName(rs.getString("DAILY_NAME"));
 				item.setDailyUnit(rs.getString("DAILY_UNIT"));
-				item.setItemName(rs.getString("ITEM_NAME"));
-				item.setItemPrice(rs.getInt("ITEM_PRICE"));
-				item.setItemVolume(rs.getInt("ITEM_VOLUME"));
-				item.setItemMemo(rs.getString("ITEM_MEMO"));
 				itemlist.add(item);
 			}
 		}
