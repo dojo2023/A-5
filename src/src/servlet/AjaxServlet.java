@@ -68,6 +68,7 @@ public class AjaxServlet extends HttpServlet {
 			HWHisDao hwHisDao = new HWHisDao();
 			if (hwFlag) {
 				if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
+					hwHisDao.insertNextHw(hwHisId);
 					result = true;
 				};
 			} else {
