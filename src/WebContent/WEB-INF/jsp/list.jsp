@@ -120,6 +120,8 @@
 					<td>${e.hwDue}</td>
 					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
 					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
+					<input type="hidden" id="hwId${status.index}" value="${e.hwId}">
+
 			<div id="HWModal${e.hwHisId}" class="iziModal" >
 
 
@@ -226,16 +228,18 @@
 
 	function toggleHwFlag(index) {
 	    const hwHisId = document.getElementById('hwHisId'+index).value;
+	    const hwId = document.getElementById('hwId'+index).value;
 	    alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);
 	    const hwFlag = document.getElementById('hwCheck'+index);
 	    alert(hwFlag.checked);
 	    let hwFlagValue = hwFlag.checked ? 1 : 0;
 	    alert(hwFlagValue);
+
 	    const data = {
 	        hwFlag: hwFlagValue,
-	        hwId: hwHisId
+	        hwHisId: hwHisId,
+	        hwId: hwId
 	    }
-
 	    /* fetch('/A-five/AjaxServlet',{
 	        method: 'POST',
 	        headers: {
