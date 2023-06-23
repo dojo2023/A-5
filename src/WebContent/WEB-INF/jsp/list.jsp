@@ -232,8 +232,8 @@
 	    let hwFlagValue = hwFlag.checked ? 1 : 0;
 	    alert(hwFlagValue);
 	    const data = {
-	        flag: hwFlagValue,
-	        id: hwHisId
+	        hwFlag: hwFlagValue,
+	        hwId: hwHisId
 	    }
 
 	    /* fetch('/A-five/AjaxServlet',{
@@ -284,8 +284,8 @@
 	    alert(itemFlag.checked);
 	    let itemFlagValue = itemFlag.checked ? 1 : 0;
 	    const data = {
-	        flag: itemFlagValue,
-	        id: itemHisId
+	        itemFlag: itemFlagValue,
+	        itemId: itemHisId
 	    }
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
