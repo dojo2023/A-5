@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
+import java.util.Calendar;
+import java.util.Date;
 import java.net.http.HttpResponse;
 import java.util.List;
 
@@ -12,11 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+
 import dao.HWDao;
+import dao.HWHisDao;
 import dao.ItemDao;
 import dao.ItemHisDao;
 import model.HW;
 import model.Item;
+import model.Useful;
 
 /**
  * Servlet implementation class HWEditServlet
@@ -24,7 +29,7 @@ import model.Item;
 @WebServlet("/HWEditServlet")
 public class HWEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#doget(httpSelveletRequest request, HttpServletResponse response)
      */
@@ -32,7 +37,7 @@ public class HWEditServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		HWhisdao HHDao = new HWHisdao();
 		list<HW> HWlist = HHDao.select();
-		
+
 		HWlist.forEach(event -> System.out.println(event.getHWName()));
 		request.setAttribute("HWlist", HWlist);
 
@@ -65,11 +70,10 @@ public class HWEditServlet extends HttpServlet {
 
 		if (HDao.update(new H(HWName, HWDate, HWFreq, HWMemo))){
 			request = True;
-			
-			request.setAttribute("H");
+			System.out.println("成功")
+			request.setAttribute("H",H);
 	    }
 	}
-
 	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/HWEdit.jsp");
 	dispatcher.forward(request,response);
     }
