@@ -9,7 +9,7 @@
 
 <link href="/A-five/css/iziModal.css" rel="stylesheet" type="text/css">
 <link href="/A-five/css/list.css" rel="stylesheet" type="text/css">
-<script src="/A-five/js/iziModal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
 
 </head>
 <body>
@@ -47,10 +47,11 @@
 					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input id= "itemCheck${status.index}" type="checkbox" data-izimodal-open="#itemModalRestock${g.itemHisId }" onchange="toggleItemFlag(${status.index})"></td>
+					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})"></td>
 					<td><input type="checkbox">
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 						<input type="hidden" id="itemId${status.index}" value="${g.itemId}">
+						<button id="itemRestockButton${status.index}" data-izimodal-open="#itemModalRestock${g.itemHisId}" style="display: none;"></button>
 
 					<div id="itemModalRestock${g.itemHisId}" class="iziModal" >
 
@@ -64,8 +65,8 @@
 					<p>使用終了日:${g.itemDue}</p>
 					<p>備考:${g.itemMemo}</p>
 
-					<button type="button" class="editButton">はい</button>
-					<button type="button" class="deleteButton">いいえ</button>
+					<button id="itemRestockYes" type="button" class="editButton" data-izimodal-close="#itemModalRestock${g.itemHisId }">はい</button>
+					<button id="itemRestockNo" type="button" class="deleteButton" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
 
 					</div>
 
@@ -263,6 +264,7 @@
 	});
 
 	function toggleHwFlag(index) {
+		alert('非同期');
 	    const hwHisId = document.getElementById('hwHisId'+index).value;
 	    const hwId = document.getElementById('hwId'+index).value;
 	    alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);
@@ -276,23 +278,6 @@
 	        hwHisId: hwHisId,
 	        hwId: hwId
 	    }
-	    /* fetch('/A-five/AjaxServlet',{
-	        method: 'POST',
-	        headers: {
-	        'Content-Type': 'application/json'
-	        },
-	        body: JSON.stringify(data)
-	    })
-	    .then(response => {
-	        if (response.ok) {
-	            console.log('フラグを更新');
-	        } else {
-	            throw new Error('フラグを更新失敗');
-	        }
-	    })
-	    .catch(error => {
-	        console.error(error);
-	    }) */
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
 	    $.ajax({
@@ -316,9 +301,30 @@
 	      .fail(function() {
 	        //失敗とアラートを出す
 	        alert("失敗！");
+
 	      });
 	}
+	function clickItemRestock(index, flag) {
+		const itemRestockButton = document.getElementById("itemRestockButton"+index);
+		if (flag) {
+			console.log(itemRestockButton);
+			itemRestockButton.click();
+			// 「はい」ボタンのクリックイベントリスナーを追加
+	        const yesButton = document.getElementById("itemRestockYes");
+	        yesButton.addEventListener("click", function() {
+	            // 「はい」がクリックされたときの処理をここに記述
+	            console.log("はいがクリックされました");
+	        });
+			// 「いいえ」ボタンのクリックイベントリスナーを追加
+	        const noButton = document.getElementById("itemRestockNo");
+	        noButton.addEventListener("click", function() {
+	            // 「はい」がクリックされたときの処理をここに記述
+	            console.log("はいがクリックされました");
+	        });
+		}
+	}
 	function toggleItemFlag(index) {
+		let checkboxElement = document.getElementById("itemCheck" + index);
 	    const itemHisId = document.getElementById('itemHisId'+index).value;
 	    const itemId = document.getElementById('itemId'+index).value;
 	    const itemFlag = document.getElementById('itemCheck'+index);
@@ -329,6 +335,7 @@
 	        itemHisId: itemHisId,
 	        itemId: itemId
 	    }
+        clickItemRestock(index, itemFlag.checked);
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
 	    $.ajax({
@@ -347,6 +354,7 @@
 	       //非同期通信が成功したときの処理
 	    }).done(function(data) {
 	        alert("成功1");
+	        alert(index);
 	    })
 	       //非同期通信が失敗したときの処理
 	      .fail(function() {
