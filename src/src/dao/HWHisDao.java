@@ -65,6 +65,7 @@ public class HWHisDao {
 
         return hwList;
     }
+    //直前に登録した家事の家事IDと、「目標頻度と登録日時から算出した実施期日」を履歴テーブルに新規登録
     public boolean insert(int hwId, Date hwDue) {
     	Connection conn = null;
 		boolean result = false;
@@ -85,7 +86,6 @@ public class HWHisDao {
 
 			pStmt.setInt(1, hwId);
 			pStmt.setDate(2, sqlHwDue);
-
 
 
 			// SQL文を実行する
@@ -114,6 +114,56 @@ public class HWHisDao {
 		// 結果を返す
 		return result;
     }
+
+    public boolean insertNextHw(int hwHisId) {
+    	Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+
+			// SQL文を準備する
+			String sql = "insert into hw_history (hw_id, hw_due) values (?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			java.sql.Date sqlHwDue = new java.sql.Date(hwDue.getTime());
+
+			pStmt.setInt(1, hwId);
+			pStmt.setDate(2, sqlHwDue);
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+    }
+
     //フラグを0→1に。実施日も追加。
     public boolean falseToTrue(int hwHisId, boolean hwFlag) {
     	Connection conn = null;
