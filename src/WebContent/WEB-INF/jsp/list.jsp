@@ -47,10 +47,45 @@
 					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})"></td>
+					<td><input id= "itemCheck${status.index}" type="checkbox" data-izimodal-open="#itemModalRestock${g.itemHisId }" onchange="toggleItemFlag(${status.index})"></td>
 					<td><input type="checkbox">
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 						<input type="hidden" id="itemId${status.index}" value="${g.itemId}">
+
+					<div id="itemModalRestock${g.itemHisId}" class="iziModal" >
+
+					<button type="button" class="batsu" data-izimodal-close="#itemModalRestock${g.itemHisId }">×</button>
+					<h4>この日用品を使い続けますか？</h4>
+					<hr>
+					<p>項目名:${g.dailyName}</p>
+					<p>商品名：${g.itemName}</p>
+					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
+					<p>使用開始日:${g.itemStart}</p>
+					<p>使用終了日:${g.itemDue}</p>
+					<p>備考:${g.itemMemo}</p>
+
+					<button type="button" class="editButton">はい</button>
+					<button type="button" class="deleteButton">いいえ</button>
+
+					</div>
+
+					<div id="itemModalStock${g.itemHisId}" class="iziModal" >
+
+					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
+					<h4>どの${g.dailyName}を使いますか?</h4>
+					<hr>
+					<p>項目名:${g.dailyName}</p>
+					<p>商品名：${g.itemName}</p>
+					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
+					<p>使用開始日:${g.itemStart}</p>
+					<p>使用終了日:${g.itemDue}</p>
+					<p>備考:${g.itemMemo}</p>
+
+					<button type="button" class="editButton">はい</button>
+					<button type="button" class="deleteButton">いいえ</button>
+
+					</div>
+
 
 					<!-- 日用品のモーダル -->
 				<div id="itemModal${g.itemHisId}" class="iziModal" >
