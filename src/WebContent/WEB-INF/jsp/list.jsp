@@ -50,6 +50,7 @@
 					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})"></td>
 					<td><input type="checkbox">
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
+						<input type="hidden" id="itemId${status.index}" value="${g.itemId}">
 
 					<!-- 日用品のモーダル -->
 				<div id="itemModal${g.itemHisId}" class="iziModal" >
@@ -284,12 +285,14 @@
 	}
 	function toggleItemFlag(index) {
 	    const itemHisId = document.getElementById('itemHisId'+index).value;
+	    const itemId = document.getElementById('itemId'+index).value;
 	    const itemFlag = document.getElementById('itemCheck'+index);
 	    alert(itemFlag.checked);
 	    let itemFlagValue = itemFlag.checked ? 1 : 0;
 	    const data = {
 	        itemFlag: itemFlagValue,
-	        itemId: itemHisId
+	        itemHisId: itemHisId,
+	        itemId: ItemId
 	    }
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
