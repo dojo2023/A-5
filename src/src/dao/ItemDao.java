@@ -10,7 +10,7 @@ import model.Item;
 
 public class ItemDao {
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
-
+		//登録フォームで入力されたデータを入れる
 		public boolean insert(Item item) {
 			Connection conn = null;
 			boolean result = false;
@@ -63,7 +63,7 @@ public class ItemDao {
 			// 結果を返す
 			return result;
 		}
-
+		//登録時、履歴テーブルに新規レコードを挿入する用のitem_idを取得
 		public int getMaxItemId() {
 			Connection conn = null;
 			int maxItemId = 0;
