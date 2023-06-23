@@ -76,7 +76,7 @@ public class AjaxServlet extends HttpServlet {
 				};
 			} else { //完了処理を取り消し
 				if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
-					hwHisDao.deleteNextHw(hwId);
+					/*hwHisDao.deleteNextHw(hwId);*/
 					result = true;
 				};
 			}
