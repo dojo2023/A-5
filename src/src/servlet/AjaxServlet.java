@@ -83,7 +83,8 @@ public class AjaxServlet extends HttpServlet {
 		} else {
 			String strItemFlag = request.getParameter("itemFlag");
 			boolean itemFlag = strItemFlag.equals("1");
-			int itemHisId = Integer.parseInt(request.getParameter("itemId"));
+			int itemHisId = Integer.parseInt(request.getParameter("itemHisId"));
+			int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 			ItemHisDao  IHDao = new ItemHisDao();
 			if (itemFlag) {
