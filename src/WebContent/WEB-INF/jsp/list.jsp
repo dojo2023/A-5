@@ -327,7 +327,7 @@
 	    const data = {
 	        itemFlag: itemFlagValue,
 	        itemHisId: itemHisId,
-	        itemId: ItemId
+	        itemId: itemId
 	    }
 	  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
