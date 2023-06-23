@@ -115,7 +115,7 @@ public class HWHisDao {
 		return result;
     }
 
-    public boolean insertNextHw(int hwHisId) {
+    public boolean insertNextHw(int hwId) {
     	Connection conn = null;
 		boolean result = false;
 
@@ -127,14 +127,14 @@ public class HWHisDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
 
 			// SQL文を準備する
-			String sql = "insert into hw_history (hw_id, hw_due) values (?, ?)";
+			String sql = "insert into hw_history (hw_id, hw_due)values(?,current_date + (select  hw_freq from houseworks where hw_id =?)::integer)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			java.sql.Date sqlHwDue = new java.sql.Date(hwDue.getTime());
+			/*java.sql.Date sqlHwDue = new java.sql.Date(hwDue.getTime());*/
 
 			pStmt.setInt(1, hwId);
-			pStmt.setDate(2, sqlHwDue);
+			pStmt.setInt(2, hwId);
 
 
 			// SQL文を実行する

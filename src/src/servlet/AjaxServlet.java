@@ -60,18 +60,21 @@ public class AjaxServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
 		boolean result = false;
+		//家事の非同期
 		if (request.getParameter("hwFlag") != null) {
 			String strHwFlag = request.getParameter("hwFlag");
 			boolean hwFlag = strHwFlag.equals("1");
-			int hwHisId = Integer.parseInt(request.getParameter("hwId"));
+			int hwHisId = Integer.parseInt(request.getParameter("hwHisId"));
+			int hwId = Integer.parseInt(request.getParameter("hwId"));
 
 			HWHisDao hwHisDao = new HWHisDao();
+			//完了処理をDBに登録
 			if (hwFlag) {
 				if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
-					hwHisDao.insertNextHw(hwHisId);
+					hwHisDao.insertNextHw(hwId);
 					result = true;
 				};
-			} else {
+			} else { //完了処理を取り消し
 				if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
 					result = true;
 				};
