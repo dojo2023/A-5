@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +18,7 @@ import dao.ItemDao;
 import dao.ItemHisDao;
 import model.HW;
 import model.Item;
+import model.Useful;
 
 /**
  * Servlet implementation class RegistServlet
@@ -89,20 +88,15 @@ public class RegistServlet extends HttpServlet {
 			int itemVolume = Integer.parseInt(request.getParameter("itemVolume"));
 			String dailyUnit = request.getParameter("dailyUnit");
 			String itemMemo = request.getParameter("itemMemo");
+
+			String strItemStart = request.getParameter("itemStart");
+	        Useful useful = new Useful();
 			//使用開始日を取得
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date itemStart = null;
-	        try {
-	            itemStart = dateFormat.parse(request.getParameter("itemStart"));
-	            System.out.println(itemStart);
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-	        int itemPeriod = Integer.parseInt(request.getParameter("itemPeriod"));
-	        //使用開始日（ユーザーが入力）と終了予測日数（ユーザーが入力）から終了予測日を計算
-	        calendar.setTime(itemStart);
-	        calendar.add(Calendar.DATE, itemPeriod);
-	        Date itemDue = calendar.getTime();
+			Date itemStart = useful.strToDate(strItemStart);
+			int itemPeriod = Integer.parseInt(request.getParameter("itemPeriod"));
+			Date itemDue = useful.getDueDate(itemStart, itemPeriod);
+			//使用開始日（ユーザーが入力）と終了予測日数（ユーザーが入力）から終了予測日を計算
+
 			// 登録処理
 			ItemDao IDao = new ItemDao();
 			ItemHisDao IHDao = new ItemHisDao();
@@ -123,14 +117,13 @@ public class RegistServlet extends HttpServlet {
 			String hwMemo = request.getParameter("hwMemo");
 			//頻度の数値と頻度の単位から頻度を日換算（1 + 週 = 7）
 			int hwFreq = numFreq * freqUnit;
+			Date currentDate = new Date();
+			Useful useful = new Useful();
+			Date hwDue = useful.getDueDate(currentDate, hwFreq);
 			HW hw = new HW();
 			hw.setHwName(hwName);
 			hw.setHwFreq(hwFreq);
 			hw.setHwMemo(hwMemo);
-			//現在日時と目標頻度を足して、期日を算出
-			calendar.add(calendar.DATE, hwFreq);
-			Date hwDue = calendar.getTime();
-
 
 			HWDao HwDao = new HWDao();
 			HWHisDao hwHisDao = new HWHisDao();
