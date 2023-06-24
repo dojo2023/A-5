@@ -111,13 +111,13 @@ public class AjaxServlet extends HttpServlet {
 			//配列をJavaScriptに返すためにJSONデータにする必要がある
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-	            //JavaオブジェクトからJSONに変換
-	            String testJson = mapper.writeValueAsString(dailyList);
-	            //JSONの出力
-	            response.getWriter().write(testJson);
-	        } catch (JsonProcessingException e) {
-	            e.printStackTrace();
-	        }
+			    //JavaオブジェクトからJSONに変換
+			    String testJson = mapper.writeValueAsString(dailyList);
+			    //JSONの出力
+			    response.getWriter().write(testJson);
+			} catch (JsonProcessingException e) {
+			    e.printStackTrace();
+			}
 
 		}
 
