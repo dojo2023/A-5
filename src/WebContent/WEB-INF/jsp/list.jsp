@@ -70,24 +70,10 @@
 
 					</div>
 
-					<div id="itemModalStock${g.itemHisId}" class="iziModal" >
+					<div id="itemModalStock${g.itemHisId}" class="iziModal">
 					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
-
-					<p>テスト</p><p>${dailyList}</p>
-					<c:forEach var="daily" items="${dailyList}">
-
-					<p>${dailyList}</p>
-					<%-- <h4>どの${daily.dailyName}を使いますか?</h4>
-					<hr>
-					<p>項目名:${daily.dailyName}</p>
-					<p>商品名：${daily.itemName}</p>
-					<p>	容量:${daily.itemVolume}${daily.dailyUnit}</p>
-					<p>備考:${daily.itemMemo}</p>daily --%>
-					</c:forEach>
-
 					<button type="button" class="editButton">はい</button>
 					<button type="button" class="deleteButton">いいえ</button>
-
 					</div>
 
 
@@ -358,18 +344,28 @@
 
 	function modalItemEveryDaily(itemHisId, listData) {
 		const container = document.getElementById('itemModalStock'+itemHisId);
+		const h4 = document.createElement('h4');
+		let dailyData = listData[0];
+		h4.textContent = dailyData.dailyName;
+		container.appendChild(h4);
 		listData.forEach(function(data) {
 			// 新しいdiv要素を生成
-			  let div = document.createElement("div");
+		  	let div = document.createElement("div");
+		  	let itemP = document.createElement("p");
+		  	let volumeP = document.createElement("p");
+		  	let priceP = document.createElement("p");
+		  	let memoP = document.createElement("p");
 
-			  // JSONデータの各プロパティを取得して表示
-			  for (var key in data) {
-			    let p = document.createElement("p");
-			    p.textContent = key + ": " + data[key];
-			    div.appendChild(p);
-			  }
-			  // 生成したdiv要素をコンテナに追加
-			  container.appendChild(div);
+		  	itemP.textContent = '商品名：' + data.itemName;
+		  	volumeP.textContent = '容量：' + data.itemVolume + data.itemUnit;
+		  	priceP.textContent = '価格：' + data.itemPrice + '円';
+		  	memoP.textContent = 'メモ：' + data.itemMemo;
+		    div.appendChild(itemP);
+		    div.appendChild(volumeP);
+		    div.appendChild(priceP);
+		    div.appendChild(memoP);
+		  // 生成したdiv要素をコンテナに追加
+		  container.appendChild(div);
 		})
 	}
 
