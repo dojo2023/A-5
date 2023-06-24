@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.HWHisDao;
+import dao.ItemDao;
 import dao.ItemHisDao;
 import model.Item;
 import model.Useful;
@@ -81,7 +83,7 @@ public class AjaxServlet extends HttpServlet {
 				};
 			}
 
-		} else {
+		} else if (request.getParameter("itemFlag") != null) {
 			String strItemFlag = request.getParameter("itemFlag");
 			boolean itemFlag = strItemFlag.equals("1");
 			int itemHisId = Integer.parseInt(request.getParameter("itemHisId"));
@@ -97,6 +99,25 @@ public class AjaxServlet extends HttpServlet {
 					result = true;
 				};
 			}
+
+		} else {
+			String strItemId = request.getParameter("itemId");
+			int itemId = Integer.parseInt(strItemId);
+			List<Item> dailyList = new ArrayList<Item>();
+
+			ItemDao IDao = new ItemDao();
+			dailyList = IDao.getDailyItem(itemId);
+			request.setAttribute("dailyList", dailyList);
+			//配列をJavaScriptに返すためにJSONデータにする必要がある
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+	            //JavaオブジェクトからJSONに変換
+	            String testJson = mapper.writeValueAsString(dailyList);
+	            //JSONの出力
+	            response.getWriter().write(testJson);
+	        } catch (JsonProcessingException e) {
+	            e.printStackTrace();
+	        }
 
 		}
 
