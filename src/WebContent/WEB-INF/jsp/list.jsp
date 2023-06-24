@@ -66,21 +66,24 @@
 					<p>備考:${g.itemMemo}</p>
 
 					<button id="itemRestockYes" type="button" class="editButton" data-izimodal-close="#itemModalRestock${g.itemHisId }">はい</button>
-					<button id="itemRestockNo" type="button" class="deleteButton" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
+					<button id="itemRestockNo" type="button" class="deleteButton" onclick="restockAjax(${g.itemId}, ${g.itemHisId})" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
 
 					</div>
 
 					<div id="itemModalStock${g.itemHisId}" class="iziModal" >
-
 					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
-					<h4>どの${g.dailyName}を使いますか?</h4>
+
+					<p>テスト</p><p>${dailyList}</p>
+					<c:forEach var="daily" items="${dailyList}">
+
+					<p>${dailyList}</p>
+					<%-- <h4>どの${daily.dailyName}を使いますか?</h4>
 					<hr>
-					<p>項目名:${g.dailyName}</p>
-					<p>商品名：${g.itemName}</p>
-					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
-					<p>使用開始日:${g.itemStart}</p>
-					<p>使用終了日:${g.itemDue}</p>
-					<p>備考:${g.itemMemo}</p>
+					<p>項目名:${daily.dailyName}</p>
+					<p>商品名：${daily.itemName}</p>
+					<p>	容量:${daily.itemVolume}${daily.dailyUnit}</p>
+					<p>備考:${daily.itemMemo}</p>daily --%>
+					</c:forEach>
 
 					<button type="button" class="editButton">はい</button>
 					<button type="button" class="deleteButton">いいえ</button>
@@ -319,12 +322,58 @@
 	        const noButton = document.getElementById("itemRestockNo");
 	        noButton.addEventListener("click", function() {
 	            // 「はい」がクリックされたときの処理をここに記述
-	            console.log("はいがクリックされました");
+	            console.log("いいえがクリックされました");
+
 	        });
 		}
 	}
+
+	function restockAjax(itemId, itemHisId) {
+		$.ajaxSetup({scriptCharset:'utf-8'});
+	    $.ajax({
+	        //どのサーブレットに送るか
+	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+	        url: '/A-five/AjaxServlet',
+	        //どのメソッドを使用するか
+	        type:"POST",
+	        //受け取るデータのタイプ
+	        dataType:"json",
+	        //何をサーブレットに飛ばすか（変数を記述）
+	        data: {itemId: itemId},
+	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+	        processDate:false,
+	        timeStamp: new Date().getTime()
+	       //非同期通信が成功したときの処理
+	    }).done(function(data) {
+	        alert("成功1");
+	        console.log(data);
+	        modalItemEveryDaily(itemHisId, data)
+	    })
+	       //非同期通信が失敗したときの処理
+	      .fail(function() {
+	        //失敗とアラートを出す
+	        alert("失敗！");
+	      });
+	}
+
+	function modalItemEveryDaily(itemHisId, listData) {
+		const container = document.getElementById('itemModalStock'+itemHisId);
+		listData.forEach(function(data) {
+			// 新しいdiv要素を生成
+			  let div = document.createElement("div");
+
+			  // JSONデータの各プロパティを取得して表示
+			  for (var key in data) {
+			    let p = document.createElement("p");
+			    p.textContent = key + ": " + data[key];
+			    div.appendChild(p);
+			  }
+			  // 生成したdiv要素をコンテナに追加
+			  container.appendChild(div);
+		})
+	}
+
 	function toggleItemFlag(index) {
-		let checkboxElement = document.getElementById("itemCheck" + index);
 	    const itemHisId = document.getElementById('itemHisId'+index).value;
 	    const itemId = document.getElementById('itemId'+index).value;
 	    const itemFlag = document.getElementById('itemCheck'+index);
