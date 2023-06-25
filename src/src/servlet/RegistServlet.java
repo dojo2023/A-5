@@ -90,11 +90,12 @@ public class RegistServlet extends HttpServlet {
 			String itemMemo = request.getParameter("itemMemo");
 
 			String strItemStart = request.getParameter("itemStart");
+
 	        Useful useful = new Useful();
 			//使用開始日を取得
 			Date itemStart = useful.strToDate(strItemStart);
-			int itemPeriod = Integer.parseInt(request.getParameter("itemPeriod"));
-			Date itemDue = useful.getDueDate(itemStart, itemPeriod);
+			int itemFreq = Integer.parseInt(request.getParameter("itemFreq"));
+			Date itemDue = useful.getDueDate(itemStart, itemFreq);
 
 			//既存の日用品か新しい日用品項目か
 			String strItemExistFlag = request.getParameter("existFlag");
@@ -104,7 +105,8 @@ public class RegistServlet extends HttpServlet {
 			// 登録処理
 			ItemDao IDao = new ItemDao();
 			ItemHisDao IHDao = new ItemHisDao();
-			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo))) {
+			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo, itemFreq))) {
+				System.out.println(itemFreq);
 				//新規の日用品はそのまま使用開始
 				if (!itemExsitFlag) {
 					int itemId = IDao.getMaxItemId();

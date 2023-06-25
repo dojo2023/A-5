@@ -25,17 +25,20 @@ public class ItemDao {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
 
 				// SQL文を準備する
-				String sql = "insert into items (user_id, daily_name, daily_unit, item_name, item_price, item_volume, item_memo) values (?, ?, ?, ?, ?, ?, ?)";
+				String sql = "insert into items (user_id, daily_name, daily_unit, item_name, item_price, item_volume, item_freq, item_memo) values (?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
-
 				// SQL文を完成させる
+
+
 				pStmt.setInt(1, item.getUserId());
 				pStmt.setString(2, item.getDailyName());
 				pStmt.setString(3, item.getDailyUnit());
 				pStmt.setString(4, item.getItemName());
 				pStmt.setInt(5, item.getItemPrice());
 				pStmt.setInt(6, item.getItemVolume());
-				pStmt.setString(7, item.getItemMemo());
+				pStmt.setInt(7, item.getItemFreq());
+				pStmt.setString(8, item.getItemMemo());
+
 
 
 

@@ -195,7 +195,7 @@ public class ItemHisDao {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
-			String sql = "SELECT his.item_his_id, his.item_id, his.item_start, his.item_due, his.item_fin,his.item_period, his.item_flag,it.user_id, it.daily_name, it.daily_unit,it.item_name, it.item_price,it.item_volume, it.item_memo FROM item_history AS his JOIN items AS it  ON his.item_id = it.item_id WHERE his.item_flag = 0 and it.user_id =1 GROUP BY his.item_id ORDER BY item_due asc";
+			String sql = "SELECT his.item_his_id, his.item_id, his.item_start, his.item_due, his.item_fin,his.item_period, his.item_flag,it.user_id, it.daily_name, it.daily_unit,it.item_name, it.item_price,it.item_volume, it.item_freq, it.item_memo FROM item_history AS his JOIN items AS it  ON his.item_id = it.item_id WHERE his.item_flag = 0 and it.user_id =1 GROUP BY his.item_id ORDER BY item_due asc";
 			PreparedStatement  pStmt = conn.prepareStatement(sql);
 
 			// SQL文を実行し、結果表を取得する
@@ -211,6 +211,7 @@ public class ItemHisDao {
 				item.setItemName(rs.getString("ITEM_NAME"));
 				item.setItemPrice(rs.getInt("ITEM_PRICE"));
 				item.setItemVolume(rs.getInt("ITEM_VOLUME"));
+				item.setItemFreq(rs.getInt("ITEM_FREQ"));
 				item.setItemMemo(rs.getString("ITEM_MEMO"));
 				item.setItemHisId(rs.getInt("ITEM_HIS_ID"));
 				item.setItemStart(rs.getDate("ITEM_START"));
@@ -366,6 +367,55 @@ public class ItemHisDao {
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+    }
+    //次のitemを使い始める
+    public boolean insertNextItem(int hwId) {
+    	Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/Yakou", "sa", "");
+
+			// SQL文を準備する
+			String sql = "insert into item_history (item_id, item_start, item_due)values(?, current_date, current_date + (select  item_freq from items where item_id =?)::integer)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			/*java.sql.Date sqlHwDue = new java.sql.Date(hwDue.getTime());*/
+
+			pStmt.setInt(1, hwId);
+			pStmt.setInt(2, hwId);
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}

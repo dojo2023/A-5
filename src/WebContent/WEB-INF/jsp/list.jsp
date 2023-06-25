@@ -73,7 +73,7 @@
 					<div id="itemModalStock${g.itemHisId}" class="iziModal">
 					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
 					<div id="itemModalStockContent${g.itemHisId}" class="itemModalStockContent"></div>
-					<button type="button" class="editButton">はい</button>
+					<button id="itemStockYes${g.itemHisId}" type="button" class="editButton">はい</button>
 					<button type="button" class="deleteButton">いいえ</button>
 					</div>
 
@@ -296,79 +296,9 @@
 	}
 
 
-	function restockAjax(itemId, itemHisId) {
-		$.ajaxSetup({scriptCharset:'utf-8'});
-	    $.ajax({
-	        //どのサーブレットに送るか
-	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
-	        url: '/A-five/AjaxServlet',
-	        //どのメソッドを使用するか
-	        type:"POST",
-	        //受け取るデータのタイプ
-	        dataType:"json",
-	        //何をサーブレットに飛ばすか（変数を記述）
-	        data: {itemId: itemId},
-	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
-	        processDate:false,
-	        timeStamp: new Date().getTime()
-	       //非同期通信が成功したときの処理
-	    }).done(function(data) {
-	        alert("成功1");
-	        console.log(data);
-	        modalItemEveryDaily(itemHisId, data)
-	    })
-	       //非同期通信が失敗したときの処理
-	      .fail(function() {
-	        //失敗とアラートを出す
-	        alert("失敗！");
-	      });
-	}
 
-	function modalItemEveryDaily(itemHisId, listData) {
-		console.log('function入ってる');
-		const content = document.getElementById('itemModalStockContent'+itemHisId);
-		content.innerHTML = '';
-		const h4 = document.createElement('h4');
-		let dailyData = listData[0];
-		h4.textContent = dailyData.dailyName;
-		content.appendChild(h4);
-		listData.forEach(function(data) {
-			// 新しいdiv要素を生成
-		  	let div = document.createElement("div");
-		  	let itemP = document.createElement("p");
-		  	let volumeP = document.createElement("p");
-		  	let priceP = document.createElement("p");
-		  	let memoP = document.createElement("p");
 
-		  	itemP.textContent = '商品名：' + data.itemName;
-		  	volumeP.textContent = '容量：' + data.itemVolume + data.dailyUnit;
-		  	priceP.textContent = '価格：' + data.itemPrice + '円';
-		  	memoP.textContent = 'メモ：' + data.itemMemo;
-		    div.appendChild(itemP);
-		    div.appendChild(volumeP);
-		    div.appendChild(priceP);
-		    div.appendChild(memoP);
 
-			let label = document.createElement('label');
-		    let radio = document.createElement('input');
-	        radio.type = 'radio';
-	        radio.name = 'selectedItem'; // 同じ名前を指定することで選択が相互に排他的になります
-	        radio.value = data.itemId;
-	        let radioValue = 0;
-	        radio.addEventListener('change', function() {
-	            if (this.checked) {
-	                // 選択された値の処理をここに追加
-	                console.log('選択された商品ID：', this.value);
-	                radioValue = this.value;
-	            }
-	        });
-		  // 生成したdiv要素をコンテナに追加
-		  label.appendChild(radio);
-		  label.appendChild(div);
-		  content.appendChild(label);
-		})
-		content.style.display = 'flex';
-	}
 
 	function toggleItemFlag(index) {
 	    const itemHisId = document.getElementById('itemHisId'+index).value;
@@ -387,23 +317,6 @@
 
 	//同じものを使うかどうかの確認モーダルを出すよ
 	function clickItemRestock(index, flag, itemId, itemHisId, data) {
-		/*  //非同期通信始めるよ
-	    $.ajaxSetup({scriptCharset:'utf-8'});
-	    let ajaxRequest = $.ajax({
-	        //どのサーブレットに送るか
-	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
-	        url: '/A-five/AjaxServlet',
-	        //どのメソッドを使用するか
-	        type:"POST",
-	        //受け取るデータのタイプ
-	        dataType:"json",
-	        //何をサーブレットに飛ばすか（変数を記述）
-	        data: data,
-	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
-	        processDate:false,
-	        timeStamp: new Date().getTime()
-	       //非同期通信が成功したときの処理
-	    }); */
 		let restart = false;
 		const itemRestockButton = document.getElementById("itemRestockButton"+index);
 		if (flag) {
@@ -424,38 +337,117 @@
 	        noButton.addEventListener("click", function() {
 	            // 「いいえ」がクリックされたときの処理をここに記述
 	            console.log("いいえがクリックされました");
-				restockAjax(itemId, itemHisId);
+	            data.restart = true;
+	            getStockAjax(itemId, itemHisId, data);
 	        });
+		} else {
+			data.restart = false;
+			restockAjax(data);
 		}
+    }
 		//同じものを使う場合のajax
-		function restockAjax(data) {
-			$.ajaxSetup({scriptCharset:'utf-8'});
-		    $.ajax({
-		        //どのサーブレットに送るか
-		        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
-		        url: '/A-five/AjaxServlet',
-		        //どのメソッドを使用するか
-		        type:"POST",
-		        //受け取るデータのタイプ
-		        dataType:"json",
-		        //何をサーブレットに飛ばすか（変数を記述）
-		        data: data,
-		        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
-		        processDate:false,
-		        timeStamp: new Date().getTime()
-		       //非同期通信が成功したときの処理
-		    }).done(function(data) {
-		        alert("成功1");
-		        alert(index);
-		    })
-		       //非同期通信が失敗したときの処理
-		      .fail(function() {
-		        //失敗とアラートを出す
-		        alert("失敗！");
-		      });
-		}
-
+	function restockAjax(data) {
+		$.ajaxSetup({scriptCharset:'utf-8'});
+	    $.ajax({
+	        //どのサーブレットに送るか
+	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+	        url: '/A-five/AjaxServlet',
+	        //どのメソッドを使用するか
+	        type:"POST",
+	        //受け取るデータのタイプ
+	        dataType:"json",
+	        //何をサーブレットに飛ばすか（変数を記述）
+	        data: data,
+	        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+	        processDate:false,
+	        timeStamp: new Date().getTime()
+	       //非同期通信が成功したときの処理
+	    }).done(function(data) {
+	        alert("成功1");
+	        alert(index);
+	    })
+	       //非同期通信が失敗したときの処理
+	      .fail(function() {
+	        //失敗とアラートを出す
+	        alert("失敗！");
+	      });
 	}
+
+    //同じ項目で違う商品を使う場合。
+    function getStockAjax(itemId, itemHisId, data) {
+        $.ajaxSetup({scriptCharset:'utf-8'});
+        $.ajax({
+            //どのサーブレットに送るか
+            //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+            url: '/A-five/AjaxServlet',
+            //どのメソッドを使用するか
+            type:"POST",
+            //受け取るデータのタイプ
+            dataType:"json",
+            //何をサーブレットに飛ばすか（変数を記述）
+            data: {itemId: itemId},
+            //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+            processDate:false,
+            timeStamp: new Date().getTime()
+            //非同期通信が成功したときの処理
+        }).done(function(getData) {
+            alert("成功1");
+            console.log(getData);
+            modalItemEveryDaily(itemHisId, getData, data);
+        }).fail(function() {
+            //失敗とアラートを出す
+            alert("失敗！");
+        });
+    }
+
+    //newStockAjaxで取得した複数の商品データを表示、選択できる
+    function modalItemEveryDaily(itemHisId, listData, data) {
+        const content = document.getElementById('itemModalStockContent' + itemHisId);
+        content.innerHTML = '';
+        const h4 = document.createElement('h4');
+        h4.textContent = listData[0].dailyName;
+        content.appendChild(h4);
+
+        listData.forEach(function(data) {
+            // 新しいdiv要素を生成
+            let div = document.createElement("div");
+            let itemP = document.createElement("p");
+            let volumeP = document.createElement("p");
+            let priceP = document.createElement("p");
+            let memoP = document.createElement("p");
+
+            itemP.textContent = '商品名：' + data.itemName;
+            volumeP.textContent = '容量：' + data.itemVolume + data.dailyUnit;
+            priceP.textContent = '価格：' + data.itemPrice + '円';
+            memoP.textContent = 'メモ：' + data.itemMemo;
+            div.appendChild(itemP);
+            div.appendChild(volumeP);
+            div.appendChild(priceP);
+            div.appendChild(memoP);
+
+            let label = document.createElement('label');
+            let radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'selectedItem'; // 同じ名前を指定することで選択が相互に排他的になります
+            radio.value = data.itemId;
+
+            label.appendChild(radio);
+            label.appendChild(div);
+            content.appendChild(label);
+        });
+        content.style.display = 'flex';
+        newStockAjax(itemHisId, data);
+    }
+
+    function newStockAjax(itemHisId, data) {
+    	const yesBtn = document.getElementById('itemStockYes' + itemHisId);
+    	console.log(itemHisId + 'aaaaa');
+    	yesBtn.addEventListener('click', function() {
+    		const selectedItemId = document.querySelector('input[name="selectedItem"]:checked').value;
+    		data.itemId = selectedItemId;
+    		restockAjax(data);
+    	});
+    }
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ public class Item {
 	private int itemPrice;
 	private int itemVolume;
 	private String itemMemo;
+	private int itemFreq;
 	private int itemHisId;
 	private Date itemStart;
 	private Date itemDue;
@@ -23,7 +24,7 @@ public class Item {
 	private Date endDate;
 	private String itemRemarks;
 
-	public Item(int userId, String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo) {
+	public Item(int userId, String dailyName, String dailyUnit, String itemName, int itemPrice, int itemVolume, String itemMemo, int itemFreq) {
 		super();
 		this.userId = userId;
 		this.dailyName = dailyName;
@@ -173,6 +174,14 @@ public class Item {
 	public void setItemRemarks(String itemRemarks) {
 		this.itemRemarks = itemRemarks;
 
+	}
+
+	public int getItemFreq() {
+		return itemFreq;
+	}
+
+	public void setItemFreq(int itemFreq) {
+		this.itemFreq = itemFreq;
 	}
 
 }

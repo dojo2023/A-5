@@ -41,7 +41,7 @@
                 </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
                 <input name="itemStart" type="date" placeholder="使用開始日">
-                <input name="itemPeriod" type="text" placeholder="予測使用日数">
+                <input name="itemFreq" type="text" placeholder="予測使用日数">
                 <input name="regist" type="hidden" value="itemSubmit">
                 <input id="existFlag" name="existFlag" type="hidden" >
                 <button type="submit">登録</button>

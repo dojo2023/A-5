@@ -89,14 +89,15 @@ public class AjaxServlet extends HttpServlet {
 			int itemHisId = Integer.parseInt(request.getParameter("itemHisId"));
 			int itemId = Integer.parseInt(request.getParameter("itemId"));
 			System.out.println(itemId);
-			String strRestock = request.getParameter("restart");
-			boolean restock = strRestock.equals("true");
+			String strRestart = request.getParameter("restart");
+			boolean restart = strRestart.equals("true");
 
 			ItemHisDao  IHDao = new ItemHisDao();
 			if (itemFlag) {
-				if(IHDao.falseToTrue(itemHisId, itemFlag)) {
-					result = true;
-				};
+				IHDao.falseToTrue(itemHisId, itemFlag);
+				if (restart) {
+					IHDao.insertNextItem(itemId);
+				}
 			} else {
 				if(IHDao.trueToFalse(itemHisId, itemFlag)) {
 					result = true;
