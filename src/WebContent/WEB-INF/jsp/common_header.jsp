@@ -21,12 +21,15 @@
 			<li><a href="HomeServlet">カレンダー</a></li>
 			<li><a href="ListServlet">一覧</a></li>
 			<li><a href="AnalysisServlet">分析</a></li>
+			<li><a href="LogoutServlet">ログアウト</a></li>
+			<li> <!-- 日付表示 -->
+		  			<div id="currentDate"></div></li>
 		  </ul>
 		  </nav>
 		  <!-- メニューここまで -->
 
 		  <!-- ログアウト -->
-		  <div id="logout"><a href="LogoutServlet">ログアウト</a></div>
+		  <!-- <div id="logout"><a href="LogoutServlet">ログアウト</a></div> -->
 		  <!-- 日付表示 -->
 		  <div id="currentDate"></div>
     </div>
