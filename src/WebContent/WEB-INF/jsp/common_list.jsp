@@ -10,7 +10,7 @@
 		<div class="d-flex flex-column">
 		  <div id="missTask">
 		  	<h3>未達成タスク</h3>
-		  	<p>データが入るよ</p>
+		  	<p>${name}</p>
 		  </div>
 		  <div id="todayTask">
 		  	<h3>今日のタスク</h3>
