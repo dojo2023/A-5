@@ -95,19 +95,29 @@ public class RegistServlet extends HttpServlet {
 			Date itemStart = useful.strToDate(strItemStart);
 			int itemPeriod = Integer.parseInt(request.getParameter("itemPeriod"));
 			Date itemDue = useful.getDueDate(itemStart, itemPeriod);
+
+			//既存の日用品か新しい日用品項目か
+			String strItemExistFlag = request.getParameter("existFlag");
+			boolean itemExsitFlag = Boolean.valueOf(strItemExistFlag);
 			//使用開始日（ユーザーが入力）と終了予測日数（ユーザーが入力）から終了予測日を計算
 
 			// 登録処理
 			ItemDao IDao = new ItemDao();
 			ItemHisDao IHDao = new ItemHisDao();
-			//情報テーブルにデータを保存できたら
-			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo))) {	// 登録成功
-				result = true;				//直前に情報テーブルに保存したデータのitemIdを取得する（履歴テーブル入れるため）
-				int itemId = IDao.getMaxItemId();
-				if(IHDao.insertItemHis(itemId, itemStart ,itemDue)) {
+			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo))) {
+				//新規の日用品はそのまま使用開始
+				if (!itemExsitFlag) {
+					int itemId = IDao.getMaxItemId();
+					if(IHDao.insertItemHis(itemId, itemStart ,itemDue)) {
+						result = true;
+					};
+				}
+				//既存の日用品の場合、itemsテーブルだけに保存する
+				else {
 					result = true;
-					System.out.println("成功");
-				};
+				}			//直前に情報テーブルに保存したデータのitemIdを取得する（履歴テーブル入れるため）
+
+
 			}
 		//家事項目フォームから送信されたら
 		} else if (submitBtn != null && submitBtn.equals("hwSubmit")) {

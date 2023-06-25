@@ -65,13 +65,14 @@
 					<p>使用終了日:${g.itemDue}</p>
 					<p>備考:${g.itemMemo}</p>
 
-					<button id="itemRestockYes" type="button" class="editButton" data-izimodal-close="#itemModalRestock${g.itemHisId }">はい</button>
-					<button id="itemRestockNo" type="button" class="deleteButton" onclick="restockAjax(${g.itemId}, ${g.itemHisId})" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
+					<button id="itemRestockYes${g.itemHisId }" type="button" class="editButton" data-izimodal-close="#itemModalRestock${g.itemHisId }">はい</button>
+					<button id="itemRestockNo${g.itemHisId }" type="button" class="deleteButton" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
 
 					</div>
 
 					<div id="itemModalStock${g.itemHisId}" class="iziModal">
 					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
+					<div id="itemModalStockContent${g.itemHisId}" class="itemModalStockContent"></div>
 					<button type="button" class="editButton">はい</button>
 					<button type="button" class="deleteButton">いいえ</button>
 					</div>
@@ -293,26 +294,7 @@
 
 	      });
 	}
-	function clickItemRestock(index, flag) {
-		const itemRestockButton = document.getElementById("itemRestockButton"+index);
-		if (flag) {
-			console.log(itemRestockButton);
-			itemRestockButton.click();
-			// 「はい」ボタンのクリックイベントリスナーを追加
-	        const yesButton = document.getElementById("itemRestockYes");
-	        yesButton.addEventListener("click", function() {
-	            // 「はい」がクリックされたときの処理をここに記述
-	            console.log("はいがクリックされました");
-	        });
-			// 「いいえ」ボタンのクリックイベントリスナーを追加
-	        const noButton = document.getElementById("itemRestockNo");
-	        noButton.addEventListener("click", function() {
-	            // 「はい」がクリックされたときの処理をここに記述
-	            console.log("いいえがクリックされました");
 
-	        });
-		}
-	}
 
 	function restockAjax(itemId, itemHisId) {
 		$.ajaxSetup({scriptCharset:'utf-8'});
@@ -343,11 +325,13 @@
 	}
 
 	function modalItemEveryDaily(itemHisId, listData) {
-		const container = document.getElementById('itemModalStock'+itemHisId);
+		console.log('function入ってる');
+		const content = document.getElementById('itemModalStockContent'+itemHisId);
+		content.innerHTML = '';
 		const h4 = document.createElement('h4');
 		let dailyData = listData[0];
 		h4.textContent = dailyData.dailyName;
-		container.appendChild(h4);
+		content.appendChild(h4);
 		listData.forEach(function(data) {
 			// 新しいdiv要素を生成
 		  	let div = document.createElement("div");
@@ -357,16 +341,33 @@
 		  	let memoP = document.createElement("p");
 
 		  	itemP.textContent = '商品名：' + data.itemName;
-		  	volumeP.textContent = '容量：' + data.itemVolume + data.itemUnit;
+		  	volumeP.textContent = '容量：' + data.itemVolume + data.dailyUnit;
 		  	priceP.textContent = '価格：' + data.itemPrice + '円';
 		  	memoP.textContent = 'メモ：' + data.itemMemo;
 		    div.appendChild(itemP);
 		    div.appendChild(volumeP);
 		    div.appendChild(priceP);
 		    div.appendChild(memoP);
+
+			let label = document.createElement('label');
+		    let radio = document.createElement('input');
+	        radio.type = 'radio';
+	        radio.name = 'selectedItem'; // 同じ名前を指定することで選択が相互に排他的になります
+	        radio.value = data.itemId;
+	        let radioValue = 0;
+	        radio.addEventListener('change', function() {
+	            if (this.checked) {
+	                // 選択された値の処理をここに追加
+	                console.log('選択された商品ID：', this.value);
+	                radioValue = this.value;
+	            }
+	        });
 		  // 生成したdiv要素をコンテナに追加
-		  container.appendChild(div);
+		  label.appendChild(radio);
+		  label.appendChild(div);
+		  content.appendChild(label);
 		})
+		content.style.display = 'flex';
 	}
 
 	function toggleItemFlag(index) {
@@ -380,10 +381,15 @@
 	        itemHisId: itemHisId,
 	        itemId: itemId
 	    }
-        clickItemRestock(index, itemFlag.checked);
-	  //非同期通信始めるよ
+	    console.log(data);
+        clickItemRestock(index, itemFlag.checked, itemId, itemHisId, data);
+	}
+
+	//同じものを使うかどうかの確認モーダルを出すよ
+	function clickItemRestock(index, flag, itemId, itemHisId, data) {
+		/*  //非同期通信始めるよ
 	    $.ajaxSetup({scriptCharset:'utf-8'});
-	    $.ajax({
+	    let ajaxRequest = $.ajax({
 	        //どのサーブレットに送るか
 	        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
 	        url: '/A-five/AjaxServlet',
@@ -397,15 +403,58 @@
 	        processDate:false,
 	        timeStamp: new Date().getTime()
 	       //非同期通信が成功したときの処理
-	    }).done(function(data) {
-	        alert("成功1");
-	        alert(index);
-	    })
-	       //非同期通信が失敗したときの処理
-	      .fail(function() {
-	        //失敗とアラートを出す
-	        alert("失敗！");
-	      });
+	    }); */
+		let restart = false;
+		const itemRestockButton = document.getElementById("itemRestockButton"+index);
+		if (flag) {
+			console.log(itemRestockButton);
+			//「この日用品？」のモーダルを出す。※izimodalはボタンをクリックしないと出てこない
+			itemRestockButton.click();
+
+			// 「はい」ボタンのクリックイベントリスナーを追加
+	        const yesButton = document.getElementById("itemRestockYes" + itemHisId);
+	        yesButton.addEventListener("click", function() {
+	            // 「はい」がクリックされたときの処理をここに記述
+	            data.restart = true;
+	            console.log(data);
+	            restockAjax(data)
+	        });
+			// 「いいえ」ボタンのクリックイベントリスナーを追加
+	        const noButton = document.getElementById("itemRestockNo" + itemHisId);
+	        noButton.addEventListener("click", function() {
+	            // 「いいえ」がクリックされたときの処理をここに記述
+	            console.log("いいえがクリックされました");
+				restockAjax(itemId, itemHisId);
+	        });
+		}
+		//同じものを使う場合のajax
+		function restockAjax(data) {
+			$.ajaxSetup({scriptCharset:'utf-8'});
+		    $.ajax({
+		        //どのサーブレットに送るか
+		        //ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		        url: '/A-five/AjaxServlet',
+		        //どのメソッドを使用するか
+		        type:"POST",
+		        //受け取るデータのタイプ
+		        dataType:"json",
+		        //何をサーブレットに飛ばすか（変数を記述）
+		        data: data,
+		        //この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		        processDate:false,
+		        timeStamp: new Date().getTime()
+		       //非同期通信が成功したときの処理
+		    }).done(function(data) {
+		        alert("成功1");
+		        alert(index);
+		    })
+		       //非同期通信が失敗したときの処理
+		      .fail(function() {
+		        //失敗とアラートを出す
+		        alert("失敗！");
+		      });
+		}
+
 	}
 </script>
 </body>
