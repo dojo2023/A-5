@@ -6,6 +6,21 @@ body{
     padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
 }
 
+h1#header{
+	white-space: nowrap;
+	position:absolute;
+	top:3%;
+	left:39%;
+}
+div#calendar{
+	height:40%;
+
+}
+td,th{
+	height:30px;
+	color: red;
+}
+
 .container-fluid {
 	width: 100%;
 }
@@ -52,8 +67,8 @@ th {
 }
 th, td {
     outline: 1px solid #ddd;
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     text-align: center;
 }
 /*日曜日*/
