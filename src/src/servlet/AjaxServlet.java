@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.HWHisDao;
+import dao.ItemDao;
 import dao.ItemHisDao;
 import model.Item;
 import model.Useful;
@@ -60,15 +62,68 @@ public class AjaxServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
 		boolean result = false;
-		String strHwFlag = request.getParameter("flag");
-		System.out.println(strHwFlag);
-		boolean hwFlag = strHwFlag.equals("1");
-		System.out.println(hwFlag);
-		int hwHisId = Integer.parseInt(request.getParameter("id"));
+		//家事の非同期
+		if (request.getParameter("hwFlag") != null) {
+			String strHwFlag = request.getParameter("hwFlag");
+			boolean hwFlag = strHwFlag.equals("1");
+			int hwHisId = Integer.parseInt(request.getParameter("hwHisId"));
+			int hwId = Integer.parseInt(request.getParameter("hwId"));
 
-		HWHisDao hwHisDao = new HWHisDao();
-		if(hwHisDao.updateDateAndFlag(hwHisId, hwFlag)) {
-			result = true;
-		};
+			HWHisDao hwHisDao = new HWHisDao();
+			//完了処理をDBに登録
+			if (hwFlag) {
+				if(hwHisDao.falseToTrue(hwHisId, hwFlag)) {
+					hwHisDao.insertNextHw(hwId);
+					result = true;
+				};
+			} else { //完了処理を取り消し
+				if(hwHisDao.trueToFalse(hwHisId, hwFlag)) {
+					/*hwHisDao.deleteNextHw(hwId);*/
+					result = true;
+				};
+			}
+
+		} else if (request.getParameter("itemFlag") != null) {
+			String strItemFlag = request.getParameter("itemFlag");
+			boolean itemFlag = strItemFlag.equals("1");
+			int itemHisId = Integer.parseInt(request.getParameter("itemHisId"));
+			int itemId = Integer.parseInt(request.getParameter("itemId"));
+			System.out.println(itemId);
+			String strRestart = request.getParameter("restart");
+			boolean restart = strRestart.equals("true");
+
+			ItemHisDao  IHDao = new ItemHisDao();
+			if (itemFlag) {
+				IHDao.falseToTrue(itemHisId, itemFlag);
+				if (restart) {
+					IHDao.insertNextItem(itemId);
+				}
+			} else {
+				if(IHDao.trueToFalse(itemHisId, itemFlag)) {
+					result = true;
+				};
+			}
+
+		} else {
+			String strItemId = request.getParameter("itemId");
+			int itemId = Integer.parseInt(strItemId);
+			List<Item> dailyList = new ArrayList<Item>();
+
+			ItemDao IDao = new ItemDao();
+			dailyList = IDao.getDailyItem(itemId);
+			request.setAttribute("dailyList", dailyList);
+			//配列をJavaScriptに返すためにJSONデータにする必要がある
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+			    //JavaオブジェクトからJSONに変換
+			    String testJson = mapper.writeValueAsString(dailyList);
+			    //JSONの出力
+			    response.getWriter().write(testJson);
+			} catch (JsonProcessingException e) {
+			    e.printStackTrace();
+			}
+
+		}
+
 	}
 }

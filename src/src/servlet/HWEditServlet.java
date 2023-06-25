@@ -1,22 +1,21 @@
 package servlet;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
-import java.net.http.HttpResponse;
+import java.util.Date;
 import java.util.List;
 
-import javax.management.monitor.StringMonitor;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.HWDao;
-import dao.ItemDao;
-import dao.ItemHisDao;
+import dao.HWHisDao;
 import model.HW;
-import model.Item;
+import model.Useful;
 
 /**
  * Servlet implementation class HWEditServlet
@@ -24,17 +23,22 @@ import model.Item;
 @WebServlet("/HWEditServlet")
 public class HWEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#doget(httpSelveletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpResponse response) throws ServletException, IOException{
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		HWhisdao HHDao = new HWHisdao();
-		list<HW> HWlist = HHDao.select();
-		
-		HWlist.forEach(event -> System.out.println(event.getHWName()));
-		request.setAttribute("HWlist", HWlist);
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/dojo6/src/LoginServlet");
+			return;
+		}
+
+		HWHisDao HHDao = new HWHisDao();
+		List<HW> HWList = HHDao.select();
+
+		HWList.forEach(hw -> System.out.println(hw.getHWName()));
+		request.setAttribute("HWList", HWList);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/HWEdit.jsp");
 		dispatcher.forward(request, response);
@@ -46,31 +50,34 @@ public class HWEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/dojo6/LoginServlet");
+			response.sendRedirect("/dojo6/src/LoginServlet");
 			return;
-	    }
+		}
 
 		request.setCharacterEncoding("UTF-8");
 		String HWName = request.getParameter("HWName");
 		String HWDate = request.getParameter("HWDate");
-		Date HWdate = 
 		String HWFreq = request.getParameter("HWFreq");
-		int number = Integer.parseInt(HWFreq);
+		int freq = Integer.parseInt(HWFreq);
 		String HWMemo = request.getParameter("HWMemo");
 
-		HWDao  HDao = new HWdao();
-		HW H = new HW();
+		Useful useful = new Useful();
+		Date hwDate = useful.strToDate(HWDate);
+
+		HWDao hwDao = new HWDao();
+		HW hw = new HW(HWName, hwDate, freq, HWMemo);
 		boolean result = false;
-	if (request.getParameter("SUBMIT").equals("更新")){
 
-		if (HDao.update(new H(HWName, HWDate, HWFreq, HWMemo))){
-			request = True;
-			
-			request.setAttribute("H");
-	    }
+		if (request.getParameter("SUBMIT").equals("更新")) {
+			if (hwDao.update(hw)) {
+				result = true;
+				System.out.println("成功");
+				request.setAttribute("hw", hw);
+			}
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/HWEdit.jsp");
+		request.setAttribute("result", result);
+		dispatcher.forward(request, response);
 	}
-
-	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/HWEdit.jsp");
-	dispatcher.forward(request,response);
-    }
 }

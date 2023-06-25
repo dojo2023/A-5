@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/A-five/css/regist.css">
 <meta charset="UTF-8">
 <title>登録</title>
+
 <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -39,8 +41,9 @@
                 </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
                 <input name="itemStart" type="date" placeholder="使用開始日">
-                <input name="itemPeriod" type="text" placeholder="予測使用日数">
+                <input name="itemFreq" type="text" placeholder="予測使用日数">
                 <input name="regist" type="hidden" value="itemSubmit">
+                <input id="existFlag" name="existFlag" type="hidden" >
                 <button type="submit">登録</button>
             </form>
         </div>
@@ -49,16 +52,16 @@
             <form id="hwRegistForm" action="/A-five/RegistServlet" method="post">
                 <input name="hwName" type="text" placeholder="家事項目" list="hwSelect">
                 <datalist id="hwSelect">
-                	<c:forEach var="item" items="${itemlist}">
-                		<option>${item.dailyName}</option>
+                	<c:forEach var="hwName" items="${hwNameList}">
+                		<option>${hwName}</option>
                 	</c:forEach>
                 </datalist>
-                <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
                 <select name="freqUnit">
                     <option value="1">日</option>
                     <option value="7">週</option>
                     <option value="30">月</option>
                 </select>
+                <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
                 <input name="hwMemo" type="text" placeholder="メモ">
                 <input name="regist" type="hidden" value="hwSubmit">
                 <button type="submit">登録</button>
@@ -68,6 +71,7 @@
 	<c:if test="{not empty result}">
 		<script type="text/javascript">alert(result);</script>
 	</c:if>
+
     <script>
 
 
@@ -77,7 +81,7 @@
         });
 
         // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
-        let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq], input[name=itemDue]');
+        let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq], input[name=itemPeriod]');
         // 値段・容量・目標頻度の入力欄をforeach
         numberInputs.forEach(function(input){
             // blur：次の入力欄が選択されたら
@@ -129,13 +133,14 @@
         const dailyRegistForm = document.getElementById('dailyRegistForm');
         dailyRegistForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const inputs = dailyRegistForm.querySelectorAll('input:not([type="submit"]), select');
+            const inputs = dailyRegistForm.querySelectorAll('input:not([type="hidden"]):not([type="submit"]), select');
             //フラグ
             let hasEmptyInput = false;
             inputs.forEach(function(input) {
                 hasEmptyInput = empCheck(input, hasEmptyInput);
             });
             if (!hasEmptyInput) {
+            	dailyExixtCheck();
                 if (confirm('本当に送信しますか？')) {
                     dailyRegistForm.submit(); // フォームを送信
                 }
@@ -181,6 +186,24 @@
             return hasEmptyInput;
         }
 
+        //既存の日用品項目を選択したかどうかをチェックし、フラグを使ってサーブレットで判定
+        function dailyExixtCheck() {
+        	const dailySelect = document.getElementById('dailySelect');
+        	const dailyName = document.getElementById('dailyName');
+        	const inputValue = dailyName.value;
+        	const options = dailySelect.getElementsByTagName('option');
+        	let existFlag = false;
+
+        	for (let i = 0; i < options.length; i++) {
+                if (options[i].value === inputValue) {
+                	existFlag = true;
+                    break;
+                }
+            }
+        	const flagInput = document.getElementById('existFlag');
+        	flagInput.value = existFlag;
+		}
+
 
         // mappingDataにはこんなマップデータが入ってる
         /* [{
@@ -196,7 +219,7 @@
         //mappingDataはデータベースから持ってくる
         //日用品項目と日用品の単位をマッピング
         function unitSet(mappingData) {
-        	const dailySelect = document.getElementById('dailySelect');
+        	const dailySelect = document.getElementById('dailySelect');//データリストの親要素
             const dailyName = document.getElementById('dailyName');
         	//日用品項目の予測補完をoptionタグで作成
         	mappingData.forEach(function(value, key) {

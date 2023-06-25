@@ -102,6 +102,30 @@ ALTER TABLE item_history RENAME COLUMN item_peiod TO item_period
 ---------------------------------------------------------------------------------
 
 
+SELECT his.item_his_id, his.item_id, his.item_start, his.item_due, his.item_fin,his.item_period, his.item_flag,it.user_id, it.daily_name, it.daily_unit,it.item_name, it.item_price,it.item_volume, it.item_memo FROM item_history AS his JOIN items AS it  ON his.item_id = it.item_id WHERE his.item_flag = 0 and it.user_id =1 GROUP BY his.item_id ORDER BY item_due asc
+---------------------------------------------------------------------------------
+【完了登録を取り消すSQL文】
+DELETE FROM hw_history WHERE hw_his_id = (SELECT MAX(hw_his_id) FROM hw_history WHERE hw_id = 1);
+---------------------------------------------------------------------------------
+【日用品完了登録(ユーザーに選択させるデータを取得)のSQL文】
+WITH sub AS (SELECT daily_name FROM items WHERE item_id = ?)
+SELECT * FROM items WHERE daily_name = SELECT daily_name FROM sub;
 
 
+---------------------------------------------------------------------------------
+【日用品完了登録（同じものを使う）のSQL文】
+WITH sub AS (SELECT item_freq FROM items WHERE item_id = ?)
+INSERT INTO item_history (item_id, item_start, item_due) VALUES (?, current_date, current_date + (SELECT item_freq FROM sub))
+---------------------------------------------------------------------------------
+【予測使用日数を追加するSQL文】
+ALTER TABLE items ADD COLUMN item_freq int
+---------------------------------------------------------------------------------
+【item_his_idが大きいほうのレコードのフラグをfalseにするSQL文】
+UPDATE item_history
+SET item_flag = false
+WHERE (item_id, item_his_id) IN (
+  SELECT item_id, MAX(item_his_id)
+  FROM item_history
+  GROUP BY item_id
+)
 
