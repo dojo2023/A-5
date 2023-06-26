@@ -71,7 +71,7 @@
 					</div>
 
 					<div id="itemModalStock${g.itemHisId}" class="iziModal">
-					<button type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
+					<button id="itemStockBatsu${g.itemHisId}" type="button" class="batsu" data-izimodal-close="#itemModalStock${g.itemHisId }">×</button>
 					<div id="itemModalStockContent${g.itemHisId}" class="itemModalStockContent"></div>
 					<button id="itemStockYes${g.itemHisId}" type="button" class="editButton">はい</button>
 					<button type="button" class="deleteButton">いいえ</button>
@@ -441,11 +441,12 @@
 
     function newStockAjax(itemHisId, data) {
     	const yesBtn = document.getElementById('itemStockYes' + itemHisId);
-    	console.log(itemHisId + 'aaaaa');
+    	const batsuBtn = document.getElementById('itemStockBatsu' + itemHisId);
     	yesBtn.addEventListener('click', function() {
     		const selectedItemId = document.querySelector('input[name="selectedItem"]:checked').value;
     		data.itemId = selectedItemId;
     		restockAjax(data);
+    		batsuBtn.click();
     	});
     }
 </script>
