@@ -5,6 +5,7 @@
     <html lang="en">
     <html>
     <head>
+    <link rel="stylesheet" href "A-five/css/edit.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>家事編集画面</title>
@@ -30,7 +31,7 @@
         <input type="button" value="クリア" onclick="clearTextHWFreq()" />
     </p>
     
-    <p>備考：<input type="text" id="HWMemo"  name="HWMemo" value="HWMemo">
+    <p>メモ：<input type="text" id="HWMemo"  name="HWMemo" value="HWMemo" placefolder= "メモ（100字まで）" max="100">
     <input type="button" value="クリア" onclick="clearTextHWMemo()" />
     </p>
     <p>
