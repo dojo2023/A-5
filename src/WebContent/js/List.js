@@ -197,3 +197,27 @@ $(function(){
     		batsuBtn.click();
     	});
     }
+    
+    
+/*日用品編集画面*/
+
+
+function clearTextitemName() {
+	var textForm = document.getElementById("itemName");
+  textForm.value = '';
+}
+
+function clearTextitemCapacity() {
+	var textForm = document.getElementById("itemCapacity");
+  textForm.value = '';
+}
+
+function clearTextitemPrice() {
+	var textForm = document.getElementById("itemPrice");
+  textForm.value = '';
+}
+
+function clearTextitemRemarks() {
+	var textForm = document.getElementById("itemRemarks");
+  textForm.value = '';
+}
