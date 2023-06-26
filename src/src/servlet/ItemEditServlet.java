@@ -28,11 +28,11 @@ public class ItemEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/dojo6/src/LoginServlet");
 			return;
-		}
+		}*/
 
 		ItemHisDao IHDao = new ItemHisDao();
 		List<Item> itemList = IHDao.select();
@@ -48,10 +48,10 @@ public class ItemEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		/*if (session.getAttribute("id") == null) {
 			response.sendRedirect("/dojo6/src/LoginServlet");
 			return;
-		}
+		}*/
 
 		request.setCharacterEncoding("UTF-8");
 		String itemName = request.getParameter("itemName");
@@ -73,10 +73,10 @@ public class ItemEditServlet extends HttpServlet {
 		boolean result = false;
 
 		if (request.getParameter("SUBMIT").equals("更新")) {
-			if (itemDao.update(item)) {
+			/*if (itemDao.update(item)) {
 				result = true;
 				request.setAttribute("item", item);
-			}
+			}*/
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemEdit.jsp");

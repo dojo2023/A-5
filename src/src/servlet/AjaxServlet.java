@@ -100,7 +100,7 @@ public class AjaxServlet extends HttpServlet {
 				}
 			} else {
 				if(IHDao.trueToFalse(itemHisId, itemFlag)) {
-					result = true;
+					IHDao.deleteNextItem(itemId);
 				};
 			}
 

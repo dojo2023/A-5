@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.HWDao;
 import dao.HWHisDao;
@@ -28,19 +27,19 @@ public class HWEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/dojo6/src/LoginServlet");
 			return;
-		}
+		}*/
 
 		HWHisDao HHDao = new HWHisDao();
 		List<HW> HWList = HHDao.select();
 
-		HWList.forEach(hw -> System.out.println(hw.getHWName()));
+//		HWList.forEach(hw -> System.out.println(hw.getHWName()));
 		request.setAttribute("HWList", HWList);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/HWEdit.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/hwEdit.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -48,32 +47,32 @@ public class HWEditServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/dojo6/src/LoginServlet");
 			return;
-		}
+		}*/
 
 		request.setCharacterEncoding("UTF-8");
-		String HWName = request.getParameter("HWName");
-		String HWDate = request.getParameter("HWDate");
-		String HWFreq = request.getParameter("HWFreq");
-		int freq = Integer.parseInt(HWFreq);
+		String HWName = request.getParameter("hwName");
+		String HWDate = request.getParameter("hwDate");
+		String HWFreq = request.getParameter("hwFreq");
+//		int freq = Integer.parseInt(hwFreq);
 		String HWMemo = request.getParameter("HWMemo");
 
 		Useful useful = new Useful();
 		Date hwDate = useful.strToDate(HWDate);
 
 		HWDao hwDao = new HWDao();
-		HW hw = new HW(HWName, hwDate, freq, HWMemo);
+//		HW hw = new HW(HWName, hwDate, freq, HWMemo);
 		boolean result = false;
 
 		if (request.getParameter("SUBMIT").equals("更新")) {
-			if (hwDao.update(hw)) {
+			/*if (hwDao.update(hw)) {
 				result = true;
 				System.out.println("成功");
 				request.setAttribute("hw", hw);
-			}
+			}*/
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/HWEdit.jsp");
