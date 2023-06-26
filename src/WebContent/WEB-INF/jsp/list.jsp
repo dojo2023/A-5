@@ -209,10 +209,38 @@
 			<br>
 			<br>
 
-				<button type="button" class="editButton">編集</button>
+				<button type="button" class="editButton" data-izimodal-open="#HWEditModal${e.hwHisId}">編集</button>
 				<button type="button" class="deleteButton">削除</button>
 
 			</div>
+
+			<div id="HWEditModal${e.hwHisId }" class ="iziModal">
+		    <form id="HWEditForm">
+
+	    	<button type="button" class="batsu" data-izimodal-close="#HWEditModal${e.hwHisId}">×</button>
+	    	<h4>${e.hwName}</h4>
+			<hr>
+
+		    <p>家事項目名：<input type="text" id="HWName" name="HWname" value="${e.hwName }">
+		    <input type="button" value="クリア" onclick="clearTextHWName()" />
+		    </p>
+
+		    <p>実施日：<input type="date" id="HWDate" name="HWDate" value="${e.hwDate }" >
+		    </p>
+
+		    <p>頻度：<input type="text" id="HWFreq" name="HWFreq" value="${e.hwFreq }日">
+		        <input type="button" value="クリア" onclick="clearTextHWFreq()" />
+		    </p>
+
+		    <p>メモ：<input type="text" id="HWMemo"  name="HWMemo" value="${e.hwMemo}" placeholder= "メモ（100字まで）" max="100">
+		    <input type="button" value="クリア" onclick="clearTextHWMemo()" />
+		    </p>
+		    <p>
+		    <input type="submit" value="更新する">
+		    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}">キャンセル</button>
+		    </p>
+	    </form>
+    </div>
 
 					</td>
 
