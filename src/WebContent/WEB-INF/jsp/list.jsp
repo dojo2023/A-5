@@ -102,8 +102,42 @@
 				</c:forEach>
 
 
-						<button type="button" class="editButton">編集</button>
+						<button type="button" class="editButton" data-izimodal-open="#itemEditModal${g.itemHisId }" >編集</button>
 						<button type="button" class="deleteButton">削除</button>
+				</div>
+
+				<div id="itemEditModal${g.itemHisId}" class="iziModal" >
+
+				<form id="itemEditForm">
+				<button type="button" class="batsu" data-izimodal-close="#itemEditModal${g.itemHisId }">×</button>
+					<h4>項目名:${g.dailyName}</h4>
+					<hr>
+			        <p>商品名:<input type="text" id="itemName" value="${g.itemName }"  name="itemName">
+			        <input type="button" value="クリア" onclick="clearTextitemName()" />
+			        </p>
+
+			        <p>容量：<input type="text"  id="itemCapacity" value="${g.itemVolume}"  name="itemCapacity" placeholder="数字を入力">
+			        <span>${g.itemUnit}</span>
+			        <input type="button" value="クリア" onclick="clearTextitemCapacity()" />
+			        </p>
+
+			        <p>値段：<input type="text" id="itemPrice" value="${g.itemPrice}" name="itemPrice" placeholder="数字を入力">円
+			            <input type="button" value="クリア" onclick="clearTextitemPrice()" />
+			        </p>
+
+			        <p>使用開始日：<input type="date" value="${g.itemStart}" name="startDate">
+			        </p>
+			        <p>使用終了日：<input type="date" value="${g.itemFin}"  name="endDate">
+			        </p>
+
+			        <p>備考：<input type="text" id="itemRemarks" name="itemRemarks" value="${g.itemMemo }">
+			        <input type="button" value="クリア" onclick="clearTextitemRemarks()" />
+			        </p>
+			        <p>
+			        <input type="submit" value="更新する" onclick="return checkFormValue()">
+			        <button type="button" data-izimodal-open="#itemModal${g.itemHisId }">キャンセル</button>
+			        </p>
+			    </form>
 				</div>
 
 					</td>
@@ -199,54 +233,7 @@
 	</div>
 </div>
 
-<!--  日用品のモーダル
-<div id="itemModal" class="iziModal" >
-	<button type="button" class="batsu" data-izimodal-close="#itemModal">×</button>
-	<h4>項目名:シャンプー</h4>
-	<hr>
-	<p>商品名：メリット</p>
-	<p>	容量:300ml</p>
-	<p>使用開始日:2023/04/16</p>
-	<p>使用終了日:2023/06/26</p>
-	<p>備考:特売セール</p>
 
-	<h2>履歴</h2>
-	<p>商品名：メリット</p>
-	<p>	容量:300ml</p>
-	<p>使用開始日:2023/04/16</p>
-	<p>使用終了日:2023/06/26</p>
-	<p>備考:特売セール</p>
-	<br>
-	<p>商品名：メリット</p>
-	<p>	容量:300ml</p>
-	<p>使用開始日:2023/04/16</p>
-	<p>使用終了日:2023/06/26</p>
-	<p>備考:特売セール</p>
-	<br>
-	<br>
-
-
-
-		<button type="button" class="editButton">編集</button>
-		<button type="button" class="deleteButton">削除</button>
-</div>
- -->
-<!-- 家事のモーダル -->
-<!-- <div id="HWModal" class="iziModal" >
-
-	<form method="GET" action="/A-five/ListServlet">
-
-	<button type="button" class="batsu" data-izimodal-close="#HWModal">×</button>
-	<h4>シンク掃除</h4>
-	<hr>
-	<p>目標頻度：1週間に1回</p>
-	<h2>履歴</h2>
-	<br>
-	<br>
-	</form>
-		<button type="button" class="editButton">編集</button>
-		<button type="button" class="deleteButton">削除</button>
-</div> -->
 
 <script type="text/javascript" src="/A-five/js/List.js"></script>
 </body>
