@@ -13,6 +13,11 @@
 
 </head>
 <body>
+
+<%@ include file="common_header.jsp" %>
+<%@ include file="common_list.jsp" %>
+
+<div class="listWrapper">
 <div class="tabWrap">
 	<input id="itemTab" type="radio" name="tab_btn" checked>
     <input id="HWTab" type="radio" name="tab_btn">
@@ -39,15 +44,15 @@
 
 			<c:forEach var="g" items="${itemlist}" varStatus ="status">
 
-			<form method="GET" action="/A-five/ListServlet">
+			<!-- <form method="GET" action="/A-five/ListServlet"> -->
 			<c:if test="${!g.itemFlag}">
 
 				<tr>
 					<td>${g.dailyName}<br>${g.itemName}</td>
-					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}">詳細</button></td>
+					<td><button type="button" data-izimodal-open="#itemModal${g.itemHisId}" class="listDetailBtn">詳細</button></td>
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
-					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})"></td>
+					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})" class="toggleButton"></td>
 					<td><input type="checkbox">
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 						<input type="hidden" id="itemId${status.index}" value="${g.itemId}">
@@ -108,7 +113,7 @@
 
 				<div id="itemEditModal${g.itemHisId}" class="iziModal" >
 
-				<form id="itemEditForm">
+				<form id="itemEditForm" action="/A-five/ItemEditServlet" method="post">
 				<button type="button" class="batsu" data-izimodal-close="#itemEditModal${g.itemHisId }">×</button>
 					<h4>項目名:${g.dailyName}</h4>
 					<hr>
@@ -134,7 +139,7 @@
 			        <input type="button" value="クリア" onclick="clearTextitemRemarks()" />
 			        </p>
 			        <p>
-			        <input type="submit" value="更新する" onclick="return checkFormValue()">
+			        <input type="submit" value="更新する">
 			        <button type="button" data-izimodal-open="#itemModal${g.itemHisId }">キャンセル</button>
 			        </p>
 			    </form>
@@ -146,7 +151,7 @@
 
 			</c:if>
 
-			</form>
+			<!-- </form> -->
 		    </c:forEach>
 
 			</table>
@@ -172,7 +177,7 @@
 
 
 
-			<form method="GET" action="/A-five/ListServlet">
+			<!-- <form method="GET" action="/A-five/ListServlet"> -->
 			<c:if test="${!e.hwFlag}">
 				<tr>
 					<td>${e.hwName}</td>
@@ -181,7 +186,8 @@
 					<td>${e.hwDue}</td>
 					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
 					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
-					<input type="hidden" id="hwId${status.index}" value="${e.hwId}">
+					<input type="hidden" id="hwId${status.index}" value="${e.hwId}"></td>
+				</tr>
 
 			<div id="HWModal${e.hwHisId}" class="iziModal" >
 
@@ -210,9 +216,28 @@
 			<br>
 
 				<button type="button" class="editButton" data-izimodal-open="#HWEditModal${e.hwHisId}">編集</button>
-				<button type="button" class="deleteButton">削除</button>
+				<button type="button" class="deleteButton" data-izimodal-open="#HWDeleteModal${e.hwHisId}">削除</button>
 
 			</div>
+			<div id="HWDeleteModal${e.hwHisId }" class ="iziModal">
+			    <form id="HWDeleteForm">
+
+		    	<button type="button" class="batsu" data-izimodal-close="#HWDeleteModal${e.hwHisId}">×</button>
+		    	<h4>本当にこの家事の予定を削除しますか？</h4>
+				<hr>
+
+
+				<p>家事項目名：${e.hwName}</p>
+				<p>目標頻度:${e.hwFreq}日に一回</p>
+				<p>次回実施日：${e.hwDue}</p>
+				<p>備考:${e.hwMemo}</p>
+				<form method="POST" action="/A-five/ListServlet">
+			    <input type="submit"name="SUBMIT" value="はい">
+			    </form>
+			    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}">いいえ</button>
+			    </p>
+		   		</form>
+	   		</div>
 
 			<div id="HWEditModal${e.hwHisId }" class ="iziModal">
 		    <form id="HWEditForm">
@@ -242,14 +267,10 @@
 	    </form>
     </div>
 
-					</td>
-
-				</tr>
-
 			</c:if>
 
 
-			</form>
+			<!-- </form> -->
 
 			</c:forEach>
 
@@ -262,7 +283,7 @@
 </div>
 
 
-
+</div>
 <script type="text/javascript" src="/A-five/js/List.js"></script>
 </body>
 </html>
