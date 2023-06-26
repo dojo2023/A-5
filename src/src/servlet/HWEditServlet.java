@@ -55,10 +55,10 @@ public class HWEditServlet extends HttpServlet {
 		}
 
 		request.setCharacterEncoding("UTF-8");
-		String HWName = request.getParameter("HWName");
-		String HWDate = request.getParameter("HWDate");
-		String HWFreq = request.getParameter("HWFreq");
-		int freq = Integer.parseInt(HWFreq);
+		String HWName = request.getParameter("hwName");
+		String HWDate = request.getParameter("hwDate");
+		String HWFreq = request.getParameter("hwFreq");
+		int freq = Integer.parseInt(hwFreq);
 		String HWMemo = request.getParameter("HWMemo");
 
 		Useful useful = new Useful();
