@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,38 +11,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class CommonServlet
- */
+import dao.TaskDao;
+import model.HW;
+import model.Useful;
+
+
 @WebServlet("/CommonServlet")
 public class CommonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public CommonServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
-		// 共通ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/common.jsp");
+		request.setCharacterEncoding("UTF-8");
+
+		TaskDao Task = new TaskDao();
+
+		List<HW> hwList = Task.select();
+
+		Useful useful = new Useful();
+		Date today = useful.getDate();
+		Date tom = useful.getDatePlus();
+
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("hwList", hwList);
+		request.setAttribute("today", today);
+		request.setAttribute("tom", tom);
+
+		for(HW h : hwList) {
+			System.out.println(h.getHwDue());
+			System.out.println(today+"今日");
+			System.out.println(tom+"明日");
+		}
+
+
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
