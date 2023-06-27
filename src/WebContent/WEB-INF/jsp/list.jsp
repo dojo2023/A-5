@@ -10,17 +10,17 @@
 
 <link href="/A-five/css/iziModal.css" rel="stylesheet" type="text/css">
 <link href="/A-five/css/list.css" rel="stylesheet" type="text/css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
-<script
-    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/A-five/css/regist.css">
+
 </head>
 <body>
 
 <%@ include file="common_header.jsp" %>
 <%@ include file="common_list.jsp" %>
-<%@ include file="regist.jsp" %>
+<%-- <%@ include file="regist.jsp" %> --%>
 <div class="listWrapper">
 <div class="tabWrap">
 	<input id="itemTab" type="radio" name="tab_btn" checked>
@@ -421,10 +421,77 @@
 		</div>
 	</div>
 </div>
-
+</div>
+<div class="plusBtnWrapper">
+	<button id="plusBtn" class="plusBtn" >+</button>
+	<button id='hiddenBtn' type="hidden" data-izimodal-open="#tabs">+</button>
+	<script type="text/javascript">
+		const plusBtn = document.getElementById('plusBtn');
+		const hiddenBtn = document.getElementById('hiddenBtn');
+		plusBtn.addEventListener('click', function() {
+			hiddenBtn.click();
+		})
+	</script>
 
 </div>
+<!-- <div id="formWrapper" class="iziModal"> -->
+	<div id="tabs" class="iziModal">
+
+		 <!-- タブ-->
+		<div>
+            <ul>
+                <li><a href="#tabs1"> 日用品登録</a></li>
+                <li><a href="#tabs2"> 家事登録</a></li>
+            </ul>
+		</div>
+        <!-- CSSで罰ボタンを -->
+        <!-- 日用品登録フォーム-->
+        <div id="tabs1">
+            <form id="dailyRegistForm" action="/A-five/RegistServlet" method="post">
+                <input id="dailyName" name="dailyName" type="text" placeholder="日用品項目" list="dailySelect">
+                <datalist id="dailySelect" name="dailySelect">
+
+                </datalist>
+                <input name="itemName" type="text" placeholder="商品名" >
+                <input name="itemPrice" type="text" placeholder="値段">
+                <input name="itemVolume" type="text" placeholder="容量">
+                <input id="dailyUnit" name="dailyUnit" type="text" placeholder="単位" list="unitSelect">
+                <datalist id="unitSelect" name="unitSelect">
+                    <!-- 日用品項目と単位はマップ -->
+                </datalist>
+                <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
+                <input name="itemStart" type="date" placeholder="使用開始日">
+                <input name="itemFreq" type="text" placeholder="予測使用日数">
+                <input name="regist" type="hidden" value="itemSubmit">
+                <input id="existFlag" name="existFlag" type="hidden" >
+                <button type="submit">登録</button>
+            </form>
+        </div>
+        <!-- 家事登録フォーム-->
+        <div id="tabs2">
+            <form id="hwRegistForm" action="/A-five/RegistServlet" method="post">
+                <input name="hwName" type="text" placeholder="家事項目" list="hwSelect">
+                <datalist id="hwSelect">
+                	<c:forEach var="hwName" items="${hwNameList}">
+                		<option>${hwName}</option>
+                	</c:forEach>
+                </datalist>
+                <select name="freqUnit">
+                    <option value="1">日</option>
+                    <option value="7">週</option>
+                    <option value="30">月</option>
+                </select>
+                <input name="hwFreq" type="text" min="0" placeholder="目標頻度">
+                <input name="hwMemo" type="text" placeholder="メモ">
+                <input name="regist" type="hidden" value="hwSubmit">
+                <button type="submit">登録</button>
+            </form>
+        </div>
+	</div>
+	<!-- </div> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
 <script type="text/javascript" src="/A-five/js/List.js"></script>
- <script src="/A-five/js/Regist.js"></script>
+<!--  <script src="/A-five/js/Regist.js"></script> -->
 </body>
 </html>

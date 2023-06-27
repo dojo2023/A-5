@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
 /* bodyタグ */
-body{
-    margin: 0 0 0 0;		/* マージンなし（後で個別に設定） */
-    padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
+body{	/* パディングなし（後で個別に設定） */
     font-size: 16px;
     text-align: center;
     width: 100vw;
@@ -19,13 +22,14 @@ body{
 	border-radius: 20px;
 	height: 15%;
 	margin: 20px;
-	width: 90%;
+	align-items: center;
 }
 .tasklistWrapper {
 	width: 25%;
 	height: 100vh;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
+	margin-left: 20px;
 }
 
 .col,
@@ -49,7 +53,7 @@ body{
 .flex-row {
 	justify-content: space-between;
 	width: 100%;
-	height: 15%;
+	height: 100%;
 }
 
 
@@ -82,30 +86,43 @@ body{
     margin:0px;padding:0px;
 }
 #logo { /* ロゴ */
-    width: 140px;
-    height: 130px;
-    position:static;
+    width: 100%;
+    height: 100%;
+    /* position:static; */
     z-index: auto;
     /* border: 1px solid red; */
+}
+#logo h1 {
+	/* margin: 0 20px; */
+	width: 90px;
+	height: 90px;
+}
+#logo img {
+	border-radius: 20px 0 0 20px;
 }
 
  #gNav{ /* メニュー */
     width: 50%;
-    height: 15%;
 	/* border: 1px solid red; */
 	position:relative;
 	top: 0;
     right: 0;
     margin-right: 50px;
+    display: flex;
+    align-items: center;
 }
 
 #gNavList{ /* メニュー */
     display:flex;
     justify-content:space-between;
     list-style: none;
-    padding-top: 20px;
+    text-align: center;
     	/* border: 1px solid red; */
 }
+#gNavList li{ /* メニュー */
+    margin-right: 30px;
+}
+
 #gNavList li a{
 	text-decoration: none;
 	color: black;
@@ -132,6 +149,7 @@ body{
 	height: 100px;
 	top: 0;
 	margin: 10px 30px;
+
 	padding: 10px;
 	border-radius: 10px;
 	color: #ccc;
