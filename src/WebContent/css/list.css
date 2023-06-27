@@ -24,6 +24,9 @@
 }
 body {
 	background-color: #cecece;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
 }
 
 .listWrapper {
@@ -31,7 +34,7 @@ body {
 	width: 800px;
 	max-height: 90vh;
 	position: absolute;
-	top: 10%;
+	top: 20%;
 	left: 30%;
 }
 

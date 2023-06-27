@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import dao.HWHisDao;
 import dao.ItemHisDao;
 import model.HW;
 import model.Item;
+import model.Useful;
 
 /**
  * Servlet implementation class ListServlet
@@ -49,6 +51,12 @@ public class ListServlet extends HttpServlet {
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("hwList", hwList);
 
+		Useful useful = new Useful();
+		Date today = useful.getDate();
+		Date tom = useful.getDatePlus();
+
+		request.setAttribute("today", today);
+		request.setAttribute("tom", tom);
 
 		/*
 				try {

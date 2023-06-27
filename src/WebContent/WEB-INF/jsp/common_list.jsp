@@ -18,7 +18,7 @@
 		  <div id="missTask" class="tasklist">
 		  	<h3>未達成タスク</h3>
 
-		  		 <%-- <c:forEach var="g" items="${hwList}">
+		  		 <c:forEach var="g" items="${hwList}">
 
 					<!-- <script type="text/javascript">
 						console.log("${g.hwName}");
@@ -31,22 +31,29 @@
 						</script> -->
 		  			<p>${g.hwName}</p>
 		  			</c:if>
-		  		</c:forEach> --%>
+		  		</c:forEach>
 		  </div>
 
 		   <div id="todayTask" class="tasklist">
 		  	<h3>今日のタスク</h3>
-		  		<c:forEach var="s" items="${hwList}">
+		  		<%-- <c:forEach var="s" items="${hwList}">
+		  			<script type="text/javascript">
+		  				console.log('${today}');
+		  			</script>
 		  			<c:if test="${s.hwDue.equals(today)}">
 		  			<p>${s.hwName}</p>
 		  			</c:if>
-		  		</c:forEach>
+		  		</c:forEach> --%>
+		  	<p>アイロンがけ</p>
 		  </div>
 
 		  <div id="trTask" class="tasklist">
 		  	<h3>明日のタスク</h3>
 		  		<c:forEach var="v" items="${hwList}">
-		  			<c:if test="${v.hwDue.equals(tom)}">
+		  			<script type="text/javascript">
+		  				console.log("${v.hwDue == tom}");
+		  			</script>
+		  			<c:if test="${v.hwDue == tom}">
 		  			<p>${v.hwName}</p>
 		  			</c:if>
 		  		</c:forEach>
@@ -54,7 +61,8 @@
 
 		  <div id="itemTask" class="tasklist">
 			<h3>今週の購入品</h3>
-			<p>データが入るよ</p>
+			<p>香水</p>
+			<p>化粧水</p>
 		  </div>
 		</div>
 	   	</div>
@@ -67,13 +75,13 @@
 		  <!-- タスク表示ここまで -->
 
 		  <!-- JavaScript -->
-		  <script>
+		  <!-- <script>
 		  date = new Date();
 		  year = date.getFullYear();
 		  month = date.getMonth() + 1;
 		  day = date.getDate();
 		  document.getElementById("current_date").value = year + "/" + month + "/" + day;
 		  today = document.getElementById("current_date").value;
-		  </script>
+		  </script> -->
 		  <!-- JavaScriptここまで -->
 </html>

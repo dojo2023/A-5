@@ -14,10 +14,12 @@ body{
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
 	height: 15%;
+	margin: 20px;
+	width: 90%;
 }
 .tasklistWrapper {
 	width: 25%;
@@ -30,7 +32,7 @@ body{
 .col-2 {
 	position: relative;
 	width: 100%;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .d-flex {
@@ -84,13 +86,13 @@ body{
     height: 130px;
     position:static;
     z-index: auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
  #gNav{ /* メニュー */
     width: 50%;
     height: 15%;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	position:relative;
 	top: 0;
     right: 0;
@@ -101,11 +103,13 @@ body{
     display:flex;
     justify-content:space-between;
     list-style: none;
-    	border: 1px solid red;
+    padding-top: 20px;
+    	/* border: 1px solid red; */
 }
 #gNavList li a{
 	text-decoration: none;
-	border: 1px solid red;
+	color: black;
+	/* border: 1px solid red; */
 }
 #logout{ /* ログアウト */
     width: 130px;

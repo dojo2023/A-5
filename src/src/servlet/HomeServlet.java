@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.TaskDao;
+import model.HW;
+import model.Useful;
 
 /**
  * Servlet implementation class HomeServlet
@@ -32,6 +38,28 @@ public class HomeServlet extends HttpServlet {
 		//リクエストスコープに保存する奴(コピペ)
 		//requestスコープにセットします("この名前で", このデータを)
 		request.setAttribute("name", name);
+
+		request.setCharacterEncoding("UTF-8");
+
+		TaskDao Task = new TaskDao();
+
+		List<HW> hwList = Task.select();
+
+		Useful useful = new Useful();
+		Date today = useful.getDate();
+		Date tom = useful.getDatePlus();
+
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("hwList", hwList);
+		request.setAttribute("today", today);
+		request.setAttribute("tom", tom);
+
+		for(HW h : hwList) {
+			System.out.println(h.getHwDue());
+			System.out.println(today+"今日");
+			System.out.println(tom+"明日");
+		}
 
 		// ホームページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
