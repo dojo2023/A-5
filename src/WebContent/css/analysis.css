@@ -1,1 +1,16 @@
 @charset "UTF-8";
+
+body{
+    margin: 0 0 0 0;		/* マージンなし（後で個別に設定） */
+    padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
+    font-size: 16px;
+    text-align: center;
+
+}
+
+
+.canvas{
+	position: relative;
+	top: 0;
+	left: 500px;
+}
