@@ -13,10 +13,14 @@ body{
 	display: flex;
 	flex-wrap: wrap;
 	border: 1px solid red;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 20px;
 }
 .tasklistWrapper {
 	width: 25%;
 	height: 100vh;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 20px;
 }
 
 .col,
@@ -36,7 +40,8 @@ body{
 	position: relative;
 }
 .flex-row {
-	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 
 
@@ -81,8 +86,9 @@ body{
     height: 130px;
 	border: 1px solid red;
 	position:relative;
-	top: -110px;
-    left: 500px;
+	top: 0;
+    right: 0;
+    margin-right: 50px;
 }
 
 #gNavList{ /* メニュー */
@@ -114,8 +120,7 @@ body{
 	background-color: rgba(48, 64, 38, 0.9);
     width: 200px;
 	height: 100px;
-	position:relative;
-	top: -220px;
+	top: 0;
 	margin: 10px 30px;
 	padding: 10px;
 	border-radius: 10px;

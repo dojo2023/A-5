@@ -8,11 +8,10 @@
 		<link rel="stylesheet" href="css/common.css">
 
  <div class="row">
-  <div class="col-2 bg-warning">
-   <div class="d-flex flex-column">
+   <div class="d-flex flex-row">
 		  <!-- ロゴ -->
 		  <div id="logo">
-		 <h1><img src='../img/logo.jpg'  width="100" height="100" alt='ロゴ'></h1>
+		 <h1><img src='../img/HW_icon.png.jpg'  width="100" height="100" alt='ロゴ'></h1>
 		  </div>
 
 		  <!-- メニュー -->
@@ -22,8 +21,8 @@
 			<li><a href="ListServlet">一覧</a></li>
 			<li><a href="AnalysisServlet">分析</a></li>
 			<li><a href="LogoutServlet">ログアウト</a></li>
-			<li> <!-- 日付表示 -->
-		  			<div id="currentDate"></div></li>
+			<!-- <li> 日付表示
+		  			<div id="currentDate"></div></li> -->
 		  </ul>
 		  </nav>
 		  <!-- メニューここまで -->
@@ -31,10 +30,9 @@
 		  <!-- ログアウト -->
 		  <!-- <div id="logout"><a href="LogoutServlet">ログアウト</a></div> -->
 		  <!-- 日付表示 -->
-		  <div id="currentDate"></div>
+		  <!-- <div id="currentDate"></div> -->
     </div>
   </div>
- </div>
 <!-- headerここまで -->
 
 </html>
