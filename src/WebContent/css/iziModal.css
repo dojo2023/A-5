@@ -3,6 +3,11 @@
 * https://izimodal.marcelodolza.com
 * by Marcelo Dolza.
 */
+
+.iziModal .modaltable{
+	  border: 2px solid black;
+}
+
 .iziModal {
     display: none;
     position: fixed;
