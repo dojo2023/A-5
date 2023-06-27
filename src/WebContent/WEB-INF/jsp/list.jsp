@@ -65,14 +65,39 @@
 					<div id="itemModalRestock${g.itemHisId}" class="iziModal" >
 
 					<button type="button" class="batsu" data-izimodal-close="#itemModalRestock${g.itemHisId }">×</button>
-					<h4>この日用品を使い続けますか？</h4>
+					<h4 style = "padding:10px;">この日用品を使い続けますか？</h4>
 					<hr>
-					<p>項目名:${g.dailyName}</p>
-					<p>商品名：${g.itemName}</p>
-					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
-					<p>使用開始日:${g.itemStart}</p>
-					<p>使用終了日:${g.itemDue}</p>
-					<p>備考:${g.itemMemo}</p>
+					<table class ="modaltable">
+					<tr>
+					<td>項目名</td>
+					<td>${g.dailyName}</td>
+					</tr>
+
+					<tr>
+					<td>商品名</td>
+					<td>${g.itemName}</td>
+					</tr>
+
+					<tr>
+					<td>容量</td>
+					<td>${g.itemVolume}${g.dailyUnit}</td>
+					</tr>
+
+					<tr>
+					<td>使用開始日</td>
+					<td>${g.itemStart}</td>
+					</tr>
+
+					<tr>
+					<td>使用終了日</td>
+					<td>${g.itemDue}</td>
+					</tr>
+
+					<tr>
+					<td>備考</td>
+					<td>${g.itemMemo}</td>
+					</tr>
+					</table>
 
 					<button id="itemRestockYes${g.itemHisId }" type="button" class="editButton" data-izimodal-close="#itemModalRestock${g.itemHisId }">はい</button>
 					<button id="itemRestockNo${g.itemHisId }" type="button" class="deleteButton" data-izimodal-open="#itemModalStock${g.itemHisId}">いいえ</button>
@@ -300,17 +325,36 @@
 
 		    	<button type="button" class="batsu" data-izimodal-close="#HWDeleteModal${e.hwHisId}">×</button>
 
-		    	<h4>本当にこの家事の予定を削除しますか？</h4>
+		    	<h4 style="padding:10px;">本当にこの家事の予定を削除しますか？</h4>
 				<hr>
 
+				<table class="modaltable">
+				<tr>
+				<td>家事項目名</td>
+				<td>${e.hwName}</td>
+				</tr>
 
-				<p>家事項目名：${e.hwName}</p>
-				<p>目標頻度:${e.hwFreq}日に一回</p>
-				<p>次回実施日：${e.hwDue}</p>
-				<p>備考:${e.hwMemo}</p>
+				<tr>
+				<td>目標頻度</td>
+				<td>${e.hwFreq}日に一回</td>
+				</tr>
+
+				<tr>
+				<td>次回実施日</td>
+				<td>${e.hwDue}</td>
+				</tr>
+
+				<tr>
+				<td>備考</td>
+				<td>${e.hwMemo}</td>
+				</tr>
+
+				</table>
+
 				<form method="POST" action="/A-five/ListServlet">
 			    <input type="submit"name="SUBMIT" value="はい">
 			    </form>
+
 			    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}">いいえ</button>
 		   		<!-- </form> -->
 	   		</div>
