@@ -6,6 +6,8 @@ body{
     padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
     font-size: 16px;
     text-align: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 
@@ -15,6 +17,7 @@ body{
 	border: 1px solid red;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
+	height: 15%;
 }
 .tasklistWrapper {
 	width: 25%;
@@ -38,10 +41,13 @@ body{
 .flex-column {
 	flex-direction: column !important;
 	position: relative;
+	height: 85%;
+	margin-bottom: 20px;
 }
 .flex-row {
 	justify-content: space-between;
 	width: 100%;
+	height: 15%;
 }
 
 
@@ -82,8 +88,8 @@ body{
 }
 
  #gNav{ /* メニュー */
-    width: 700px;
-    height: 130px;
+    width: 50%;
+    height: 15%;
 	border: 1px solid red;
 	position:relative;
 	top: 0;
@@ -127,40 +133,37 @@ body{
 	color: #ccc;
 	overflow: auto;
 }
-
-
-/* #missTask{ 未達成タスク
-    background: #AEFFBD;
-    border: 0.2px solid #006400;
-    width: 200px;
-	height: 100px;
-	position:relative;
+.plusBtnWrapper {
+	width: 54px;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	right: 0;
+	transition: 1.25s all ease .9s;
 }
-
-#todayTask{ 今日のタスク
-    background: #AEFFBD;
-    border: 0.2px solid #006400;
-    width: 200px;
-	height: 100px;
-	position:relative;
-	top: -215px;
+.plusBtn {
+	width: 54px;
+	height: 54px;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	z-index: 4;
+	position: relative;
+	transition: 1.25s all ease .1s;
 }
-
-#trTask{ 明日のタスク
-    background: #AEFFBD;
-    border: 0.2px solid #006400;
-    width: 200px;
-	height: 100px;
-	position:relative;
-	top: -210px;
-}
-
-#itemTask{ 日用品タスク
-    background: #AEFFBD;
-    border: 0.2px solid #006400;
-    width: 200px;
-	height: 100px;
-	position:relative;
-	top: -205px;
-} */
 

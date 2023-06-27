@@ -57,8 +57,12 @@
 			<p>データが入るよ</p>
 		  </div>
 		</div>
-	   </div>
-		<input type="text" id="current_date">
+	   	</div>
+	   	<div class="plusBtnWrapper">
+	   		<button class="plusBtn" data-izimodal-open="#formWrapper">+</button>
+	   	</div>
+
+		<!-- <input type="text" id="current_date"> -->
 
 		  <!-- タスク表示ここまで -->
 

@@ -17,10 +17,10 @@
 		  <!-- メニュー -->
 		  <nav id="gNav">
 		  <ul id="gNavList">
-			<li><a href="HomeServlet">カレンダー</a></li>
-			<li><a href="ListServlet">一覧</a></li>
-			<li><a href="AnalysisServlet">分析</a></li>
-			<li><a href="LogoutServlet">ログアウト</a></li>
+			<li><a href="/A-five/HomeServlet">カレンダー</a></li>
+			<li><a href="/A-five/ListServlet">一覧</a></li>
+			<li><a href="/A-five/AnalysisServlet">分析</a></li>
+			<li><a href="/A-five/LogoutServlet">ログアウト</a></li>
 			<!-- <li> 日付表示
 		  			<div id="currentDate"></div></li> -->
 		  </ul>

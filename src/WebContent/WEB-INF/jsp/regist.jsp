@@ -3,19 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
 <link rel="stylesheet" href="/A-five/css/regist.css">
 <meta charset="UTF-8">
-<title>登録</title>
 
-<script
+<!-- <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ -->
 <script
     src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-</head>
-<body>
     <!--全体を囲う-->
+    <div id="formWrapper" class="iziModal">
 	<div id="tabs">
 		<!-- タブ-->
 		<div>
@@ -67,6 +65,7 @@
                 <button type="submit">登録</button>
             </form>
         </div>
+	</div>
 	</div>
 	<c:if test="{not empty result}">
 		<script type="text/javascript">alert(result);</script>
