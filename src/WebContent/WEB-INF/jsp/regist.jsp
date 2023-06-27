@@ -8,7 +8,8 @@
 
 <!-- <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- --><script
+ -->
+<script
     src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <!--全体を囲う-->
@@ -69,7 +70,7 @@
 	<c:if test="{not empty result}">
 		<script type="text/javascript">alert(result);</script>
 	</c:if>
-    <!-- <script src="/A-five/js/Regist.js"></script> -->
+    <script src="/A-five/js/Regist.js"></script>
 </body>
 </html>
 
