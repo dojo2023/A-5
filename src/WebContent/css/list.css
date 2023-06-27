@@ -62,12 +62,14 @@ body {
 	background:lightgray;
 }
 
+.updatebutton,
 .editButton{
 	position:fixed;
 	top:365px;
 	left:240px;
 }
 
+.cancelbutton,
 .deleteButton{
 	position:fixed;
 	top:365px;
@@ -169,4 +171,43 @@ tbody {
 	border: 1px solid #fff;
 }
 
+.iziModal-wrap .iziModal-content{
+	max-height:400px;
+	min-height:400px;
+}
 
+.iziModal-content .modaltable{
+  white-space: nowrap;
+  text-align: justify;
+  margin-top:20px;
+  margin-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:30px 10px;
+	border: outset 6px rgb(0 0 0 / 19%);
+	border-radius: 10px;
+}
+
+.iziModal-content .modaltable2{
+  white-space: nowrap;
+  text-align: justify;
+  margin-top:20px;
+  margin-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:15px 10px;
+	border: outset 6px rgb(0 0 0 / 19%);
+	border-radius: 10px;
+}
+
+.modaltable td {
+  font-size: 10px;
+  padding: 10px 60px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modaltable2 td {
+  font-size: 10px;
+  padding: 8px 60px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
