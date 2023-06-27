@@ -1,6 +1,13 @@
-$(function(){
-		$(".iziModal").iziModal();
-	});
+
+
+	$(function(){
+			$(".iziModal").iziModal();
+		});
+	$(function() {
+	            $( "#tabs" ).tabs();
+	        });
+
+
 
 	function toggleHwFlag(index) {
 		alert('非同期');
