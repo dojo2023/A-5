@@ -59,7 +59,7 @@
 		</div>
 	   	</div>
 	   	<div class="plusBtnWrapper">
-	   		<button class="plusBtn" data-izimodal-open="formWrapper">+</button>
+	   		<button class="plusBtn" data-izimodal-open="#formWrapper">+</button>
 	   	</div>
 
 		<!-- <input type="text" id="current_date"> -->
