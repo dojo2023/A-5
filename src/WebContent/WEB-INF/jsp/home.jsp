@@ -118,7 +118,7 @@
 	                    calendar += "<td>" + count + "<br>"
 	                    //+"<a href=''>"+year+"</a>"
 	                     //アイコン表示
-						+ "<a href='/A-five/src/HomeServlet'><img src='../img/HW_icon.png' width='1' height='1' alt='家事'></a>"
+						+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
 	                    +"</td>";
 
 	                }
