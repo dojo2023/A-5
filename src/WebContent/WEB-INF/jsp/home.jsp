@@ -23,7 +23,7 @@
 
 <!--     <div class="col-9 d-flex justify-content-center align-items-center">
 	<div class="d-flex justify-content-center align-items-center"> -->
-
+<div class="calenderWrapper">
 	<div class="calender">
     	<!-- カレンダー関連 -->
 	    <!-- xxxx年xx月を表示 -->
@@ -43,6 +43,7 @@
 	 </div> -->
 	    <!-- カレンダー関連ここまで -->
 	</div>
+</div>
 
 
 
