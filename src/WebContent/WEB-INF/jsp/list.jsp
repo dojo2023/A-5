@@ -11,13 +11,16 @@
 <link href="/A-five/css/iziModal.css" rel="stylesheet" type="text/css">
 <link href="/A-five/css/list.css" rel="stylesheet" type="text/css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
-
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/A-five/css/regist.css">
 </head>
 <body>
 
 <%@ include file="common_header.jsp" %>
 <%@ include file="common_list.jsp" %>
-
+<%@ include file="regist.jsp" %>
 <div class="listWrapper">
 <div class="tabWrap">
 	<input id="itemTab" type="radio" name="tab_btn" checked>
@@ -378,5 +381,6 @@
 
 </div>
 <script type="text/javascript" src="/A-five/js/List.js"></script>
+ <script src="/A-five/js/Regist.js"></script>
 </body>
 </html>
