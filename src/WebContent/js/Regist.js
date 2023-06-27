@@ -4,7 +4,7 @@
             $( "#tabs" ).tabs();
         });
 
-        // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
+      /*  // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
         let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq], input[name=itemPeriod], input[name=itemCapacity]');
         // 値段・容量・目標頻度の入力欄をforeach
         numberInputs.forEach(function(input){
@@ -125,7 +125,7 @@
                 }
             }
             return hasEmptyInput;
-        }
+        }*/
 
         //既存の日用品項目を選択したかどうかをチェックし、フラグを使ってサーブレットで判定
         function dailyExixtCheck() {
