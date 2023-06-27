@@ -32,18 +32,18 @@
 		<div id="itemPanel" class="tabPanel">
 
 			<table class="table">
-				<tr>
-					<th>日用品項目</th>
-					<th></th>
-					<th>予測終了日</th>
-					<th>日数</th>
-					<th>補充</th>
-					<th>使用終了</th>
-				</tr>
-
-
+				<thead>
+					<tr>
+						<th>日用品項目</th>
+						<th></th>
+						<th>予測終了日</th>
+						<th>日数</th>
+						<th>補充</th>
+						<th>使用終了</th>
+					</tr>
+				</thead>
 			<c:forEach var="g" items="${itemlist}" varStatus ="status">
-
+			<tbody>
 			<!-- <form method="GET" action="/A-five/ListServlet"> -->
 			<c:if test="${!g.itemFlag}">
 
@@ -146,11 +146,11 @@
 				</div>
 
 					</td>
-
 				</tr>
 
 			</c:if>
 
+			</tbody>
 			<!-- </form> -->
 		    </c:forEach>
 
@@ -168,7 +168,6 @@
 					<th>期限</th>
 					<th>完了</th>
 				</tr>
-
 
 
 

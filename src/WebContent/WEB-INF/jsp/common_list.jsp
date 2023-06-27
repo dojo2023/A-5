@@ -13,12 +13,12 @@
 
 		  <!-- タスク表示 -->
 
-	   <div class="col-2 bg-warning">
+	   <div class="tasklistWrapper bg-warning">
 		<div class="d-flex flex-column">
-		  <div id="missTask">
+		  <div id="missTask" class="tasklist">
 		  	<h3>未達成タスク</h3>
 
-		  		 <c:forEach var="g" items="${hwList}">
+		  		 <%-- <c:forEach var="g" items="${hwList}">
 
 					<!-- <script type="text/javascript">
 						console.log("${g.hwName}");
@@ -31,10 +31,10 @@
 						</script> -->
 		  			<p>${g.hwName}</p>
 		  			</c:if>
-		  		</c:forEach>
+		  		</c:forEach> --%>
 		  </div>
 
-		   <div id="todayTask">
+		   <div id="todayTask" class="tasklist">
 		  	<h3>今日のタスク</h3>
 		  		<c:forEach var="s" items="${hwList}">
 		  			<c:if test="${s.hwDue.equals(today)}">
@@ -43,7 +43,7 @@
 		  		</c:forEach>
 		  </div>
 
-		  <div id="trTask">
+		  <div id="trTask" class="tasklist">
 		  	<h3>明日のタスク</h3>
 		  		<c:forEach var="v" items="${hwList}">
 		  			<c:if test="${v.hwDue.equals(tom)}">
@@ -52,7 +52,7 @@
 		  		</c:forEach>
 		  </div>
 
-		  <div id="itemTask">
+		  <div id="itemTask" class="tasklist">
 			<h3>今週の購入品</h3>
 			<p>データが入るよ</p>
 		  </div>
