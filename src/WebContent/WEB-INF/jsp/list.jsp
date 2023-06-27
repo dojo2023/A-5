@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js"></script>
 
 <link href="/A-five/css/iziModal.css" rel="stylesheet" type="text/css">
@@ -86,23 +87,58 @@
 					<!-- 日用品のモーダル -->
 				<div id="itemModal${g.itemHisId}" class="iziModal" >
 					<button type="button" class="batsu" data-izimodal-close="#itemModal${g.itemHisId }">×</button>
-					<h4>項目名:${g.dailyName}</h4>
+					<h3 style="padding:10px;">項目名:${g.dailyName}</h3>
 					<hr>
-					<p>商品名：${g.itemName}</p>
-					<p>	容量:${g.itemVolume}${g.dailyUnit}</p>
-					<p>使用開始日:${g.itemStart}</p>
-					<p>使用終了日:${g.itemDue}</p>
-					<p>備考:${g.itemMemo}</p>
+					<table class ="modaltable">
+					<tr>
+					<td>商品名</td>
+					<td>${g.itemName}</td>
+					</tr>
+					<tr>
+					<td>容量</td>
+					<td>${g.itemVolume}${g.dailyUnit}</td>
+					</tr>
+					<tr>
+					<td >使用開始日</td>
+					<td >${g.itemStart}</td>
+					</tr>
+					<tr>
+					<td>使用終了日</td>
+					<td >${g.itemDue}</td>
+					</tr>
+					<tr>
+					<td>備考</td>
+					<td>${g.itemMemo}</td>
+					</tr>
+					</table>
 					<h2>履歴</h2>
 
 				<c:forEach var="h" items="${itemlist}" varStatus ="status">
 				<c:if test="${h.itemId == g.itemId}">
-					<p>商品名：${h.itemName}</p>
-					<p>	容量:${h.itemVolume}${h.dailyUnit}</p>
-					<p>使用開始日:${h.itemStart}</p>
-					<p>使用終了日:${h.itemFin}</p>
-					<p>備考:${h.itemMemo}</p>
-					<br>
+				<table class = "modaltable">
+					<tr>
+					<td>商品名</td>
+					<td>${h.itemName}</td>
+					</tr>
+					<tr>
+					<td>容量</td>
+					<td>${h.itemVolume}${h.dailyUnit}</td>
+					</tr>
+					<tr>
+					<td>使用開始日</td>
+					<td>${h.itemStart}</td>
+					</tr>
+					<tr>
+					<td>使用終了日</td>
+					<td>${h.itemFin}</td>
+					</tr>
+					<tr>
+					<td>備考</td>
+					<td>${h.itemMemo}</td>
+					</tr>
+
+				</table>
+
 				</c:if>
 				</c:forEach>
 
@@ -115,32 +151,57 @@
 
 				<form id="itemEditForm" action="/A-five/ItemEditServlet" method="post">
 				<button type="button" class="batsu" data-izimodal-close="#itemEditModal${g.itemHisId }">×</button>
-					<h4>項目名:${g.dailyName}</h4>
+					<h4 style="padding:10px;">商品内容を編集してください</h4>
 					<hr>
-			        <p>商品名:<input type="text" id="itemName" value="${g.itemName }"  name="itemName">
-			        <input type="button" value="クリア" onclick="clearTextitemName()" />
-			        </p>
+					<table class ="modaltable2">
+					<tr>
+			        <td>商品名</td><td><input type="text" id="itemName" value="${g.itemName }"  name="itemName">
+			        <input type="button" value="クリア" onclick="clearTextitemName()" /></td>
+			        </tr>
 
-			        <p>容量：<input type="text"  id="itemCapacity" value="${g.itemVolume}"  name="itemCapacity" placeholder="数字を入力">
-			        <span>${g.itemUnit}</span>
+			        <tr>
+			        <td>容量</td>
+			        <td>
+			        <input type="text"  id="itemCapacity" value="${g.itemVolume}${g.itemUnit}"  name="itemCapacity" placeholder="数字を入力">
 			        <input type="button" value="クリア" onclick="clearTextitemCapacity()" />
-			        </p>
+			        </td>
+			        </tr>
 
-			        <p>値段：<input type="text" id="itemPrice" value="${g.itemPrice}" name="itemPrice" placeholder="数字を入力">円
-			            <input type="button" value="クリア" onclick="clearTextitemPrice()" />
-			        </p>
+			        <tr>
+			        <td>値段</td>
+			        <td>
+			        <input type="text" id="itemPrice" value="${g.itemPrice}" name="itemPrice" placeholder="数字を入力">円
+			        <input type="button" value="クリア" onclick="clearTextitemPrice()" />
+			        </td>
+			        </tr>
 
-			        <p>使用開始日：<input type="date" value="${g.itemStart}" name="startDate">
-			        </p>
-			        <p>使用終了日：<input type="date" value="${g.itemFin}"  name="endDate">
-			        </p>
+					<tr>
+			        <td>使用開始日</td>
+			        <td>
+			        <input type="date" value="${g.itemStart}" name="startDate">
+			        </td>
+			        </tr>
 
-			        <p>備考：<input type="text" id="itemRemarks" name="itemRemarks" value="${g.itemMemo }">
+			        <tr>
+			        <td>使用終了日</td>
+			        <td>
+			        <input type="date" value="${g.itemFin}"  name="endDate">
+			        </td>
+			        </tr>
+
+					<tr>
+			        <td>備考</td>
+			        <td>
+			        <input type="text" id="itemRemarks" name="itemRemarks" value="${g.itemMemo }">
 			        <input type="button" value="クリア" onclick="clearTextitemRemarks()" />
-			        </p>
+			        </td>
+			        </tr>
+
+			        </table>
+
 			        <p>
-			        <input type="submit" value="更新する">
-			        <button type="button" data-izimodal-open="#itemModal${g.itemHisId }">キャンセル</button>
+			        <input type="submit" value="更新する" class="updatebutton">
+			        <button type="button" data-izimodal-open="#itemModal${g.itemHisId }" class ="cancelbutton">キャンセル</button>
 			        </p>
 			    </form>
 				</div>
@@ -185,31 +246,44 @@
 					<td>${e.hwDue}</td>
 					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
 					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
-					<input type="hidden" id="hwId${status.index}" value="${e.hwId}"></td>
-				</tr>
+					<input type="hidden" id="hwId${status.index}" value="${e.hwId}">
+
 
 			<div id="HWModal${e.hwHisId}" class="iziModal" >
 
 
 			<button type="button" class="batsu" data-izimodal-close="#HWModal${e.hwHisId}">×</button>
-			<h4>${e.hwName}</h4>
+			<h4 style ="padding: 10px;">${e.hwName}</h4>
 			<hr>
-
-			<p>目標頻度:${e.hwFreq}日に一回</p>
-			<p>次回実施日：${e.hwDue}</p>
-			<p>備考:${e.hwMemo}</p>
+			<table class = "modaltable">
+			<tr>
+			<td>目標頻度</td>
+			<td>${e.hwFreq}日に一回</td>
+			</tr>
+			<tr>
+			<td>次回実施日</td>
+			<td>${e.hwDue}</td>
+			</tr>
+			<tr>
+			<td>備考</td>
+			<td>${e.hwMemo}</td>
+			</tr>
+			</table>
 
 			<h2>履歴</h2>
 
+			<table class="modaltable">
 			<c:forEach var="f" items="${hwList}">
 
 			<c:if test="${f.hwId == e.hwId}">
-
-			<p>${f.hwDate}</p>
+			<tr>
+			<td>${f.hwDate}</td>
+			</tr>
 
 
 			</c:if>
 			</c:forEach>
+			</table>
 
 			<br>
 			<br>
@@ -219,9 +293,10 @@
 
 			</div>
 			<div id="HWDeleteModal${e.hwHisId }" class ="iziModal">
-			    <form id="HWDeleteForm">
+<!-- 			    <form id="HWDeleteForm"> -->
 
 		    	<button type="button" class="batsu" data-izimodal-close="#HWDeleteModal${e.hwHisId}">×</button>
+
 		    	<h4>本当にこの家事の予定を削除しますか？</h4>
 				<hr>
 
@@ -234,38 +309,57 @@
 			    <input type="submit"name="SUBMIT" value="はい">
 			    </form>
 			    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}">いいえ</button>
-			    </p>
-		   		</form>
+		   		<!-- </form> -->
 	   		</div>
 
 			<div id="HWEditModal${e.hwHisId }" class ="iziModal">
 		    <form id="HWEditForm">
 
 	    	<button type="button" class="batsu" data-izimodal-close="#HWEditModal${e.hwHisId}">×</button>
-	    	<h4>${e.hwName}</h4>
+	    	<h4 style ="padding:10px;">家事内容を編集してください</h4>
 			<hr>
 
-		    <p>家事項目名：<input type="text" id="HWName" name="HWname" value="${e.hwName }">
+			<table class = "modaltable">
+			<tr>
+		    <td>家事項目名</td>
+		    <td>
+		    <input type="text" id="HWName" name="HWname" value="${e.hwName }">
 		    <input type="button" value="クリア" onclick="clearTextHWName()" />
-		    </p>
+		    </td>
+		    </tr>
 
-		    <p>実施日：<input type="date" id="HWDate" name="HWDate" value="${e.hwDate }" >
-		    </p>
+			<tr>
+		    <td>実施日</td>
+		    <td>
+		    <input type="date" id="HWDate" name="HWDate" value="${e.hwDate }" >
+		    </td>
+		    </tr>
 
-		    <p>頻度：<input type="text" id="HWFreq" name="HWFreq" value="${e.hwFreq }日">
-		        <input type="button" value="クリア" onclick="clearTextHWFreq()" />
-		    </p>
+			<tr>
+		    <td>頻度</td>
+		    <td>
+		    <input type="text" id="HWFreq" name="HWFreq" value="${e.hwFreq }日">
+		    <input type="button" value="クリア" onclick="clearTextHWFreq()" />
+		    </td>
+		    </tr>
 
-		    <p>メモ：<input type="text" id="HWMemo"  name="HWMemo" value="${e.hwMemo}" placeholder= "メモ（100字まで）" max="100">
+			<tr>
+		    <td>メモ</td>
+		    <td>
+		    <input type="text" id="HWMemo"  name="HWMemo" value="${e.hwMemo}" placeholder= "メモ（100字まで）" max="100">
 		    <input type="button" value="クリア" onclick="clearTextHWMemo()" />
-		    </p>
-		    <p>
-		    <input type="submit" value="更新する">
-		    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}">キャンセル</button>
-		    </p>
-	    </form>
-    </div>
+		    </td>
+		    </tr>
 
+		    </table>
+		    <input type="submit" value="更新する" class="updatebutton">
+		    <button type="button" data-izimodal-open="#HWModal${e.hwHisId}" class="cancelbutton">キャンセル</button>
+
+
+				    </form>
+			    </div>
+			</td>
+			</tr>
 			</c:if>
 
 
