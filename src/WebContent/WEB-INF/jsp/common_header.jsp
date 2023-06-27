@@ -11,7 +11,7 @@
    <div class="d-flex flex-row">
 		  <!-- ロゴ -->
 		  <div id="logo">
-		 <h1><img src='../img/HW_icon.png.jpg'  width="100" height="100" alt='ロゴ'></h1>
+		 <h1><img src='./img/logo.jpg'  width="90" height="90" alt='ロゴ'></h1>
 		  </div>
 
 		  <!-- メニュー -->

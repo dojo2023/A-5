@@ -327,7 +327,7 @@ function empCheck(input, hasEmptyInput) {
 
 
 // 家事編集フォームのinputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
-const hwEditForm = document.getElementById("hwEditForm");
+/*const hwEditForm = document.getElementById("hwEditForm");
 hwEditForm.addEventListener('submit', function(event) {
     event.preventDefault();
     const inputs = hwEditForm.querySelectorAll('input:not([type="submit"]), select');
@@ -340,5 +340,5 @@ hwEditForm.addEventListener('submit', function(event) {
         	hwEditForm.submit();
         }
     }
-})
+})*/
 }
