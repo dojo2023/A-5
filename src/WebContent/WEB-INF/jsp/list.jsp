@@ -424,7 +424,7 @@
 </div>
 <div class="plusBtnWrapper">
 	<button id="plusBtn" class="plusBtn" >+</button>
-	<button id='hiddenBtn' type="hidden" data-izimodal-open="#tabs">+</button>
+	<button id='hiddenBtn' type="hidden" data-izimodal-open="#tabs"></button>
 	<script type="text/javascript">
 		const plusBtn = document.getElementById('plusBtn');
 		const hiddenBtn = document.getElementById('hiddenBtn');

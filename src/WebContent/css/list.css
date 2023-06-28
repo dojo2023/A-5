@@ -6,7 +6,7 @@
     .tabArea label:hover{opacity:0.5;}
     .tabArea label:first-child{border-radius: 15px 0 0 0}
     .tabArea label:last-child{border-radius: 0 15px 0 0}
-    .panelArea{height: 100vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 0 0 15px 15px; overflow: auto;}
+    .panelArea{height: 100vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 0 0 15px 15px; overflow-y: auto;}
     .panelArea::-webkit-scrollbar {width: 10px;}
     .panelArea::-webkit-scrollbar-track {background-color: rgba(48, 64, 38, 0.5);;}
     .panelArea::-webkit-scrollbar-thumb {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7);}
@@ -97,7 +97,7 @@ body {
 
 .tableWrap {
   margin-inline: auto;
-  overflow-x: auto; /* tableタグのはみ出た要素を隠す */
+  overflow-y: auto; /* tableタグのはみ出た要素を隠す */
   white-space: nowrap; /* テキストの折り返しなし */
 }
 .table {

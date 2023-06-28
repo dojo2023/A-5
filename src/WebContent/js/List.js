@@ -8,7 +8,6 @@
 	        });
 
 
-
 	function toggleHwFlag(index) {
 		alert('非同期');
 	    const hwHisId = document.getElementById('hwHisId'+index).value;
