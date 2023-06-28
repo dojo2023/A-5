@@ -44,13 +44,6 @@ public class CommonServlet extends HttpServlet {
 		request.setAttribute("today", today);
 		request.setAttribute("tom", tom);
 
-		for(HW h : hwList) {
-			System.out.println(h.getHwDue());
-			System.out.println(today+"今日");
-			System.out.println(tom+"明日");
-		}
-
-
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);

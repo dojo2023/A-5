@@ -27,13 +27,16 @@
 	<div class="calender">
     	<!-- カレンダー関連 -->
 	    <!-- xxxx年xx月を表示 -->
-	    <div class="tuki">
-	    <h1 id="header"></h1>
-	    </div>
+	    <!-- <div class="tuki">
+	    <h2 id="header"></h2>
+	    </div> -->
 
 	    <!-- ボタンクリックで月移動 -->
 	    <div id="nextPrevButton">
 	        <button id="prev" onclick="prev()">＜</button>
+	        <div class="tuki">
+		    <h2 id="header"></h2>
+		    </div>
 	        <button id="next" onclick="next()">＞</button>
 	    </div>
 
@@ -119,7 +122,7 @@
 	                    calendar += "<td>" + count + "<br>"
 	                    //+"<a href=''>"+year+"</a>"
 	                     //アイコン表示
-						+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+						+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='15' height='15' alt='家事'></a>"
 	                    +"</td>";
 
 	                }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.HWHisDao;
 import dao.ItemHisDao;
+import dao.TaskDao;
 import model.HW;
 import model.Item;
 import model.Useful;
@@ -45,7 +46,11 @@ public class ListServlet extends HttpServlet {
 
 		HWHisDao hwHis = new HWHisDao();
 
-		List<HW> hwList = hwHis.select();
+		/*List<HW> hwList = hwHis.select();*/
+
+		TaskDao Task = new TaskDao();
+
+		List<HW> hwList = Task.select();
 
 
 		// 検索結果をリクエストスコープに格納する
@@ -55,6 +60,7 @@ public class ListServlet extends HttpServlet {
 		Date today = useful.getDate();
 		Date tom = useful.getDatePlus();
 
+		request.setAttribute("hwList", hwList);
 		request.setAttribute("today", today);
 		request.setAttribute("tom", tom);
 

@@ -33,10 +33,9 @@ public class HomeServlet extends HttpServlet {
 			response.sendRedirect("/A-five/LoginServlet");
 			return;
 		}*/
-		String name = "家事項目１";
+
 		//リクエストスコープに保存する奴(コピペ)
 		//requestスコープにセットします("この名前で", このデータを)
-		request.setAttribute("name", name);
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -54,11 +53,6 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("today", today);
 		request.setAttribute("tom", tom);
 
-		for(HW h : hwList) {
-			System.out.println(h.getHwDue());
-			System.out.println(today+"今日");
-			System.out.println(tom+"明日");
-		}
 
 		// ホームページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");

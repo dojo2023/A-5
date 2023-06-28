@@ -39,8 +39,8 @@ public class TaskDao {
 				 HW hw = new HW();
 				 hw.setHwName(rs.getString("HW_NAME"));
 				 hw.setUserId(rs.getInt("USER_ID"));
-//				 hw.setHwDue(rs.getDate("HW_DUE"));
-				 hw.setHwDue(new java.util.Date(rs.getDate("HW_DUE").getTime()));
+				 hw.setHwDue(rs.getDate("HW_DUE"));
+/* hw.setHwDue(new java.util.Date(rs.getDate("HW_DUE").getTime()));*/
 				 hwList.add(hw);
 
 			}
