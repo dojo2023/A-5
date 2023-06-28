@@ -1,4 +1,9 @@
 @charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
 /* body{
     margin: 0 0 0 0;		マージンなし（後で個別に設定）
@@ -8,12 +13,18 @@
 
 } */
 
-/* .canvas {
+.canvasWrapper {
   position: absolute;
   top: 0px;
   width: 500px;
   height: 500px;
-} */
+}
+#canvasWrapper {
+  position: absolute;
+  top: 0px;
+  width: 500px;
+  height: 500px;
+}
 
 canvas#stage {
   position: absolute;

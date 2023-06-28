@@ -6,13 +6,14 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet" href="/A-five/css/analysis.css">
 </head>
 
 <body>
 		<%@ include file="common_header.jsp" %>
 
 		<%@ include file="common_list.jsp" %>
-<div class="canvas" style="position: absolute; top: 0px; width: 500px; height: 500px;">
+<div class="canvasWrapper" id="canvasWrapper">
 <canvas id="stage"></canvas>
 </div>
 
