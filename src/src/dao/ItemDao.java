@@ -28,7 +28,7 @@ public class ItemDao {
 				String sql = "insert into items (user_id, daily_name, daily_unit, item_name, item_price, item_volume, item_freq, item_memo) values (?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				// SQL文を完成させる
-
+				System.out.println(item.getItemFreq());
 
 				pStmt.setInt(1, item.getUserId());
 				pStmt.setString(2, item.getDailyName());

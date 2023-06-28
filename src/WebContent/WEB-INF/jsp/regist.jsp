@@ -46,7 +46,7 @@
         <!-- 家事登録フォーム-->
         <div id="tabs2">
             <form id="hwRegistForm" action="/A-five/RegistServlet" method="post">
-                <input name="hwName" type="text" placeholder="家事項目" list="hwSelect">
+                <input id="hwName" name="hwName" type="text" placeholder="家事項目" list="hwSelect">
                 <datalist id="hwSelect">
                 	<c:forEach var="hwName" items="${hwNameList}">
                 		<option>${hwName}</option>

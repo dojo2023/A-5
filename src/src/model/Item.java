@@ -33,6 +33,7 @@ public class Item {
 		this.itemPrice = itemPrice;
 		this.itemVolume = itemVolume;
 		this.itemMemo = itemMemo;
+		this.itemFreq = itemFreq;
 
 	}
 

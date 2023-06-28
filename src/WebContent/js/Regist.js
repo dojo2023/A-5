@@ -144,6 +144,43 @@
         	const flagInput = document.getElementById('existFlag');
         	flagInput.value = existFlag;
 		}
+        //既存の家事は登録できない
+        const hwNameInput = document.getElementById('hwName');
+        hwNameInput.addEventListener('blur', function(){
+			let existFlag = false;
+			hwExixtCheck(existFlag);
+			let error = hwNameInput.nextElementSibling;
+			if (existFlag) {
+				if (error.classList.contains('errorMessage')) {
+                    error.textContent = '既存の日用品';
+                } else {
+                    error = document.createElement('div');
+                    error.classList.add('errorMessage');
+                    error.textContent = '既存の日用品';
+                    //親要素を取得。次の要素の前にerrorを入れる
+                    input.parentNode.insertBefore(error, input.nextElementSibling);
+                }
+			} else {
+                if (error && error.classList.contains('errorMessage')) {
+                    error.remove();
+                }
+            }
+        });
+        function hwExixtCheck(existFlag) {
+        	const hwSelect = document.getElementById('hwSelect');
+        	const hwName = document.getElementById('hwName');
+        	const inputValue = hwName.value;
+        	const options = hwSelect.getElementsByTagName('option');
+        	for (let i = 0; i < options.length; i++) {
+                if (options[i].value === inputValue) {
+                	existFlag = true;
+                    break;
+                }
+            }
+        	/*const flagInput = document.getElementById('existFlag');
+        	flagInput.value = existFlag;*/
+		}
+
 
 
         // mappingDataにはこんなマップデータが入ってる
