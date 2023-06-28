@@ -19,12 +19,12 @@
 
 <script>
 var mydata = {
-		  labels: ["１月", "２月", "３月", "４月", "５月", "６月", "７月"],
+		  labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
 		  datasets: [
 		    {
 		      label: '月合計',
 		      hoverBackgroundColor: "rgba(255,99,132,0.3)",
-		      data: [0, 0, 0, 0, 0, 0, 1500],
+		      data: [350, 1040, 530, 2200, 220, 1300, 1500, 628, 5300, 700, 850, 3240],
 		    }
 		  ]
 		};
@@ -38,8 +38,8 @@ var mydata = {
 		};
 
 		var canvas = document.getElementById('stage');
-		canvas.width = 500;
-		canvas.height = 500;
+		canvas.width = 150;
+		canvas.height = 80;
 
 		var chart = new Chart(canvas, {
 
