@@ -269,7 +269,7 @@
 			<c:if test="${!e.hwFlag}">
 				<tr>
 					<td>${e.hwName}</td>
-					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" >詳細</button></td>
+					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" class="listDetailBtn">詳細</button></td>
 					<td>${e.hwFreq}日</td>
 					<td>${e.hwDue}</td>
 					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
@@ -305,7 +305,7 @@
 
 			<c:if test="${f.hwId == e.hwId}">
 			<tr>
-			<td>${f.hwDate}</td>
+			<td>${f.hwDue}</td>
 			</tr>
 
 
