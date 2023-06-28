@@ -42,8 +42,8 @@
 						<th></th>
 						<th>予測終了日</th>
 						<th>日数</th>
-						<th>補充</th>
 						<th>使用終了</th>
+						<th></th>
 					</tr>
 				</thead>
 			<c:forEach var="g" items="${itemlist}" varStatus ="status">
@@ -57,7 +57,7 @@
 					<td>${g.itemDue}</td>
 					<td>あと日</td>
 					<td><input id= "itemCheck${status.index}" type="checkbox" onchange="toggleItemFlag(${status.index})" class="toggleButton"></td>
-					<td><input type="checkbox">
+					<td>
 						<input type="hidden" id="itemHisId${status.index}" value="${g.itemHisId}">
 						<input type="hidden" id="itemId${status.index}" value="${g.itemId}">
 						<button id="itemRestockButton${status.index}" data-izimodal-open="#itemModalRestock${g.itemHisId}" style="display: none;"></button>
@@ -250,6 +250,7 @@
 
 		<div id="HWPanel" class="tabPanel">
 			<table class="table">
+				<thead>
 				<tr>
 					<th>家事項目</th>
 					<th></th>
@@ -257,7 +258,7 @@
 					<th>期限</th>
 					<th>完了</th>
 				</tr>
-
+				</thead>
 
 
 
@@ -272,7 +273,7 @@
 					<td><button type="submit" data-izimodal-open="#HWModal${e.hwHisId}" class="listDetailBtn">詳細</button></td>
 					<td>${e.hwFreq}日</td>
 					<td>${e.hwDue}</td>
-					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})">
+					<td><input type="checkbox" id="hwCheck${status.index}" onchange="toggleHwFlag(${status.index})" class="toggleButton">
 					<input type="hidden" id="hwHisId${status.index}" value="${e.hwHisId}">
 					<input type="hidden" id="hwId${status.index}" value="${e.hwId}">
 
