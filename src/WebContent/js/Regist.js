@@ -4,7 +4,7 @@
             $( "#tabs" ).tabs();
         });
 
-      /*  // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
+      // 数字を入力系のinputタグで1未満が入力されたらアラートでエラー表示
         let numberInputs = document.querySelectorAll('input[name=itemPrice], input[name=itemVolume], input[name=hwFreq], input[name=itemPeriod], input[name=itemCapacity]');
         // 値段・容量・目標頻度の入力欄をforeach
         numberInputs.forEach(function(input){
@@ -87,7 +87,7 @@
             }
         })
 
-		// 日用品編集フォームのinputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
+		/*// 日用品編集フォームのinputタグ(display=noneのもの以外)の中身が空のまま送信ボタンが押されたら、各inputタグの下にエラー表示
         const itemEditForm = document.getElementById("itemEditForm");
         itemEditForm.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -101,7 +101,7 @@
                 	itemEditForm.submit();
                 }
             }
-        })
+        })*/
 
 
         // 空チェック。booleanを返す
@@ -125,7 +125,7 @@
                 }
             }
             return hasEmptyInput;
-        }*/
+        }
 
         //既存の日用品項目を選択したかどうかをチェックし、フラグを使ってサーブレットで判定
         function dailyExixtCheck() {

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.HWDao;
 import dao.HWHisDao;
@@ -70,8 +71,8 @@ public class RegistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//ユーザーIDは常に必要
-		//HttpSession session = request.getSession();
-		//session.getAttribute('userId');
+		HttpSession session = request.getSession();
+		int userId = (int) session.getAttribute("userId");
 
 		request.setCharacterEncoding("UTF-8");
 		//ユーザーIDは必ず取得
@@ -81,7 +82,6 @@ public class RegistServlet extends HttpServlet {
 		Calendar calendar = Calendar.getInstance();
 		//日用品の登録処理
 		if (submitBtn != null && submitBtn.equals("itemSubmit")) {
-			int userId = 1;//とりあえず「１」にしている
 			String dailyName = request.getParameter("dailyName");
 			String itemName = request.getParameter("itemName");
 			int itemPrice = Integer.parseInt(request.getParameter("itemPrice"));
@@ -105,11 +105,12 @@ public class RegistServlet extends HttpServlet {
 			// 登録処理
 			ItemDao IDao = new ItemDao();
 			ItemHisDao IHDao = new ItemHisDao();
+			System.out.println("予測日数" + itemFreq);
 			if (IDao.insert(new Item(userId, dailyName, dailyUnit, itemName, itemPrice, itemVolume, itemMemo, itemFreq))) {
-				System.out.println(itemFreq);
+				System.out.println("予測日数(insert後)" + itemFreq);
 				//新規の日用品はそのまま使用開始
 				if (!itemExsitFlag) {
-					int itemId = IDao.getMaxItemId();
+					int itemId = IDao.getMaxItemId(userId);
 					if(IHDao.insertItemHis(itemId, itemStart ,itemDue)) {
 						result = true;
 					};
