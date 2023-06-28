@@ -69,7 +69,7 @@ public class ItemDao {
 			return result;
 		}
 		//登録時、履歴テーブルに新規レコードを挿入する用のitem_idを取得
-		public int getMaxItemId() {
+		public int getMaxItemId(int userId) {
 			Connection conn = null;
 			int maxItemId = 0;
 
@@ -82,7 +82,7 @@ public class ItemDao {
 				String sql = "SELECT MAX(item_id) AS maxId FROM items WHERE user_id = ? ";
 				PreparedStatement  pStmt = conn.prepareStatement(sql);
 				//user_idの？に1を入れる
-				pStmt.setString(1, "1");
+				pStmt.setInt(1, userId);
 
 
 				// SQL文を実行し、結果表を取得する
