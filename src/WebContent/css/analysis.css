@@ -1,16 +1,22 @@
 @charset "UTF-8";
 
-body{
-    margin: 0 0 0 0;		/* マージンなし（後で個別に設定） */
-    padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
+/* body{
+    margin: 0 0 0 0;		マージンなし（後で個別に設定）
+    padding: 0 0 0 0;		パディングなし（後で個別に設定）
     font-size: 16px;
     text-align: center;
 
+} */
+
+/* .canvas {
+  position: absolute;
+  top: 0px;
+  width: 500px;
+  height: 500px;
+} */
+
+canvas#stage {
+  position: absolute;
+  top: 10px;
 }
 
-
-.canvas{
-	position: relative;
-	top: 0;
-	left: 500px;
-}

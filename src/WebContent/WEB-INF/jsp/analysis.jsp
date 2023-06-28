@@ -12,7 +12,7 @@
 		<%@ include file="common_header.jsp" %>
 
 		<%@ include file="common_list.jsp" %>
-<div class="canvas" style="width: 500px; height: 500px;">
+<div class="canvas" style="position: absolute; top: 0px; width: 500px; height: 500px;">
 <canvas id="stage"></canvas>
 </div>
 
