@@ -1,40 +1,51 @@
 @charset "UTF-8";
-	.tabWrap{width: 100%; height: 80vh; margin:0; position: absoulte; top: 0%; left: 0;}
+	.tabWrap{width: 100%; height: 100%; margin:0; position: absoulte; top: 0%; left: 0;}
     input[type="radio"]{display:none;}
-    .tabArea{font-size:0; margin:0;}
+    .tabArea{font-size:0; margin:0; height: 10%; overflow: hidden;}
     .tabArea label{width:50%; margin:0; display:inline-block; padding:12px 0; color:#999; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
     .tabArea label:hover{opacity:0.5;}
     .tabArea label:first-child{border-radius: 15px 0 0 0}
     .tabArea label:last-child{border-radius: 0 15px 0 0}
-    .panelArea{height: 100vh; background-color: rgba(255, 255, 255, 0.3); border-radius: 0 0 15px 15px; overflow-y: auto;}
+    .panelArea{height: 90%; background-color: rgba(255, 255, 255, 0.3); border-radius: 0 0 15px 15px; overflow-y: auto;}
     .panelArea::-webkit-scrollbar {width: 10px;}
-    .panelArea::-webkit-scrollbar-track {background-color: rgba(48, 64, 38, 0.5);;}
-    .panelArea::-webkit-scrollbar-thumb {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7);}
-    .tabPanel{width:100%; padding: 0; display:none;}
+    .panelArea::-webkit-scrollbar-track {background-color: rgba(48, 64, 38, 0.5); border-radius: 0 0 10px 0;}
+    .panelArea::-webkit-scrollbar-thumb {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7); border-radius: 0 0 10px 0;}
+    .tabPanel{width:100%; height: 100%; padding: 0; display:none;}
     .tabPanel p{font-size:14px; letter-spacing:1px; text-align:center;}
     #itemTab:checked ~ .tabArea .itemTabLabel{background:#fff; color:#000;}
     #itemTab:checked ~ .panelArea #itemPanel{display:block;}
     #HWTab:checked ~ .tabArea .HWTabLabel{background:#fff; color:#000;}
     #HWTab:checked ~ .panelArea #HWPanel{display:block;}
-
+.iziModal .ui-tabs .ui-corner-all .ui-widget .ui-widget-content .hasShadow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+html{
+	width: 100vw;
+	height: 100vh;
+}
+html::-webkit-scrollbar {
+  display: none; /*Google Chrome、Safari、Microsoft Edge対応のスクロールバー非表示コード*/
+}
 body {
 	background-color: #cecece;
 	position: relative;
-	width: 100vw;
-	height: 100vh;
 }
 
 .listWrapper {
 	max-width: 100vw;
-	width: 800px;
+	width: 68.5%;
+	height: 75%;
 	max-height: 90vh;
 	position: absolute;
-	top: 20%;
+	top: 18.5%;
 	left: 30%;
 }
 
@@ -101,11 +112,11 @@ body {
   white-space: nowrap; /* テキストの折り返しなし */
 }
 .table {
-  width: auto;;
+  width: 100%;
+  height: 100px;
   white-space: nowrap;
   border-spacing: 0 10px;
   padding: 20px;
-  height: 80vh;
 }
 td:first-child,
 th:first-child {
