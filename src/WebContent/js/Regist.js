@@ -145,7 +145,7 @@
         	flagInput.value = existFlag;
 		}
         //既存の家事は登録できない
-        const hwNameInput = document.getElementById('hwName');
+        /*const hwNameInput = document.getElementById('hwName');
         hwNameInput.addEventListener('blur', function(){
 			let existFlag = false;
 			hwExixtCheck(existFlag);
@@ -165,7 +165,7 @@
                     error.remove();
                 }
             }
-        });
+        });*/
         function hwExixtCheck(existFlag) {
         	const hwSelect = document.getElementById('hwSelect');
         	const hwName = document.getElementById('hwName');

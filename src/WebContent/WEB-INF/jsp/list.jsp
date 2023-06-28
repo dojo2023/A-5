@@ -12,8 +12,8 @@
 <link href="/A-five/css/list.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/A-five/css/regist.css">
+<link rel="stylesheet" href="/A-five/css/tabsJquery-ui.css">
 
 </head>
 <body>
@@ -454,7 +454,7 @@
 
                 </datalist>
                 <input name="itemName" type="text" placeholder="商品名" >
-                <input name="itemPrice" type="text" placeholder="値段">
+                <input name="itemPrice" type="text" placeholder="値段"><span>円</span>
                 <input name="itemVolume" type="text" placeholder="容量">
                 <input id="dailyUnit" name="dailyUnit" type="text" placeholder="単位" list="unitSelect">
                 <datalist id="unitSelect" name="unitSelect">
@@ -462,7 +462,7 @@
                 </datalist>
                 <input name="itemMemo" type="text" placeholder="メモ(100字まで)" max="100">
                 <input name="itemStart" type="date" placeholder="使用開始日">
-                <input name="itemFreq" type="text" placeholder="予測使用日数">
+                <input name="itemFreq" type="text" placeholder="予測使用日数"><span>日</span>
                 <input name="regist" type="hidden" value="itemSubmit">
                 <input id="existFlag" name="existFlag" type="hidden" >
                 <button type="submit">登録</button>
@@ -493,6 +493,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
 <script type="text/javascript" src="/A-five/js/List.js"></script>
+<script type="text/javascript" src="/A-five/js/Regist.js"></script>
 <!--  <script src="/A-five/js/Regist.js"></script> -->
 </body>
 </html>

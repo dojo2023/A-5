@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+.ui-tabs-tab .ui-corner-top .ui-state-default .ui-tab .ui-tabs-active .ui-state-active {
+	width: 50%;
+}
         #tabs{
         width: 1100px;
         height: auto;/*幅*/
@@ -19,12 +21,12 @@
         font-size: 14px;
         }
         #tabs form {/*formの四角の中身に対する変更*/
-        z-index: 1;
+
         background: #FFFFFF;
         max-width: 100%;/*幅*/
         max-height: auto;/*高さ*/
-        margin: 0 auto 100px;
-        padding: 35px;/*padding..テキストと四角の間*/
+        margin: 0 auto;
+        padding: 25px;/*padding..テキストと四角の間*/
         text-align: left;/*テキスト中央ぞろえ*/
         /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);影 */
 	    }
@@ -32,7 +34,7 @@
         font-family: "Roboto", sans-serif;
         outline: 0;
         background: #f2f2f2;
-        width: 100%;
+        width: 45%;
         border: 10px;
         margin: 5px;
         padding: 6px ;
@@ -40,11 +42,23 @@
         font-size: 14px;
         }
          /*inputタグの、name属性が" "のものに適応*/
-         #tabs form input[name="hwFreq"]{
-        position: relative;
-            left: -55px;
-            /* right: 65px; */
-            width: 92%;
+         /* #tabs form input[name="dailyName"] {
+         	margin: 0 25%;
+         } */
+         #tabs form input[name="itemPrice"]{
+            width: 42%;
+        }
+         #tabs form input[name="itemVolume"]{
+            width: 30%;
+        }
+         #tabs form input[name="dailyUnit"]{
+            width: 12%;
+        }
+        #tabs form input[name="itemMemo"]{
+            width: 92.5%;
+        }
+         #tabs form input[name="itemFreq"]{
+			width: 40%;
         }
 
         #tabs form select{
@@ -63,9 +77,9 @@
         #tabs form button{
         font-family: "Roboto", sans-serif;
   		outline: 0;
-        margin-left: 900px;
   		background: #4CAF50;
-  		width: 70px;
+
+  		width: 100px;
         height: 30px;
   		border: 0;
   		padding: 5px;
@@ -75,6 +89,9 @@
   		-webkit-transition: all 0.3 ease;
   		transition: all 0.3 ease;
   		cursor: pointer;
+  		border-radius: 15px;
+  		margin: 5% 0 0 47%;
+  		transform: translateX(-50%);
         }
 
         #tabs form .errorMessage{
