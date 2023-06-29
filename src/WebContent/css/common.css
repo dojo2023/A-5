@@ -198,6 +198,9 @@ body{	/* パディングなし（後で個別に設定） */
 	z-index: 4;
 	position: relative;
 	transition: 1.25s all ease .1s;
+	background-color: rgba(48, 64, 38, 0.9);
+	color: white;
+	font-size: 32px;
 }
 #hiddenBtn {
 	display: none;

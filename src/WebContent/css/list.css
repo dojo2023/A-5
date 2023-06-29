@@ -79,16 +79,15 @@ body {
 .updatebutton,
 .editButton{
 	position:fixed;
-	top:365px;
-	left:240px;
+	bottom: 5px;
+	left:35%;
 }
 
 .cancelbutton,
 .deleteButton{
 	position:fixed;
-	top:365px;
-	left:330px;
-
+	bottom: 5px;
+	left:50%;
 }
 
 
@@ -172,7 +171,7 @@ tbody {
 .toggleButton:checked:before {
     transform: translateX(20px);
 }
-.listDetailBtn {
+.listDetailBtn, .updatebutton, .editButton, .deleteButton {
 	display: inline-block;
   padding: 7px 20px;
   border-radius: 25px;
@@ -182,7 +181,7 @@ tbody {
   background-color: rgba(48, 64, 38, 0.9);
   transition: .4s;
 }
-.listDetailBtn:hover {
+.listDetailBtn:hover, .updatebutton:hover, .editButton:hover, .deleteButton:hover {
 	background-color: rgba(48, 64, 38, 0.5);
 	border: 1px solid #fff;
 }
@@ -190,6 +189,7 @@ tbody {
 .iziModal-wrap .iziModal-content{
 	max-height:400px;
 	min-height:400px;
+	background: #cecece;
 }
 
 .iziModal-content .modaltable{
@@ -199,9 +199,14 @@ tbody {
   margin-bottom:20px;
 	margin-left:auto;
 	margin-right:auto;
+	background-color: rgba(255, 255, 255, 0.5);
 	padding:30px 10px;
-	border: outset 6px rgb(0 0 0 / 19%);
-	border-radius: 10px;
+	/* border: outset 6px rgb(0 0 0 / 19%); */
+	border-radius: 20px;
+}
+
+.iziModal-content .modaltable td{
+  border: none;
 }
 
 .iziModal-content .modaltable2{
@@ -217,9 +222,10 @@ tbody {
 }
 
 .modaltable td {
-  font-size: 10px;
-  padding: 10px 60px;
-  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 15px;
+  padding: 5px 50px;
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  border: none;
 }
 
 .modaltable2 td {

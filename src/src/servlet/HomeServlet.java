@@ -32,6 +32,7 @@ public class HomeServlet extends HttpServlet {
 		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/A-five/LoginServlet");
 			return;
+			
 		}*/
 
 		//リクエストスコープに保存する奴(コピペ)

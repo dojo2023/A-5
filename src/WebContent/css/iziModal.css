@@ -3,9 +3,29 @@
 * https://izimodal.marcelodolza.com
 * by Marcelo Dolza.
 */
+.itemModalStockContent {
+	padding: 20px;
+}
+.itemModalStockContent  h4{
+    width: 20%;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
+}
+.itemModalStockContent  label{
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-top: 50px;
+
+}
+.itemModalStockContent  label:checked{
+    background-color: gray;
+
+}
 .iziModal .modaltable{
-	  border: 2px solid black;
+	  /* border: 2px solid black; */
 }
 
 .iziModal {
