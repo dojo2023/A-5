@@ -47,7 +47,17 @@
 	    <!-- カレンダー関連ここまで -->
 	</div>
 </div>
-
+<div class="plusBtnWrapper">
+	<button id="plusBtn" class="plusBtn" >+</button>
+	<button id='hiddenBtn' type="hidden" data-izimodal-open="#tabs"></button>
+	<script type="text/javascript">
+		const plusBtn = document.getElementById('plusBtn');
+		const hiddenBtn = document.getElementById('hiddenBtn');
+		plusBtn.addEventListener('click', function() {
+			hiddenBtn.click();
+		})
+	</script>
+</div>
 
 
 	<script>
@@ -116,14 +126,22 @@
 	                if(year == today.getFullYear()
 	                  && month == (today.getMonth())
 	                  && count == today.getDate()){
-	                    calendar += "<td class='today'>" + count + "</td>";
+	                    calendar += "<td class='today'><h5>" + count + "</h5></td>";
 	                } else {
-						//表示したい項目がある場合は、ここでリンクを設定する
-	                    calendar += "<td>" + count + "<br>"
-	                    //+"<a href=''>"+year+"</a>"
-	                     //アイコン表示
-						+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='15' height='15' alt='家事'></a>"
-	                    +"</td>";
+	                	if (count === 3) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else {
+							//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+		                    +"</h5></td>";
+						}
 
 	                }
 	            }

@@ -433,7 +433,6 @@
 			hiddenBtn.click();
 		})
 	</script>
-
 </div>
 <!-- <div id="formWrapper" class="iziModal"> -->
 	<div id="tabs" class="iziModal">
