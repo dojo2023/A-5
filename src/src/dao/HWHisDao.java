@@ -31,7 +31,7 @@ public class HWHisDao {
 
             // 結果表をコレクションにコピーする
 			 while (rs.next()) {
-			    System.out.println(rs.getString("HW_NAME") + "完了");
+					/*System.out.println(rs.getString("HW_NAME") + "完了");*/
 			    HW hw = new HW();
 			    hw.setHwId(rs.getInt("HW_ID"));
 			    hw.setUserId(rs.getInt("USER_ID"));

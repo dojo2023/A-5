@@ -88,7 +88,7 @@ public class AjaxServlet extends HttpServlet {
 			boolean itemFlag = strItemFlag.equals("1");
 			int itemHisId = Integer.parseInt(request.getParameter("itemHisId"));
 			int itemId = Integer.parseInt(request.getParameter("itemId"));
-			System.out.println(itemId);
+			System.out.println("日用品ID：" + itemId + "のデータが送信されました");
 			String strRestart = request.getParameter("restart");
 			boolean restart = strRestart.equals("true");
 

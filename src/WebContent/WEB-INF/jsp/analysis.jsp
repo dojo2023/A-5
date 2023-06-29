@@ -38,8 +38,8 @@ var mydata = {
 		};
 
 		var canvas = document.getElementById('stage');
-		canvas.width = 150;
-		canvas.height = 80;
+		canvas.width = 130;
+		canvas.height = 60;
 
 		var chart = new Chart(canvas, {
 

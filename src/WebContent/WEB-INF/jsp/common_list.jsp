@@ -36,15 +36,14 @@
 
 		   <div id="todayTask" class="tasklist">
 		  	<h3>今日のタスク</h3>
-		  		<%-- <c:forEach var="s" items="${hwList}">
+		  		<c:forEach var="s" items="${hwList}">
 		  			<script type="text/javascript">
 		  				console.log('${today}');
 		  			</script>
 		  			<c:if test="${s.hwDue.equals(today)}">
 		  			<p>${s.hwName}</p>
 		  			</c:if>
-		  		</c:forEach> --%>
-		  	<p>アイロンがけ</p>
+		  		</c:forEach>
 		  </div>
 
 		  <div id="trTask" class="tasklist">
@@ -61,8 +60,9 @@
 
 		  <div id="itemTask" class="tasklist">
 			<h3>今週の購入品</h3>
-			<p>香水</p>
+			<p>ティッシュ</p>
 			<p>化粧水</p>
+			<p>日焼け止め</p>
 		  </div>
 		</div>
 	   	</div>

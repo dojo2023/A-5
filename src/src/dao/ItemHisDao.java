@@ -30,7 +30,7 @@ public class ItemHisDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");
+				/*System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");*/
 				Item item = new Item();
 				item.setItemId(rs.getInt("ITEM_ID"));
 				item.setUserId(rs.getInt("USER_ID"));
@@ -202,7 +202,7 @@ public class ItemHisDao {
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");
+				/*System.out.println(rs.getString("ITEM_NAME")+"aaaaaaaa");*/
 				Item item = new Item();
 				item.setItemId(rs.getInt("ITEM_ID"));
 				item.setUserId(rs.getInt("USER_ID"));

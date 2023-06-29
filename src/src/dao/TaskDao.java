@@ -25,7 +25,7 @@ public class TaskDao {
 					+ " WHERE hw_flag=? "
 //					+ " AND his.hw_due < CURDATE()"
 					+ " order by his.hw_due ";
-			System.out.println(sql+"←TaskDaoのselect文");
+			/*System.out.println(sql+"←TaskDaoのselect文");*/
         	PreparedStatement pStmt = conn.prepareStatement(sql);
 
         	pStmt.setBoolean(1, false);

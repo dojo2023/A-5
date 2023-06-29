@@ -5,6 +5,9 @@
 	box-sizing: border-box;
 }
 
+html::-webkit-scrollbar {
+  display: none; /*Google Chrome、Safari、Microsoft Edge対応のスクロールバー非表示コード*/
+}
 body{
     background: #ccc;
     font-size: 16px;
@@ -15,12 +18,13 @@ body{
 
 
 .canvasWrapper {
-	background: rgba(255, 255, 255, 0.5);
-	border-radius: 20px;
 	position: absolute;
-	top: 130px;
-	left: 350px;
-	width: 750px;
+	width: 70%;
+	height: 75%;
+	top: 22%;
+	right: 2%;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 20px;
 }
 
 

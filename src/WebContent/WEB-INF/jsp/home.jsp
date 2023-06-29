@@ -126,7 +126,9 @@
 	                if(year == today.getFullYear()
 	                  && month == (today.getMonth())
 	                  && count == today.getDate()){
-	                    calendar += "<td class='today'><h5>" + count + "</h5></td>";
+	                    calendar += "<td class='today'><h5>" + count + "</br>"
+	                    + "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+	                    +"</h5></td>";
 	                } else {
 	                	if (count === 3) {
 	                		//表示したい項目がある場合は、ここでリンクを設定する
@@ -135,7 +137,112 @@
 		                     //アイコン表示
 							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
 		                    +"</h5></td>";
-						} else {
+						} else if (count === 4) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else if (count === 7) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else if (count === 8) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else if (count === 9) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else if (count === 14) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						} else if (count === 16) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 17) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 20) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 22) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 23) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 25) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 26) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 28) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 29) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else if (count === 30) {
+	                		//表示したい項目がある場合は、ここでリンクを設定する
+		                    calendar += "<td><h5>" + count + "<br>"
+		                    //+"<a href=''>"+year+"</a>"
+		                     //アイコン表示
+							+ "<a href='/A-five/src/HomeServlet'><img src='./img/HW_icon.png' width='20' height='20' alt='家事'></a>"
+		                    +"</h5></td>";
+						}else {
 							//表示したい項目がある場合は、ここでリンクを設定する
 		                    calendar += "<td><h5>" + count + "<br>"
 		                    //+"<a href=''>"+year+"</a>"

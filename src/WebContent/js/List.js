@@ -9,14 +9,14 @@
 
 
 	function toggleHwFlag(index) {
-		alert('非同期');
+		/*alert('非同期');*/
 	    const hwHisId = document.getElementById('hwHisId'+index).value;
 	    const hwId = document.getElementById('hwId'+index).value;
-	    alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);
+	    /*alert('hwHisId'+index+":"+document.getElementById('hwHisId'+index).value);*/
 	    const hwFlag = document.getElementById('hwCheck'+index);
-	    alert(hwFlag.checked);
+	    /*alert(hwFlag.checked);*/
 	    let hwFlagValue = hwFlag.checked ? 1 : 0;
-	    alert(hwFlagValue);
+	    /*alert(hwFlagValue);*/
 
 	    const data = {
 	        hwFlag: hwFlagValue,
@@ -40,12 +40,12 @@
 	        timeStamp: new Date().getTime()
 	       //非同期通信が成功したときの処理
 	    }).done(function(data) {
-	        alert("toggleHwFlag成功");
+	        /*alert("toggleHwFlag成功");*/
 	    })
 	       //非同期通信が失敗したときの処理
 	      .fail(function() {
 	        //失敗とアラートを出す
-	        alert("失敗！");
+	        /*alert("失敗！");*/
 
 	      });
 	}
@@ -59,7 +59,7 @@
 	    const itemHisId = document.getElementById('itemHisId'+index).value;
 	    const itemId = document.getElementById('itemId'+index).value;
 	    const itemFlag = document.getElementById('itemCheck'+index);
-	    alert(itemFlag.checked);
+	    /*alert(itemFlag.checked);*/
 	    let itemFlagValue = itemFlag.checked ? 1 : 0;
 	    const data = {
 	        itemFlag: itemFlagValue,
@@ -118,12 +118,12 @@
 	        timeStamp: new Date().getTime()
 	       //非同期通信が成功したときの処理
 	    }).done(function(data) {
-	        alert("restockAjax成功1");
+	        /*alert("restockAjax成功1");*/
 	    })
 	       //非同期通信が失敗したときの処理
 	      .fail(function() {
 	        //失敗とアラートを出す
-	        alert("restockAjax失敗！");
+	        /*alert("restockAjax失敗！");*/
 	      });
 	}
 
@@ -145,12 +145,12 @@
             timeStamp: new Date().getTime()
             //非同期通信が成功したときの処理
         }).done(function(getData) {
-            alert("getStockAjax成功1");
+            /*alert("getStockAjax成功1");*/
             console.log(getData);
             modalItemEveryDaily(itemHisId, getData, data);
         }).fail(function() {
             //失敗とアラートを出す
-            alert("getStockAjax失敗！");
+            /*alert("getStockAjax失敗！");*/
         });
     }
 

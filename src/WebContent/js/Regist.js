@@ -222,7 +222,7 @@
         }
 		window.onload = goAjax;
        	function goAjax(){
-			alert("functionはいったよ！");
+			/*alert("functionはいったよ！");*/
 			//非同期通信始めるよ
 			$.ajaxSetup({scriptCharset:'utf-8'});
 			$.ajax({
@@ -237,7 +237,7 @@
 				processDate:false,
 				timeStamp: new Date().getTime()
 			}).done(function(data) {
-				alert("map取得成功");
+				/*alert("map取得成功");*/
 				let mappingData = new Map();
 				Object.entries(data).forEach(function([key, value]) {
 					mappingData.set(key, value);
@@ -254,7 +254,7 @@
 				console.log(data + 'hdfalkda'); */
 			  })
 			  .fail(function() {
-				alert("map取得失敗！");
+				/*alert("map取得失敗！");*/
 			  });
 		}
 

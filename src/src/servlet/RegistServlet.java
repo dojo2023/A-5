@@ -77,7 +77,7 @@ public class RegistServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//ユーザーIDは必ず取得
 		String submitBtn = request.getParameter("regist");
-		System.out.println(submitBtn);
+		/*System.out.println(submitBtn);*/
 		boolean result = false;
 		Calendar calendar = Calendar.getInstance();
 		//日用品の登録処理
