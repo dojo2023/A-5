@@ -170,7 +170,7 @@ body{	/* パディングなし（後で個別に設定） */
 	width: 100px;
 	height: 100px;
 	position: absolute;
-	bottom: 30px;
+	bottom: 20px;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -201,6 +201,8 @@ body{	/* パディングなし（後で個別に設定） */
 	background-color: rgba(48, 64, 38, 0.9);
 	color: white;
 	font-size: 32px;
+	bottom: 0;
+	right: 10px;
 }
 #hiddenBtn {
 	display: none;
