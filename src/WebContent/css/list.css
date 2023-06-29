@@ -41,12 +41,12 @@ body {
 
 .listWrapper {
 	max-width: 100vw;
-	width: 68.5%;
+	width: 70%;
 	height: 75%;
 	max-height: 90vh;
 	position: absolute;
 	top: 18.5%;
-	left: 30%;
+	right: 2%;
 }
 
 #mask {
